@@ -502,7 +502,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
         <span>Hotel &amp; Commercial Brokerage</span>
       </span>
     </a>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation menu">
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
     </button>
     <nav id="navLinks" class="nav-links" aria-label="Primary">
@@ -633,7 +633,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
         <p>Browse a selection of our active hospitality and commercial opportunities. Filter by property type, location, status, or price. Many of our best opportunities are off-market &mdash; <a href="#contact" style="color:var(--gold)">contact us</a> for private inventory.</p>
       </div>
 
-      <form class="listings-toolbar reveal" id="listingsFilters" aria-label="Filter listings" role="search">
+      <div class="listings-toolbar reveal" id="listingsFilters" aria-label="Filter listings" role="search">
         <div class="field">
           <label for="filterType">Property Type</label>
           <select id="filterType" name="type">
@@ -668,7 +668,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
           <input type="search" id="filterSearch" name="q" placeholder="e.g. Houston, TX" autocomplete="off" />
         </div>
         <div class="listings-count" id="listingsCount" aria-live="polite"></div>
-      </form>
+      </div>
 
       <div class="listing-grid" id="listingGrid" aria-live="polite"></div>
       <p class="listings-note">Sample inventory shown for demonstration. All figures are illustrative &mdash; replace with live listings before launch. Listings subject to change and prior sale.</p>
@@ -817,6 +817,12 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
         <form class="reveal" data-delay="1" id="contactForm" novalidate
               action="https://formspree.io/f/your-form-id" method="POST" aria-describedby="formHelp">
           <p id="formHelp" class="visually-hidden">Fields marked with an asterisk are required.</p>
+          <!-- Honeypot: hidden from people & assistive tech; bots that fill it are rejected.
+               "_gotcha" is also recognized natively by Formspree as a spam trap. -->
+          <div class="visually-hidden" aria-hidden="true">
+            <label for="cf-company">Company (leave this field empty)</label>
+            <input type="text" id="cf-company" name="_gotcha" tabindex="-1" autocomplete="off" />
+          </div>
           <div class="form-field">
             <label for="cf-name">Full Name <span class="req" aria-hidden="true">*</span></label>
             <input type="text" id="cf-name" name="name" required autocomplete="name" />
@@ -904,7 +910,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   </div>
 </footer>
 
-<button class="to-top" id="toTop" aria-label="Back to top">
+<button type="button" class="to-top" id="toTop" aria-label="Back to top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 15 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
 
@@ -1113,6 +1119,9 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
     form.addEventListener("submit", function(e){
       var action = form.getAttribute("action") || "";
       var unconfigured = action.indexOf("your-form-id") !== -1;
+      // Honeypot: if a bot filled the hidden field, silently drop the submission.
+      var honeypot = form.querySelector('[name="_gotcha"]');
+      if (honeypot && honeypot.value){ e.preventDefault(); return; }
       if (!form.checkValidity()){
         e.preventDefault();
         status.textContent = "Please complete the required fields.";

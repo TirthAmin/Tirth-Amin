@@ -19,6 +19,15 @@ and re-graded until no further issues remained.
 
 Rule sets run: `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`.
 
+**HTML structure** was also validated with `html-validate` (recommended ruleset).
+All real findings were fixed — every page now passes with **0 errors**:
+
+- Added missing `type="button"` to the menu and back-to-top buttons.
+- Converted the listings filter from a `<form>` (which implies a submit) to a
+  `role="search"` container, since filtering applies live via JavaScript.
+- Gave the IABS contact table a `<tbody>`, a caption, and `scope="row"` on every
+  header cell (WCAG H63) so screen readers announce row headers correctly.
+
 ## Issues found and fixed during grading
 
 1. **Nav "Contact Us" button — failed color contrast (1.85:1).** The button's
@@ -52,6 +61,8 @@ Rule sets run: `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`.
 - FAQ accordion: keyboard-operable (Enter/Space toggle) via native `<details>`.
 - Listing photos: when a listing has an `image`, it renders with descriptive,
   auto-generated alt text; otherwise a decorative icon placeholder is used.
+- Contact form: an accessible honeypot field (`_gotcha`, hidden from people and
+  assistive tech) blocks bot spam; legitimate submissions are unaffected.
 
 ## What the automated grade can't cover (do before launch)
 
