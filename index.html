@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1a2f" />
+<title>Amin Realty, Inc. | Hotel &amp; Commercial Real Estate Brokerage</title>
+<meta name="description" content="Amin Realty, Inc. is a national commercial real estate brokerage specializing in hotel and motel acquisitions and dispositions since 2012. Serving independent motels, franchise hotels, distressed assets, 1031 Exchange, EB-5, REIT and international investors." />
+<meta name="author" content="Amin Realty, Inc." />
+<link rel="canonical" href="https://aminrealtyinc.com/" />
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Amin Realty, Inc. | Hotel &amp; Commercial Real Estate Brokerage" />
+<meta property="og:description" content="National hotel & commercial real estate brokerage. Secure, confidential, professional transactions since 2012." />
+<meta property="og:url" content="https://aminrealtyinc.com/" />
+<meta property="og:site_name" content="Amin Realty, Inc." />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Favicon (inline SVG, no external dependency) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23d4af6a' text-anchor='middle' font-weight='700'%3EA%3C/text%3E%3C/svg%3E" />
+
+<!-- Structured data for search engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Amin Realty, Inc.",
+  "description": "Commercial real estate brokerage specializing in hotel and motel transactions nationwide since 2012.",
+  "url": "https://aminrealtyinc.com/",
+  "telephone": "[VERIFY-PHONE]",
+  "email": "[VERIFY-EMAIL]",
+  "foundingDate": "2012",
+  "areaServed": "United States",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "3 Sugarcreek Center",
+    "addressLocality": "Sugar Land",
+    "addressRegion": "TX",
+    "postalCode": "77478",
+    "addressCountry": "US"
+  }
+}
+</script>
+
+<style>
+/* ============================================================
+   AMIN REALTY, INC. — Design System & Styles
+   Self-contained. No external fonts/CDNs (works offline,
+   on GoDaddy hosting, and inside a Wix HTML embed).
+   ============================================================ */
+
+/* ---------- 1. Design tokens ---------- */
+:root{
+  --navy-900:#0a1a2f;
+  --navy-800:#0f2742;
+  --navy-700:#16395f;
+  --navy-600:#1f4a78;
+  --gold:#d4af6a;
+  --gold-dark:#b8923f;
+  --cream:#f7f4ee;
+  --paper:#ffffff;
+  --ink:#15263b;          /* dark text on light bg */
+  --ink-soft:#41546b;     /* secondary text on light bg */
+  --light:#eef3f9;        /* light text on dark bg */
+  --light-soft:#a9bdd4;   /* secondary text on dark bg (>=4.5:1 on navy-900) */
+  --line:#e2e6ec;
+  --line-dark:rgba(212,175,106,.22);
+  --shadow:0 10px 40px -12px rgba(8,20,38,.35);
+  --shadow-lg:0 24px 60px -20px rgba(8,20,38,.55);
+  --radius:14px;
+  --radius-sm:10px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+
+/* ---------- 2. Reset / base ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.65;
+  font-size:clamp(16px,1.02vw,17px);
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--serif);line-height:1.15;font-weight:700;letter-spacing:-.01em}
+ul{list-style:none}
+
+/* ---------- 3. Accessibility helpers ---------- */
+.skip-link{
+  position:absolute;left:8px;top:-48px;z-index:200;
+  background:var(--gold);color:var(--navy-900);
+  padding:.7rem 1.1rem;border-radius:8px;font-weight:700;text-decoration:none;
+  transition:top .2s var(--ease);
+}
+.skip-link:focus{top:8px}
+.visually-hidden{
+  position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* ---------- 4. Layout ---------- */
+.container{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
+section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
+.section-dark{background:var(--navy-900);color:var(--light)}
+.section-cream{background:var(--cream)}
+.eyebrow{
+  display:inline-block;font-family:var(--sans);font-size:.8rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.9rem;
+}
+.section-dark .eyebrow{color:var(--gold)}
+.section-head{max-width:62ch;margin-bottom:clamp(2rem,4vw,3rem)}
+.section-head h2{font-size:clamp(1.8rem,4vw,2.7rem)}
+.section-head p{margin-top:1rem;color:var(--ink-soft);font-size:1.05rem}
+.section-dark .section-head p{color:var(--light-soft)}
+
+/* ---------- 5. Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--sans);font-weight:700;font-size:.98rem;
+  padding:.85rem 1.6rem;border-radius:10px;border:2px solid transparent;
+  text-decoration:none;cursor:pointer;transition:transform .25s var(--ease),
+    background .25s var(--ease),box-shadow .25s var(--ease),color .25s var(--ease);
+}
+.btn-primary{background:var(--gold);color:var(--navy-900)}
+.btn-primary:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(184,146,63,.7)}
+.btn-ghost{background:transparent;color:var(--light);border-color:rgba(212,175,106,.55)}
+.btn-ghost:hover{background:rgba(212,175,106,.12);border-color:var(--gold);transform:translateY(-2px)}
+.btn-dark{background:var(--navy-900);color:#fff}
+.btn-dark:hover{background:var(--navy-700);transform:translateY(-2px)}
+
+/* ---------- 6. Header / nav ---------- */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,26,47,.82);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-dark);
+  transition:background .3s var(--ease),padding .3s var(--ease);
+}
+.site-header.scrolled{background:rgba(10,26,47,.97)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:1rem}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--light)}
+.brand-mark{
+  width:42px;height:42px;border-radius:9px;flex:none;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  display:grid;place-items:center;color:var(--navy-900);
+  font-family:var(--serif);font-weight:700;font-size:1.3rem;
+}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text b{font-family:var(--serif);font-size:1.12rem;letter-spacing:.01em}
+.brand-text span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:.3rem}
+.nav-links a{
+  text-decoration:none;color:var(--light);font-size:.95rem;font-weight:600;
+  padding:.55rem .85rem;border-radius:8px;transition:color .2s var(--ease),background .2s var(--ease);
+}
+.nav-links a:hover{color:var(--gold);background:rgba(212,175,106,.1)}
+.nav-links .btn{margin-left:.5rem;padding:.6rem 1.15rem}
+/* Keep the primary button's dark text legible in the nav (overrides .nav-links a color) */
+.nav-links a.btn-primary,.nav-links a.btn-primary:hover{color:var(--navy-900)}
+.nav-toggle{
+  display:none;background:none;border:2px solid var(--line-dark);border-radius:8px;
+  width:46px;height:46px;cursor:pointer;color:var(--light);
+}
+.nav-toggle svg{width:22px;height:22px;margin:auto}
+
+@media (max-width:920px){
+  .nav-toggle{display:grid;place-items:center}
+  .nav-links{
+    position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;
+    background:var(--navy-900);border-bottom:1px solid var(--line-dark);
+    padding:1rem clamp(1.1rem,4vw,2rem) 1.6rem;gap:.25rem;
+    max-height:0;overflow:hidden;visibility:hidden;
+    transition:max-height .35s var(--ease),visibility .35s;
+  }
+  .nav-links.open{max-height:80vh;visibility:visible}
+  .nav-links a{padding:.85rem .6rem;border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav-links .btn{margin:.6rem 0 0;justify-content:center}
+}
+
+/* ---------- 7. Hero ---------- */
+.hero{
+  position:relative;background:var(--navy-900);color:var(--light);
+  padding-block:clamp(4rem,9vw,7.5rem);overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:0;opacity:.9}
+.hero-bg::before{
+  content:"";position:absolute;inset:-20%;
+  background:
+    radial-gradient(40% 50% at 78% 18%,rgba(212,175,106,.20),transparent 60%),
+    radial-gradient(45% 55% at 12% 88%,rgba(31,74,120,.55),transparent 60%);
+  animation:drift 18s var(--ease) infinite alternate;
+}
+.hero-grid-lines{
+  position:absolute;inset:0;z-index:0;opacity:.16;
+  background-image:linear-gradient(rgba(212,175,106,.25) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,175,106,.25) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(70% 60% at 70% 30%,#000,transparent);
+  mask-image:radial-gradient(70% 60% at 70% 30%,#000,transparent);
+}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-3%,2%,0) scale(1.08)}}
+.hero-inner{position:relative;z-index:1;max-width:760px}
+.hero .tag{
+  display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+  border:1px solid var(--line-dark);border-radius:999px;padding:.4rem .9rem;margin-bottom:1.4rem;
+}
+.hero .tag .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(212,175,106,.7);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(212,175,106,.6)}70%{box-shadow:0 0 0 10px rgba(212,175,106,0)}100%{box-shadow:0 0 0 0 rgba(212,175,106,0)}}
+.hero h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.05}
+.hero h1 .accent{color:var(--gold)}
+.hero p.lead{margin-top:1.4rem;font-size:clamp(1.05rem,2vw,1.25rem);color:var(--light-soft);max-width:60ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.2rem}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;
+  margin-top:3rem;max-width:560px;
+}
+.hero-stat b{display:block;font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.4rem);color:var(--gold)}
+.hero-stat span{font-size:.85rem;color:var(--light-soft);letter-spacing:.02em}
+
+/* ---------- 8. Trust bar ---------- */
+.trustbar{background:var(--navy-800);border-block:1px solid var(--line-dark)}
+.trustbar .container{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:clamp(1rem,4vw,3rem);padding-block:1.5rem;text-align:center}
+.trustbar span{color:var(--light-soft);font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+.trustbar b{color:var(--light);font-family:var(--serif)}
+
+/* ---------- 9. Generic cards / grids ---------- */
+.grid{display:grid;gap:1.5rem}
+.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.cols-3,.cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}}
+
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.8rem;box-shadow:var(--shadow);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
+.card .icon{
+  width:54px;height:54px;border-radius:12px;display:grid;place-items:center;margin-bottom:1.1rem;
+  background:linear-gradient(135deg,rgba(212,175,106,.18),rgba(31,74,120,.12));color:var(--gold-dark);
+}
+.card .icon svg{width:28px;height:28px}
+.card h3{font-size:1.25rem;margin-bottom:.5rem}
+.card p{color:var(--ink-soft);font-size:.97rem}
+
+/* ---------- 10. About / split ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+.about-visual{
+  position:relative;border-radius:var(--radius);overflow:hidden;min-height:380px;
+  background:linear-gradient(160deg,var(--navy-700),var(--navy-900));box-shadow:var(--shadow-lg);
+  display:grid;place-items:center;color:var(--light);
+}
+.about-visual .skyline{width:100%;height:auto;opacity:.9}
+.about-visual .badge{
+  position:absolute;left:1.4rem;bottom:1.4rem;background:rgba(10,26,47,.78);
+  border:1px solid var(--line-dark);border-radius:12px;padding:1rem 1.3rem;backdrop-filter:blur(6px);
+}
+.about-visual .badge b{display:block;font-family:var(--serif);color:var(--gold);font-size:1.5rem}
+.about-visual .badge span{font-size:.82rem;color:var(--light-soft)}
+.checklist{margin-top:1.6rem;display:grid;gap:.85rem}
+.checklist li{display:flex;gap:.75rem;align-items:flex-start;color:var(--ink-soft)}
+.checklist svg{flex:none;width:22px;height:22px;color:var(--gold-dark);margin-top:2px}
+
+/* ---------- 11. Listings (HVS-style) ---------- */
+.listings-toolbar{
+  display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-bottom:2rem;
+}
+.listings-toolbar .field{display:flex;flex-direction:column;gap:.3rem}
+.listings-toolbar label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.listings-toolbar select,.listings-toolbar input{
+  font-family:var(--sans);font-size:.95rem;padding:.6rem .8rem;border-radius:9px;
+  border:1px solid var(--line-dark);background:var(--navy-800);color:var(--light);min-width:165px;
+}
+.listings-toolbar select:focus,.listings-toolbar input:focus{border-color:var(--gold)}
+.listings-toolbar .spacer{flex:1 1 auto}
+.listings-count{color:var(--light-soft);font-size:.9rem;align-self:flex-end;padding-bottom:.55rem}
+
+.listing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+@media (max-width:980px){.listing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.listing-grid{grid-template-columns:1fr}}
+
+.listing{
+  background:var(--navy-800);border:1px solid var(--line-dark);border-radius:var(--radius);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.listing:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
+.listing-media{
+  position:relative;aspect-ratio:16/10;display:grid;place-items:center;color:rgba(255,255,255,.85);
+}
+.listing-media svg{width:64px;height:64px;opacity:.85}
+.listing-status{
+  position:absolute;top:.85rem;left:.85rem;font-size:.72rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;padding:.35rem .7rem;border-radius:999px;color:#fff;backdrop-filter:blur(4px);
+}
+.status-available{background:rgba(34,139,87,.92)}
+.status-under-contract{background:rgba(184,146,63,.95);color:var(--navy-900)}
+.status-sold{background:rgba(120,40,40,.92)}
+.listing-type{
+  position:absolute;bottom:.85rem;right:.85rem;font-size:.72rem;font-weight:600;
+  background:rgba(10,26,47,.78);color:var(--light);padding:.3rem .65rem;border-radius:8px;
+}
+.listing-body{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
+.listing-price{font-family:var(--serif);font-size:1.45rem;color:var(--gold);font-weight:700}
+.listing-title{font-family:var(--serif);font-size:1.12rem;color:var(--light);line-height:1.3}
+.listing-loc{display:flex;align-items:center;gap:.4rem;color:var(--light-soft);font-size:.9rem}
+.listing-loc svg{width:16px;height:16px;flex:none;color:var(--gold)}
+.listing-specs{
+  display:flex;flex-wrap:wrap;gap:.5rem .9rem;margin-top:.2rem;
+  border-top:1px solid rgba(255,255,255,.08);padding-top:.9rem;
+}
+.listing-spec{font-size:.83rem;color:var(--light-soft)}
+.listing-spec b{color:var(--light);font-family:var(--serif);display:block;font-size:1rem}
+.listing-cta{margin-top:auto;padding-top:1rem}
+.listing-cta a{
+  display:inline-flex;align-items:center;gap:.4rem;color:var(--gold);font-weight:700;
+  font-size:.92rem;text-decoration:none;
+}
+.listing-cta a:hover{color:#fff}
+.listing-cta a svg{width:16px;height:16px;transition:transform .2s var(--ease)}
+.listing-cta a:hover svg{transform:translateX(4px)}
+.listings-empty{
+  grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--light-soft);
+  border:1px dashed var(--line-dark);border-radius:var(--radius);
+}
+.listings-note{margin-top:1.5rem;font-size:.85rem;color:var(--light-soft);text-align:center}
+
+/* ---------- 12. Process steps ---------- */
+.steps{counter-reset:step;display:grid;gap:1.3rem}
+.step{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start}
+.step-num{
+  counter-increment:step;width:48px;height:48px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy-900);
+  font-family:var(--serif);font-weight:700;font-size:1.25rem;
+}
+.step-num::before{content:counter(step,decimal-leading-zero)}
+.step h3{font-size:1.2rem;margin-bottom:.3rem}
+.step p{color:var(--ink-soft)}
+.section-dark .step p{color:var(--light-soft)}
+
+/* ---------- 13. Team ---------- */
+.team-card{text-align:center}
+.team-avatar{
+  width:96px;height:96px;border-radius:50%;margin:0 auto 1rem;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--navy-700),var(--navy-900));color:var(--gold);
+  font-family:var(--serif);font-size:2rem;font-weight:700;border:2px solid var(--gold);
+}
+.team-card h3{font-size:1.2rem}
+.team-role{color:var(--gold-dark);font-weight:700;font-size:.9rem;margin-bottom:.6rem}
+.team-card p{color:var(--ink-soft);font-size:.94rem}
+
+/* ---------- 14. Contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,3.5rem)}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+.contact-info li{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1.3rem}
+.contact-info .ic{
+  width:46px;height:46px;border-radius:11px;flex:none;display:grid;place-items:center;
+  background:rgba(212,175,106,.14);color:var(--gold);
+}
+.contact-info .ic svg{width:22px;height:22px}
+.contact-info b{display:block;color:var(--light);font-family:var(--serif);font-size:1.05rem}
+.contact-info a,.contact-info span{color:var(--light-soft);text-decoration:none}
+.contact-info a:hover{color:var(--gold)}
+.form-field{margin-bottom:1.1rem}
+.form-field label{display:block;font-size:.85rem;font-weight:700;margin-bottom:.4rem;color:var(--light)}
+.form-field .req{color:var(--gold)}
+.form-field input,.form-field select,.form-field textarea{
+  width:100%;font-family:var(--sans);font-size:1rem;padding:.8rem .9rem;border-radius:10px;
+  border:1px solid var(--line-dark);background:var(--navy-800);color:var(--light);
+}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold)}
+.form-field textarea{resize:vertical;min-height:120px}
+.form-note{font-size:.82rem;color:var(--light-soft);margin-top:.6rem}
+.form-status{margin-top:1rem;font-size:.95rem;font-weight:600}
+.form-status[data-state="ok"]{color:#5fcf95}
+.form-status[data-state="err"]{color:#ff9a8a}
+
+/* ---------- 15. Footer ---------- */
+.site-footer{background:#07131f;color:var(--light-soft);padding-block:3rem 2rem;font-size:.92rem}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem;margin-bottom:2.4rem}
+@media (max-width:780px){.footer-top{grid-template-columns:1fr}}
+.site-footer h4{color:var(--light);font-size:1rem;margin-bottom:1rem;font-family:var(--sans);letter-spacing:.04em}
+.site-footer a{color:var(--light-soft);text-decoration:none}
+.site-footer a:hover{color:var(--gold)}
+.footer-links li{margin-bottom:.6rem}
+.footer-legal{
+  border-top:1px solid rgba(255,255,255,.1);padding-top:1.6rem;
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;
+}
+.footer-legal .fh{display:flex;align-items:center;gap:.7rem;max-width:520px}
+.fh-logo{width:40px;height:40px;flex:none}
+.footer-disclaimer{font-size:.78rem;color:#7e91a8;margin-top:1.4rem;line-height:1.6}
+.footer-disclaimer a{color:var(--gold);text-decoration:underline}
+.footer-legal-links{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem}
+
+/* ---------- 16. Scroll-reveal animation ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-delay="1"]{transition-delay:.08s}
+.reveal[data-delay="2"]{transition-delay:.16s}
+.reveal[data-delay="3"]{transition-delay:.24s}
+
+/* Back-to-top */
+.to-top{
+  position:fixed;right:1.2rem;bottom:1.2rem;z-index:90;width:48px;height:48px;border-radius:50%;
+  background:var(--gold);color:var(--navy-900);border:none;cursor:pointer;display:grid;place-items:center;
+  box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transform:translateY(12px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s;
+}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{background:var(--gold-dark)}
+.to-top svg{width:22px;height:22px}
+
+/* ---------- 17. Reduced-motion: honor user/OS preference ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+  .hero-bg::before{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="top">
+  <div class="container nav">
+    <a class="brand" href="#top" aria-label="Amin Realty, Inc. home">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span class="brand-text">
+        <b>Amin Realty, Inc.</b>
+        <span>Hotel &amp; Commercial Brokerage</span>
+      </span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+    </button>
+    <nav id="navLinks" class="nav-links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#listings">Listings</a>
+      <a href="#process">Process</a>
+      <a href="#team">Team</a>
+      <a class="btn btn-primary" href="#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-grid-lines" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <span class="tag"><span class="dot" aria-hidden="true"></span> Nationwide Hotel &amp; Commercial Brokerage</span>
+      <h1 id="hero-title">Where Hospitality Assets<br><span class="accent">Find Their Future.</span></h1>
+      <p class="lead">Since 2012, Amin Realty, Inc. has guided owners and investors through confidential hotel, motel, and commercial real estate transactions across the United States — with discretion, market intelligence, and results.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#listings">View Listings</a>
+        <a class="btn btn-ghost" href="#contact">Schedule a Consultation</a>
+      </div>
+      <div class="hero-stats" role="list">
+        <div class="hero-stat" role="listitem"><b data-count="12" data-suffix="+">12+</b><span>Years in Business</span></div>
+        <div class="hero-stat" role="listitem"><b data-count="11" data-suffix="">11</b><span>States Served</span></div>
+        <div class="hero-stat" role="listitem"><b data-count="100" data-suffix="%">100%</b><span>Confidential Process</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST BAR ============ -->
+  <div class="trustbar">
+    <div class="container">
+      <span><b>Independent Motels</b></span>
+      <span><b>Franchise Hotels</b></span>
+      <span><b>Distressed Assets</b></span>
+      <span><b>Land &amp; Development</b></span>
+      <span><b>1031 &middot; EB-5 &middot; REIT</b></span>
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">About the Firm</span>
+        <h2 id="about-title">A specialized brokerage built on trust and hospitality expertise.</h2>
+        <p style="margin-top:1rem;color:var(--ink-soft)">Amin Realty, Inc. is a commercial real estate brokerage focused exclusively on the hospitality sector. From single independent motels to multi-property franchise portfolios, we represent buyers and sellers with the confidentiality and diligence that high-value transactions demand. Our reach extends nationwide, and our relationships span private owners, institutional investors, and international capital.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Access to private, off-market listings</strong> across the country.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Specialists in hospitality</strong> — independent &amp; franchise hotels and motels.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Guidance for complex structures</strong> — 1031 Exchange, EB-5, and REIT acquisitions.</span></li>
+        </ul>
+      </div>
+      <div class="about-visual reveal" data-delay="1" role="img" aria-label="Stylized illustration of a hotel and commercial property skyline.">
+        <svg class="skyline" viewBox="0 0 600 380" fill="none" aria-hidden="true" focusable="false">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4af6a" stop-opacity=".9"/><stop offset="1" stop-color="#d4af6a" stop-opacity=".25"/></linearGradient></defs>
+          <rect x="60" y="150" width="90" height="200" rx="4" fill="url(#g1)" opacity=".55"/>
+          <rect x="170" y="90" width="120" height="260" rx="4" fill="url(#g1)"/>
+          <rect x="310" y="140" width="80" height="210" rx="4" fill="url(#g1)" opacity=".7"/>
+          <rect x="410" y="60" width="130" height="290" rx="4" fill="url(#g1)" opacity=".85"/>
+          <g fill="#0a1a2f" opacity=".5">
+            <rect x="186" y="110" width="18" height="22" rx="2"/><rect x="216" y="110" width="18" height="22" rx="2"/><rect x="246" y="110" width="18" height="22" rx="2"/>
+            <rect x="186" y="150" width="18" height="22" rx="2"/><rect x="216" y="150" width="18" height="22" rx="2"/><rect x="246" y="150" width="18" height="22" rx="2"/>
+            <rect x="430" y="90" width="20" height="24" rx="2"/><rect x="466" y="90" width="20" height="24" rx="2"/><rect x="502" y="90" width="20" height="24" rx="2"/>
+            <rect x="430" y="134" width="20" height="24" rx="2"/><rect x="466" y="134" width="20" height="24" rx="2"/><rect x="502" y="134" width="20" height="24" rx="2"/>
+          </g>
+        </svg>
+        <div class="badge"><b>Est. 2012</b><span>Sugar Land, Texas &middot; Serving the USA</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section id="services" class="section-cream" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">What We Do</span>
+        <h2 id="services-title">Full-service brokerage across the hospitality lifecycle.</h2>
+        <p>Whether you are acquiring your first property or repositioning a portfolio, our team manages every stage of the transaction with precision and confidentiality.</p>
+      </div>
+      <div class="grid cols-3">
+        <article class="card reveal">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3>Hotel &amp; Motel Sales</h3>
+          <p>Representation for independent motels and franchise hotels — from valuation and confidential marketing to closing.</p>
+        </article>
+        <article class="card reveal" data-delay="1">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8M21 7v6m0-6h-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3>Acquisition Advisory</h3>
+          <p>Buy-side guidance for investors seeking cash-flowing assets, value-add opportunities, or distressed properties.</p>
+        </article>
+        <article class="card reveal" data-delay="2">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 8l7-5 7 5M5 8v8l7 5 7-5V8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3>1031 Exchange Support</h3>
+          <p>Coordination for tax-deferred exchanges, helping you reinvest proceeds within IRS timelines and requirements.</p>
+        </article>
+        <article class="card reveal">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" stroke-linecap="round"/></svg></span>
+          <h3>EB-5 &amp; International</h3>
+          <p>Project sourcing and brokerage for EB-5 investors and international buyers entering the U.S. market.</p>
+        </article>
+        <article class="card reveal" data-delay="1">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V10l8-6 8 6v11M4 21h16M9 21v-5h6v5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3>Land &amp; Development</h3>
+          <p>Sourcing and disposition of land for new hospitality and commercial project development nationwide.</p>
+        </article>
+        <article class="card reveal" data-delay="2">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3>Distressed Assets</h3>
+          <p>Discreet handling of distressed and note sales, connecting motivated sellers with qualified, ready capital.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LISTINGS (HVS-style) ============ -->
+  <section id="listings" class="section-dark" aria-labelledby="listings-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Current Opportunities</span>
+        <h2 id="listings-title">Featured Listings</h2>
+        <p>Browse a selection of our active hospitality and commercial opportunities. Filter by property type, location, status, or price. Many of our best opportunities are off-market &mdash; <a href="#contact" style="color:var(--gold)">contact us</a> for private inventory.</p>
+      </div>
+
+      <form class="listings-toolbar reveal" id="listingsFilters" aria-label="Filter listings" role="search">
+        <div class="field">
+          <label for="filterType">Property Type</label>
+          <select id="filterType" name="type">
+            <option value="">All Types</option>
+            <option value="Franchise Hotel">Franchise Hotel</option>
+            <option value="Independent Motel">Independent Motel</option>
+            <option value="Land / Development">Land / Development</option>
+            <option value="Commercial">Commercial</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="filterStatus">Status</label>
+          <select id="filterStatus" name="status">
+            <option value="">All Statuses</option>
+            <option value="Available">Available</option>
+            <option value="Under Contract">Under Contract</option>
+            <option value="Sold">Sold</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="filterPrice">Max Price</label>
+          <select id="filterPrice" name="price">
+            <option value="">Any Price</option>
+            <option value="2000000">Up to $2M</option>
+            <option value="5000000">Up to $5M</option>
+            <option value="10000000">Up to $10M</option>
+            <option value="100000000">$10M+</option>
+          </select>
+        </div>
+        <div class="field" style="flex:1 1 200px">
+          <label for="filterSearch">Search Location / Keyword</label>
+          <input type="search" id="filterSearch" name="q" placeholder="e.g. Houston, TX" autocomplete="off" />
+        </div>
+        <div class="listings-count" id="listingsCount" aria-live="polite"></div>
+      </form>
+
+      <div class="listing-grid" id="listingGrid" aria-live="polite"></div>
+      <p class="listings-note">Sample inventory shown for demonstration. All figures are illustrative &mdash; replace with live listings before launch. Listings subject to change and prior sale.</p>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section id="process" aria-labelledby="process-title">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">How We Work</span>
+        <h2 id="process-title">A confidential, four-step path to closing.</h2>
+        <p style="margin-top:1rem;color:var(--ink-soft)">Every engagement is tailored, but our disciplined process keeps transactions moving while protecting your privacy and your value.</p>
+        <div class="hero-cta" style="margin-top:1.8rem">
+          <a class="btn btn-dark" href="#contact">Start a Conversation</a>
+        </div>
+      </div>
+      <div class="steps reveal" data-delay="1">
+        <div class="step"><span class="step-num" aria-hidden="true"></span><div><h3>Discovery &amp; Valuation</h3><p>We learn your goals and assess the asset with current market data to establish a realistic, defensible value.</p></div></div>
+        <div class="step"><span class="step-num" aria-hidden="true"></span><div><h3>Confidential Marketing</h3><p>Qualified buyers are approached discreetly through our nationwide network &mdash; no signage, no public disruption.</p></div></div>
+        <div class="step"><span class="step-num" aria-hidden="true"></span><div><h3>Negotiation &amp; Diligence</h3><p>We manage offers, financing, and due diligence, coordinating with lenders, attorneys, and exchange intermediaries.</p></div></div>
+        <div class="step"><span class="step-num" aria-hidden="true"></span><div><h3>Closing &amp; Beyond</h3><p>We drive the transaction to a clean close and remain a resource for your next acquisition or disposition.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section id="team" class="section-cream" aria-labelledby="team-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Our People</span>
+        <h2 id="team-title">Experienced advisors at your side.</h2>
+        <p>A focused team with deep relationships across the U.S. hospitality investment community.</p>
+      </div>
+      <div class="grid cols-3">
+        <article class="card team-card reveal">
+          <div class="team-avatar" aria-hidden="true">VA</div>
+          <h3>Viral Amin</h3>
+          <p class="team-role">President</p>
+          <p>Leads the firm's brokerage and advisory practice, serving high-net-worth investors across multiple states.</p>
+        </article>
+        <article class="card team-card reveal" data-delay="1">
+          <div class="team-avatar" aria-hidden="true">SA</div>
+          <h3>Sejal Amin</h3>
+          <p class="team-role">Broker &middot; TREC Licensed (TX)</p>
+          <p>Oversees brokerage operations and client representation with a focus on confidential, professional service.</p>
+        </article>
+        <article class="card team-card reveal" data-delay="2">
+          <div class="team-avatar" aria-hidden="true">★</div>
+          <h3>Your Advisor</h3>
+          <p class="team-role">Acquisitions &amp; Advisory</p>
+          <p>Our advisors guide buyers and sellers through every transaction with market intelligence and discretion.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="section-dark" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Get in Touch</span>
+        <h2 id="contact-title">Let's discuss your next transaction.</h2>
+        <p>Buying, selling, or simply exploring the market &mdash; reach out for a confidential, no-obligation consultation.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <ul class="contact-info">
+            <li>
+              <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span><b>Office</b><span>3 Sugarcreek Center, Sugar Land, TX 77478</span></span>
+            </li>
+            <li>
+              <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></span>
+              <span><b>Phone</b><a href="tel:+1XXXXXXXXXX">(XXX) XXX-XXXX <span style="color:var(--gold)">[VERIFY]</span></a></span>
+            </li>
+            <li>
+              <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+              <span><b>Email</b><a href="mailto:info@aminrealtyinc.com">info@aminrealtyinc.com <span style="color:var(--gold)">[VERIFY]</span></a></span>
+            </li>
+          </ul>
+          <p class="form-note" style="margin-top:1.4rem">Amin Realty, Inc. is a licensed Texas real estate brokerage. We hold all inquiries in strict confidence and never share your information with third parties without consent. See our <a href="legal/privacy.html" style="color:var(--gold)">Privacy Policy</a>.</p>
+        </div>
+
+        <form class="reveal" data-delay="1" id="contactForm" novalidate
+              action="https://formspree.io/f/your-form-id" method="POST" aria-describedby="formHelp">
+          <p id="formHelp" class="visually-hidden">Fields marked with an asterisk are required.</p>
+          <div class="form-field">
+            <label for="cf-name">Full Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="cf-name" name="name" required autocomplete="name" />
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="cf-email" name="email" required autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label for="cf-phone">Phone</label>
+            <input type="tel" id="cf-phone" name="phone" autocomplete="tel" />
+          </div>
+          <div class="form-field">
+            <label for="cf-interest">I am interested in</label>
+            <select id="cf-interest" name="interest">
+              <option>Buying a property</option>
+              <option>Selling a property</option>
+              <option>1031 Exchange / EB-5</option>
+              <option>General inquiry</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="cf-message">Message <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="cf-message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Message</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          <p class="form-note">By submitting, you agree to our <a href="legal/terms.html" style="color:var(--gold)">Terms</a> and <a href="legal/privacy.html" style="color:var(--gold)">Privacy Policy</a>. This form is not for transmitting confidential financial data.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a class="brand" href="#top" aria-label="Amin Realty, Inc. home" style="margin-bottom:1rem">
+          <span class="brand-mark" aria-hidden="true">A</span>
+          <span class="brand-text"><b style="color:var(--light)">Amin Realty, Inc.</b><span>Hotel &amp; Commercial Brokerage</span></span>
+        </a>
+        <p style="max-width:38ch">National commercial real estate brokerage specializing in hospitality assets. Secure, confidential, and professional service since 2012.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#listings">Listings</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Compliance</h4>
+        <ul class="footer-links">
+          <li><a href="legal/privacy.html">Privacy Policy</a></li>
+          <li><a href="legal/terms.html">Terms of Use</a></li>
+          <li><a href="legal/accessibility.html">Accessibility Statement</a></li>
+          <li><a href="legal/iabs.html">TREC: Information About Brokerage Services</a></li>
+          <li><a href="legal/consumer-protection.html">TREC: Consumer Protection Notice</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <div class="fh">
+        <svg class="fh-logo" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="6" fill="none" stroke="#a9bdd4" stroke-width="2"/><path d="M24 11 13 21h3v15h16V21h3L24 11Z" fill="none" stroke="#a9bdd4" stroke-width="2" stroke-linejoin="round"/><rect x="21" y="27" width="6" height="9" fill="none" stroke="#a9bdd4" stroke-width="2"/><text x="24" y="45.5" font-family="Arial" font-size="3.4" fill="#a9bdd4" text-anchor="middle">EQUAL HOUSING</text></svg>
+        <span style="font-size:.8rem">Amin Realty, Inc. is an Equal Housing Opportunity brokerage. We do business in accordance with the Federal Fair Housing Act and all applicable state and local fair housing laws.</span>
+      </div>
+      <div class="footer-legal-links">
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="legal/terms.html">Terms</a>
+        <a href="legal/accessibility.html">Accessibility</a>
+      </div>
+    </div>
+
+    <p class="footer-disclaimer">
+      &copy; <span id="year">2026</span> Amin Realty, Inc. All rights reserved. Licensed Texas Real Estate Brokerage &mdash; Office: 3 Sugarcreek Center, Sugar Land, TX 77478. TREC Broker License No. <strong>[VERIFY-LICENSE]</strong>.
+      All information is deemed reliable but not guaranteed and should be independently verified. Property details, prices, and availability are subject to change or withdrawal without notice. This website does not constitute an offer to sell or a solicitation of an offer to buy any security or real estate in any jurisdiction where such offer or solicitation would be unlawful. Texas law requires all real estate license holders to give the <a href="legal/iabs.html">Information About Brokerage Services</a> notice to prospective buyers, tenants, sellers, and landlords.
+    </p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 15 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+/* ============================================================
+   AMIN REALTY, INC. — Behavior
+   Vanilla JS, no dependencies. Degrades gracefully and
+   honors prefers-reduced-motion.
+   ============================================================ */
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- Current year ---- */
+  var yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ---- Mobile nav toggle ---- */
+  var toggle = document.getElementById("navToggle");
+  var links  = document.getElementById("navLinks");
+  if (toggle && links){
+    toggle.addEventListener("click", function(){
+      var open = links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+    });
+    links.addEventListener("click", function(e){
+      if (e.target.closest("a") && links.classList.contains("open")){
+        links.classList.remove("open");
+        toggle.setAttribute("aria-expanded","false");
+      }
+    });
+  }
+
+  /* ---- Header shrink + back-to-top on scroll ---- */
+  var header = document.querySelector(".site-header");
+  var toTop  = document.getElementById("toTop");
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset;
+    if (header) header.classList.toggle("scrolled", y > 20);
+    if (toTop)  toTop.classList.toggle("show", y > 600);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+  if (toTop) toTop.addEventListener("click", function(){
+    window.scrollTo({top:0, behavior: reduceMotion ? "auto" : "smooth"});
+  });
+
+  /* ---- Scroll-reveal (IntersectionObserver) ---- */
+  var reveals = document.querySelectorAll(".reveal");
+  if (reduceMotion || !("IntersectionObserver" in window)){
+    reveals.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, {threshold:0.12, rootMargin:"0px 0px -40px 0px"});
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- Animated stat counters ---- */
+  var counters = document.querySelectorAll("[data-count]");
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute("data-count"));
+    var suffix = el.getAttribute("data-suffix") || "";
+    if (reduceMotion){ el.textContent = target + suffix; return; }
+    var start = null, dur = 1400;
+    function tick(ts){
+      if (!start) start = ts;
+      var p = Math.min((ts - start)/dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  if ("IntersectionObserver" in window){
+    var cObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ animateCount(en.target); cObs.unobserve(en.target); }
+      });
+    }, {threshold:0.6});
+    counters.forEach(function(el){ cObs.observe(el); });
+  } else {
+    counters.forEach(animateCount);
+  }
+
+  /* ============================================================
+     LISTINGS DATA
+     ---- EDIT THIS ARRAY to manage your listings. ----
+     Each listing: title, type, location, status, price (number),
+     priceLabel (string shown), and specs (label/value pairs).
+     status values: "Available" | "Under Contract" | "Sold"
+     type values must match the filter dropdown options.
+     ============================================================ */
+  var LISTINGS = [
+    { title:"85-Key Franchise Hotel", type:"Franchise Hotel", location:"Houston, TX", status:"Available",
+      price:7900000, priceLabel:"$7,900,000", icon:"hotel",
+      specs:[["Keys","85"],["Brand","Flagged"],["Year Built","2016"]] },
+    { title:"42-Room Independent Motel", type:"Independent Motel", location:"San Antonio, TX", status:"Available",
+      price:2450000, priceLabel:"$2,450,000", icon:"motel",
+      specs:[["Rooms","42"],["Lot","1.8 ac"],["Cap Rate","9.1%"]] },
+    { title:"Highway-Frontage Development Land", type:"Land / Development", location:"Katy, TX", status:"Available",
+      price:1850000, priceLabel:"$1,850,000", icon:"land",
+      specs:[["Acres","4.6"],["Zoning","Commercial"],["Frontage","320 ft"]] },
+    { title:"120-Key Upscale Select-Service", type:"Franchise Hotel", location:"Dallas, TX", status:"Under Contract",
+      price:14250000, priceLabel:"$14,250,000", icon:"hotel",
+      specs:[["Keys","120"],["Brand","Upper-Midscale"],["Year Built","2019"]] },
+    { title:"Mixed-Use Retail &amp; Office", type:"Commercial", location:"Sugar Land, TX", status:"Available",
+      price:4600000, priceLabel:"$4,600,000", icon:"commercial",
+      specs:[["SF","28,000"],["Occupancy","92%"],["Parking","110"]] },
+    { title:"58-Room Roadside Motel", type:"Independent Motel", location:"El Paso, TX", status:"Sold",
+      price:3100000, priceLabel:"$3,100,000", icon:"motel",
+      specs:[["Rooms","58"],["Lot","2.3 ac"],["Status","Closed 2025"]] }
+  ];
+
+  var ICONS = {
+    hotel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v15M9 9h.01M12 9h.01M15 9h.01M9 13h.01M12 13h.01M15 13h.01M10 21v-4h4v4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    motel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 17h20M4 17V9l8-4 8 4v8M8 17v-4h3v4M13 13h3v4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    land:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 20h18M5 20l3-9 3 4 3-7 5 12" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    commercial:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M6 21V4h8v17M14 21V9h4v12M9 8h.01M9 12h.01M9 16h.01" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  };
+  var pinIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+  var arrowIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  var grid     = document.getElementById("listingGrid");
+  var countEl  = document.getElementById("listingsCount");
+  var fType    = document.getElementById("filterType");
+  var fStatus  = document.getElementById("filterStatus");
+  var fPrice   = document.getElementById("filterPrice");
+  var fSearch  = document.getElementById("filterSearch");
+
+  function statusClass(s){
+    return "status-" + s.toLowerCase().replace(/\s+/g,"-");
+  }
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"]/g, function(c){
+      return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];
+    });
+  }
+
+  function renderListings(){
+    if (!grid) return;
+    var t = fType.value, s = fStatus.value, p = fPrice.value, q = fSearch.value.trim().toLowerCase();
+    var filtered = LISTINGS.filter(function(l){
+      if (t && l.type !== t) return false;
+      if (s && l.status !== s) return false;
+      if (p && l.price > parseFloat(p)) return false;
+      if (q){
+        var hay = (l.title + " " + l.location + " " + l.type).toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+
+    grid.innerHTML = "";
+    if (!filtered.length){
+      grid.innerHTML = '<p class="listings-empty">No listings match your filters. <a href="#contact" style="color:var(--gold)">Contact us</a> about off-market opportunities.</p>';
+    } else {
+      filtered.forEach(function(l){
+        var specs = l.specs.map(function(sp){
+          return '<span class="listing-spec"><b>'+ escapeHtml(sp[1]) +'</b>'+ escapeHtml(sp[0]) +'</span>';
+        }).join("");
+        var article = document.createElement("article");
+        article.className = "listing";
+        article.innerHTML =
+          '<div class="listing-media" style="background:linear-gradient(150deg,#16395f,#0a1a2f)">'+
+            '<span class="listing-status '+ statusClass(l.status) +'">'+ escapeHtml(l.status) +'</span>'+
+            '<span class="listing-type">'+ escapeHtml(l.type) +'</span>'+
+            (ICONS[l.icon] || ICONS.commercial) +
+          '</div>'+
+          '<div class="listing-body">'+
+            '<span class="listing-price">'+ l.priceLabel +'</span>'+
+            '<h3 class="listing-title">'+ l.title +'</h3>'+
+            '<span class="listing-loc">'+ pinIcon +' '+ escapeHtml(l.location) +'</span>'+
+            '<div class="listing-specs">'+ specs +'</div>'+
+            '<div class="listing-cta"><a href="#contact" aria-label="Inquire about '+ escapeHtml(l.title.replace(/&amp;/g,"and")) +'">Request details '+ arrowIcon +'</a></div>'+
+          '</div>';
+        grid.appendChild(article);
+      });
+    }
+    if (countEl){
+      countEl.textContent = filtered.length + (filtered.length === 1 ? " listing" : " listings");
+    }
+  }
+
+  [fType, fStatus, fPrice].forEach(function(el){ if(el) el.addEventListener("change", renderListings); });
+  if (fSearch) fSearch.addEventListener("input", renderListings);
+  renderListings();
+
+  /* ---- Contact form (progressive enhancement) ----
+     Works with Formspree/Web3Forms/Wix forms. If no real endpoint
+     is configured, it shows a friendly fallback instead of failing. */
+  var form = document.getElementById("contactForm");
+  var status = document.getElementById("formStatus");
+  if (form){
+    form.addEventListener("submit", function(e){
+      var action = form.getAttribute("action") || "";
+      var unconfigured = action.indexOf("your-form-id") !== -1;
+      if (!form.checkValidity()){
+        e.preventDefault();
+        status.textContent = "Please complete the required fields.";
+        status.setAttribute("data-state","err");
+        return;
+      }
+      if (unconfigured){
+        e.preventDefault();
+        status.textContent = "Form endpoint not configured yet. Please email info@aminrealtyinc.com — see the deploy guide to connect this form.";
+        status.setAttribute("data-state","err");
+        return;
+      }
+      // Real endpoint: submit via fetch for inline confirmation.
+      if (window.fetch){
+        e.preventDefault();
+        status.textContent = "Sending…";
+        status.removeAttribute("data-state");
+        fetch(action, {method:"POST", body:new FormData(form), headers:{Accept:"application/json"}})
+          .then(function(r){
+            if (r.ok){
+              form.reset();
+              status.textContent = "Thank you — your message has been sent. We'll be in touch shortly.";
+              status.setAttribute("data-state","ok");
+            } else { throw new Error("bad response"); }
+          })
+          .catch(function(){
+            status.textContent = "Something went wrong. Please email info@aminrealtyinc.com directly.";
+            status.setAttribute("data-state","err");
+          });
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
