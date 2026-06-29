@@ -25,7 +25,8 @@ hotel and motel transactions since 2012.
 ## Project structure
 
 ```
-index.html          Homepage (hero, about, services, listings, process, team, contact)
+index.html          Homepage (hero, about, services, listings, process,
+                    testimonials, team, FAQ, contact)
 404.html            Not-found page
 robots.txt          Search crawler rules
 sitemap.xml         Sitemap
@@ -57,8 +58,16 @@ Find the `LISTINGS` array near the bottom of `index.html`. Each entry looks like
 - `type` must match a filter option (`Franchise Hotel`, `Independent Motel`,
   `Land / Development`, `Commercial`).
 - `icon`: `hotel`, `motel`, `land`, or `commercial`.
-- To show real photos, swap the card's gradient placeholder for an `<img>` with
-  descriptive `alt` text (a code comment marks the spot).
+- To show a real photo, add `image:"https://.../photo.jpg"` to a listing — the
+  card renders the photo (with auto-generated alt text) instead of the icon
+  placeholder. No `image` = the branded gradient + icon.
+
+## Other sections you can personalize
+
+- **Testimonials** — replace the three sample quotes (marked "Sample Client")
+  with your own approved client quotes and names.
+- **FAQ** — an accessible accordion built on native `<details>`; edit the
+  questions/answers directly in the markup.
 
 ## Disclaimer
 

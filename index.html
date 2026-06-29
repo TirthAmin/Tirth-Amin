@@ -404,6 +404,46 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 .footer-disclaimer a{color:var(--gold);text-decoration:underline}
 .footer-legal-links{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem}
 
+/* ---------- 15b. Listing photos (optional, used when a listing has an image) ---------- */
+.listing-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.listing-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(7,19,31,.55));pointer-events:none}
+
+/* ---------- 15c. Testimonials ---------- */
+.quote{
+  background:var(--navy-800);border:1px solid var(--line-dark);border-radius:var(--radius);
+  padding:2rem 1.8rem;display:flex;flex-direction:column;gap:1.1rem;height:100%;
+  transition:transform .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease);
+}
+.quote:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow-lg)}
+.quote .stars{display:flex;gap:.15rem;color:var(--gold)}
+.quote .stars svg{width:18px;height:18px}
+.quote blockquote{color:var(--light);font-size:1.02rem;font-style:italic;line-height:1.6;margin:0}
+.quote .who{display:flex;align-items:center;gap:.8rem;margin-top:auto}
+.quote .who .av{
+  width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy-900);
+  font-family:var(--serif);font-weight:700;
+}
+.quote .who b{display:block;color:var(--light);font-family:var(--serif);font-size:1rem;font-style:normal}
+.quote .who span{color:var(--light-soft);font-size:.85rem}
+
+/* ---------- 15d. FAQ (native <details> = accessible, keyboard-ready, no JS) ---------- */
+.faq{max-width:820px;margin:0 auto;display:grid;gap:.9rem}
+.faq details{
+  border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--paper);
+  overflow:hidden;transition:border-color .25s var(--ease),box-shadow .25s var(--ease);
+}
+.faq details[open]{border-color:var(--gold);box-shadow:var(--shadow)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:1.15rem 1.3rem;font-family:var(--serif);
+  font-size:1.08rem;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+.faq summary .chev{flex:none;width:22px;height:22px;color:var(--gold-dark);transition:transform .3s var(--ease)}
+.faq details[open] summary .chev{transform:rotate(180deg)}
+.faq .ans{padding:0 1.3rem 1.3rem;color:var(--ink-soft);font-size:.97rem;line-height:1.65}
+
 /* ---------- 16. Scroll-reveal animation ---------- */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .reveal.in{opacity:1;transform:none}
@@ -637,6 +677,34 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
     </div>
   </section>
 
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="section-dark" aria-labelledby="testi-title">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Client Voices</span>
+        <h2 id="testi-title">Trusted by owners and investors nationwide.</h2>
+        <p>A disciplined, confidential process has earned the long-term trust of our clients. <em>Sample testimonials shown &mdash; replace with your own approved quotes before launch.</em></p>
+      </div>
+      <div class="grid cols-3">
+        <figure class="quote reveal">
+          <div class="stars" role="img" aria-label="Rated 5 out of 5 stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg></div>
+          <blockquote>&ldquo;They sold our motel discreetly and brought a qualified buyer we never could have reached on our own. The whole process stayed confidential from start to close.&rdquo;</blockquote>
+          <figcaption class="who"><span class="av" aria-hidden="true">RP</span><span><b>Sample Client</b><span>Independent Motel Owner</span></span></figcaption>
+        </figure>
+        <figure class="quote reveal" data-delay="1">
+          <div class="stars" role="img" aria-label="Rated 5 out of 5 stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg></div>
+          <blockquote>&ldquo;As a 1031 buyer on a tight clock, I needed a team that understood the timeline. Amin Realty found the right asset and kept the exchange on track.&rdquo;</blockquote>
+          <figcaption class="who"><span class="av" aria-hidden="true">JT</span><span><b>Sample Client</b><span>1031 Exchange Investor</span></span></figcaption>
+        </figure>
+        <figure class="quote reveal" data-delay="2">
+          <div class="stars" role="img" aria-label="Rated 5 out of 5 stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3 6.5 7 .6-5.3 4.6 1.6 6.9L12 17.3 5.7 20.6l1.6-6.9L2 9.1l7-.6z"/></svg></div>
+          <blockquote>&ldquo;Professional, responsive, and genuinely knowledgeable about the hospitality market. They represented our franchise portfolio with real expertise.&rdquo;</blockquote>
+          <figcaption class="who"><span class="av" aria-hidden="true">MK</span><span><b>Sample Client</b><span>Franchise Hotel Group</span></span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ TEAM ============ -->
   <section id="team" class="section-cream" aria-labelledby="team-title">
     <div class="container">
@@ -664,6 +732,39 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
           <p class="team-role">Acquisitions &amp; Advisory</p>
           <p>Our advisors guide buyers and sellers through every transaction with market intelligence and discretion.</p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-head reveal" style="margin-inline:auto;text-align:center">
+        <span class="eyebrow">Questions</span>
+        <h2 id="faq-title">Frequently asked questions</h2>
+        <p style="margin-inline:auto">Answers to what owners and investors ask us most. Don't see yours? <a href="#contact" style="color:var(--gold-dark);font-weight:600">Get in touch.</a></p>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>What types of properties do you handle?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="ans">We specialize in hospitality real estate &mdash; independent motels and franchise hotels &mdash; along with land for new hospitality and commercial development, distressed assets, and select commercial properties. Our focus is the hotel and motel sector nationwide.</div>
+        </details>
+        <details>
+          <summary>Do you represent buyers, sellers, or both?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="ans">Both. We represent owners looking to sell discreetly and investors looking to acquire cash-flowing, value-add, or distressed assets. Representation terms are always established in writing &mdash; see our <a href="legal/iabs.html">Information About Brokerage Services</a> notice.</div>
+        </details>
+        <details>
+          <summary>What is an off-market or private listing?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="ans">Many hospitality owners prefer to sell without public marketing to protect staff, guests, and operations. We maintain access to private inventory that is never advertised publicly. Contact us to discuss what may be available in your target market.</div>
+        </details>
+        <details>
+          <summary>Can you help with a 1031 Exchange or EB-5 investment?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="ans">Yes. We regularly coordinate with qualified intermediaries on 1031 tax-deferred exchanges and source projects suitable for EB-5 and international buyers. We are a brokerage, not a tax or legal advisor, so we work alongside your own professionals.</div>
+        </details>
+        <details>
+          <summary>What areas do you serve?<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="ans">We are based in Sugar Land, Texas and serve clients across the United States, having worked with investors spanning multiple states. Reach out to discuss your specific market.</div>
+        </details>
       </div>
     </div>
   </section>
@@ -750,6 +851,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
           <li><a href="#services">Services</a></li>
           <li><a href="#listings">Listings</a></li>
           <li><a href="#process">Process</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -880,6 +982,9 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
      priceLabel (string shown), and specs (label/value pairs).
      status values: "Available" | "Under Contract" | "Sold"
      type values must match the filter dropdown options.
+     icon values: "hotel" | "motel" | "land" | "commercial"
+     OPTIONAL: add  image:"https://.../photo.jpg"  to show a real photo
+       instead of the icon placeholder (alt text is generated for you).
      ============================================================ */
   var LISTINGS = [
     { title:"85-Key Franchise Hotel", type:"Franchise Hotel", location:"Houston, TX", status:"Available",
@@ -949,13 +1054,18 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
         var specs = l.specs.map(function(sp){
           return '<span class="listing-spec"><b>'+ escapeHtml(sp[1]) +'</b>'+ escapeHtml(sp[0]) +'</span>';
         }).join("");
+        // Use a real photo when the listing has one; otherwise a branded icon placeholder.
+        var plainTitle = l.title.replace(/&amp;/g,"and");
+        var media = l.image
+          ? '<img src="'+ encodeURI(l.image) +'" alt="'+ escapeHtml(plainTitle) +' in '+ escapeHtml(l.location) +'" loading="lazy" decoding="async">'
+          : (ICONS[l.icon] || ICONS.commercial);
         var article = document.createElement("article");
         article.className = "listing";
         article.innerHTML =
           '<div class="listing-media" style="background:linear-gradient(150deg,#16395f,#0a1a2f)">'+
+            media +
             '<span class="listing-status '+ statusClass(l.status) +'">'+ escapeHtml(l.status) +'</span>'+
             '<span class="listing-type">'+ escapeHtml(l.type) +'</span>'+
-            (ICONS[l.icon] || ICONS.commercial) +
           '</div>'+
           '<div class="listing-body">'+
             '<span class="listing-price">'+ l.priceLabel +'</span>'+

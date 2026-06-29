@@ -34,6 +34,9 @@ Rule sets run: `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`.
    Changed to white on navy → passes.
 5. **Stray `</p>` tag** in one legal note block → removed.
 
+> Re-audited after adding the Testimonials section, the FAQ accordion, and
+> optional listing-photo support — still **0 violations on every page**.
+
 ## Functional checks (all passing)
 
 - Listings render from the data array (6 sample cards).
@@ -46,6 +49,9 @@ Rule sets run: `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`.
   immediately and animations are disabled.
 - Contact form: invalid input is blocked with a message; with no endpoint
   configured it shows a graceful "email us directly" fallback instead of failing.
+- FAQ accordion: keyboard-operable (Enter/Space toggle) via native `<details>`.
+- Listing photos: when a listing has an `image`, it renders with descriptive,
+  auto-generated alt text; otherwise a decorative icon placeholder is used.
 
 ## What the automated grade can't cover (do before launch)
 
