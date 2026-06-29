@@ -16,8 +16,18 @@ and re-graded until no further issues remained.
 | `legal/iabs.html` | **0** | 0 |
 | `legal/consumer-protection.html` | **0** | 0 |
 | `404.html` | **0** | 0 |
+| `listings.html` | **0** | 0 |
+| `documents.html` (incl. modal open) | **0** | 0 |
 
 Rule sets run: `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`.
+
+**Audit methodology note:** scroll-revealed elements start at `opacity:0`, and
+accessibility engines skip invisible elements. To avoid blind spots, the final
+audit pass **forces every `.reveal` element visible first**, then runs axe — so
+contrast is checked on all content, not just what happens to be on screen. This
+caught and fixed several gold-on-light text elements (`.eyebrow`, `.team-role`,
+the document "confidential" labels, and a couple of inline links) that were
+~2.9:1; they now use an accessible gold (`#7e6220`, ≥4.5:1 on white and cream).
 
 **HTML structure** was also validated with `html-validate` (recommended ruleset).
 All real findings were fixed — every page now passes with **0 errors**:
@@ -63,6 +73,15 @@ All real findings were fixed — every page now passes with **0 errors**:
   auto-generated alt text; otherwise a decorative icon placeholder is used.
 - Contact form: an accessible honeypot field (`_gotcha`, hidden from people and
   assistive tech) blocks bot spam; legitimate submissions are unaffected.
+- Listings page: renders 12 sample listings from `assets/listings.js`; filters
+  (type/status/price/keyword) and sorting (price asc/desc, name) all verified.
+- Document Center NDA modal: verified end-to-end — empty submit is blocked with
+  a clear message; a completed signature unlocks the download; the signature is
+  recorded (name, email, company, typed signature, agreement version, timestamp)
+  to localStorage and POSTed to the configured endpoint; Esc closes the dialog;
+  focus moves into the dialog on open and returns to the trigger on close; the
+  closed dialog uses `inert` so its fields are not focusable; the `#audit` panel
+  lists records and exports CSV.
 
 ## What the automated grade can't cover (do before launch)
 

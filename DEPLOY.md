@@ -21,6 +21,8 @@ information. These are intentionally left blank so nothing false is published.
 | `[VERIFY-NAME]` | `legal/iabs.html` | Designated broker / sales agent names |
 | `[VERIFY-DATE]` | legal pages | The date you publish (e.g. "June 2026") |
 | `your-form-id` | `index.html` contact form `action` | Your form endpoint (see §3) |
+| `logEndpoint` (blank) | `assets/config.js` | Where document signatures are logged (see §6) |
+| `contactEmail` | `assets/config.js` | Your real inbox |
 
 > **Important:** Have an attorney review the Privacy Policy, Terms, and the two
 > TREC notices before launch, and confirm the TREC notice wording against
@@ -33,10 +35,18 @@ information. These are intentionally left blank so nothing false is published.
 ## 1. Files in this project
 
 ```
-index.html                     ← the homepage (everything: hero, listings, contact)
+index.html                     ← the homepage (hero, featured listings, contact)
+listings.html                  ← full property catalog (filter + sort)
+documents.html                 ← Secure Document Center (signature-gated)
 404.html                       ← "page not found" page
 robots.txt, sitemap.xml        ← search-engine helpers
 site.webmanifest               ← app/icon metadata
+assets/
+  listings.js                  ← edit to add/remove listings
+  documents.js                 ← edit to add/remove downloadable files
+  config.js                    ← set your signature-log endpoint here
+  site.css, site.js            ← shared styles & behavior
+documents/                     ← put your downloadable files here
 legal/
   privacy.html
   terms.html
@@ -44,6 +54,10 @@ legal/
   iabs.html                    ← TREC: Information About Brokerage Services
   consumer-protection.html     ← TREC: Consumer Protection Notice
 ```
+
+> **Keep the folder structure intact** when uploading. `index.html`, `listings.html`,
+> and `documents.html` reference the `assets/` and `documents/` folders by relative
+> path, so upload the whole tree (not just loose files).
 
 To **edit your listings**, open `index.html`, find the `LISTINGS` array near the
 bottom (inside the `<script>` block — it's clearly commented), and add/edit
@@ -132,3 +146,51 @@ visitors to email you directly — it never silently fails.
 4. Submit the contact form to confirm you receive the email.
 
 See `GRADE.md` for the audit this site already passed locally.
+
+---
+
+## 6. Document Center & signature logging
+
+The **Secure Document Center** (`documents.html`) requires each visitor to sign a
+confidentiality agreement before a file downloads, and logs every signature.
+
+### 6.1 Connect the signature log (do this for production)
+Signatures are always saved in the visitor's browser, but to get a **central
+record you can access**, set an endpoint in **`assets/config.js`**:
+
+- **Formspree** — create a form, paste its URL into `logEndpoint`.
+- **Web3Forms** — set `logEndpoint` to `https://api.web3forms.com/submit` and put
+  your key in `web3formsKey`.
+- **Google Sheet** — deploy a Google Apps Script web app that appends rows, and
+  paste its `/exec` URL into `logEndpoint`.
+
+Each signature record includes: document, signer name, email, company, the typed
+signature, agreement version, and an ISO timestamp. You (and the signer, via the
+`_subject`) receive it immediately. Set `requireRemoteLog: true` to refuse
+downloads unless the signature is successfully logged.
+
+You can also view/export signatures stored on a given browser by visiting
+`documents.html#audit` (includes a **Download CSV** button).
+
+### 6.2 Add or remove files
+Drop the file in `documents/`, then add/remove its entry in `assets/documents.js`.
+
+### 6.3 Important: truly locking files
+On plain static hosting (GoDaddy file hosting / any static host), files in
+`documents/` are technically reachable by their direct URL if someone guesses it.
+The signature gate creates the **signed, logged record** and stops casual access,
+which is enough for most brokerage use. To **hard-restrict** a file:
+
+- Email the file *after* signing (e.g., a Formspree autoresponse or an Apps
+  Script that emails the attachment), and remove it from the public `documents/`
+  folder; **or**
+- Serve files through a small serverless function (Cloudflare Workers, Netlify/
+  Vercel Functions) that checks for a signature before returning the file; **or**
+- Use a dedicated virtual-data-room / e-sign service for sensitive deals.
+
+### 6.4 Wix note
+`listings.html` and `documents.html` use multiple files, custom JavaScript, and
+file downloads, which the Wix builder does not host natively. For these pages,
+host the site on **GoDaddy (cPanel)** or any static host (§2 A1). On Wix, the
+homepage can still be embedded (§3 B2); link its "Listings"/"Documents" buttons
+to the GoDaddy-hosted pages, or recreate those pages with native Wix elements.

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1a2f" />
+<title>Listings | Amin Realty, Inc.</title>
+<meta name="description" content="Browse active hotel, motel, land, and commercial real estate listings from Amin Realty, Inc. Filter by property type, status, location, and price." />
+<link rel="canonical" href="https://aminrealtyinc.com/listings.html" />
+<meta property="og:title" content="Listings | Amin Realty, Inc." />
+<meta property="og:description" content="Active hotel, motel, land, and commercial listings nationwide." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23d4af6a' text-anchor='middle' font-weight='700'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="Amin Realty, Inc. home">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span class="brand-text"><b>Amin Realty, Inc.</b><span>Hotel &amp; Commercial Brokerage</span></span>
+    </a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+    </button>
+    <nav id="navLinks" class="nav-links" aria-label="Primary">
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="listings.html" aria-current="page">Listings</a>
+      <a href="documents.html">Documents</a>
+      <a href="index.html#process">Process</a>
+      <a class="btn btn-primary" href="index.html#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span>Listings</nav>
+      <h1>Property Listings</h1>
+      <p>Active hotel, motel, land, and commercial opportunities. Filter and sort below. Many of our best deals are off-market &mdash; <a href="index.html#contact">contact us</a> for private inventory.</p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <div class="toolbar" role="search" aria-label="Filter and sort listings">
+        <div class="field">
+          <label for="filterType">Property Type</label>
+          <select id="filterType"><option value="">All Types</option><option>Franchise Hotel</option><option>Independent Motel</option><option>Land / Development</option><option>Commercial</option></select>
+        </div>
+        <div class="field">
+          <label for="filterStatus">Status</label>
+          <select id="filterStatus"><option value="">All Statuses</option><option>Available</option><option>Under Contract</option><option>Sold</option></select>
+        </div>
+        <div class="field">
+          <label for="filterPrice">Max Price</label>
+          <select id="filterPrice"><option value="">Any Price</option><option value="2500000">Up to $2.5M</option><option value="5000000">Up to $5M</option><option value="10000000">Up to $10M</option><option value="100000000">$10M+</option></select>
+        </div>
+        <div class="field">
+          <label for="sortBy">Sort By</label>
+          <select id="sortBy"><option value="">Featured</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="title">Name (A–Z)</option></select>
+        </div>
+        <div class="field grow">
+          <label for="filterSearch">Search Location / Keyword</label>
+          <input type="search" id="filterSearch" placeholder="e.g. Houston, TX" autocomplete="off" />
+        </div>
+        <div class="count" id="listingsCount" aria-live="polite"></div>
+      </div>
+
+      <div class="listing-grid" id="listingGrid" aria-live="polite"></div>
+      <p style="margin-top:1.5rem;font-size:.85rem;color:var(--light-soft);text-align:center">Sample inventory shown for demonstration. All figures are illustrative &mdash; edit <code>assets/listings.js</code> to manage your real listings. Listings subject to change and prior sale.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="listings.html">Listings</a>
+      <a href="documents.html">Documents</a>
+      <a href="legal/privacy.html">Privacy</a>
+      <a href="legal/terms.html">Terms</a>
+      <a href="legal/accessibility.html">Accessibility</a>
+      <a href="legal/iabs.html">TREC IABS</a>
+    </div>
+    <p class="foot-copy">&copy; <span id="year">2026</span> Amin Realty, Inc. All rights reserved. Licensed Texas Real Estate Brokerage &mdash; 3 Sugarcreek Center, Sugar Land, TX 77478. TREC Broker License No. <strong>[VERIFY-LICENSE]</strong>. All information deemed reliable but not guaranteed; verify independently. Equal Housing Opportunity.</p>
+  </div>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/listings.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

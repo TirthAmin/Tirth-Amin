@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a1a2f" />
+<title>Secure Document Center | Amin Realty, Inc.</title>
+<meta name="description" content="Confidential document center. Access offering memoranda and deal materials after agreeing to keep the information confidential." />
+<meta name="robots" content="noindex, follow" />
+<link rel="canonical" href="https://aminrealtyinc.com/documents.html" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23d4af6a' text-anchor='middle' font-weight='700'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="Amin Realty, Inc. home">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span class="brand-text"><b>Amin Realty, Inc.</b><span>Hotel &amp; Commercial Brokerage</span></span>
+    </a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+    </button>
+    <nav id="navLinks" class="nav-links" aria-label="Primary">
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="listings.html">Listings</a>
+      <a href="documents.html" aria-current="page">Documents</a>
+      <a href="index.html#process">Process</a>
+      <a class="btn btn-primary" href="index.html#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span>Document Center</nav>
+      <h1>Secure Document Center</h1>
+      <p>Confidential deal materials &mdash; offering memoranda, financials, and related files. To protect our clients, each document is released only after you agree to keep its contents confidential. Your agreement is recorded.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Available Documents</span>
+        <h2>Request access to confidential files</h2>
+        <p>Select a document, review and sign the short confidentiality agreement, and your download will unlock immediately.</p>
+      </div>
+      <div class="doc-grid" id="docGrid"></div>
+
+      <!-- Owner audit panel: visit documents.html#audit to view/export signatures stored on this device -->
+      <div class="audit" id="auditPanel" hidden>
+        <h3>Signature Audit Log (this device)</h3>
+        <div class="audit-inner" id="auditInner"></div>
+      </div>
+
+      <p class="fineprint reveal" style="margin-top:2rem;max-width:75ch">
+        <strong>How this works &amp; important notes.</strong> Typing your name as a signature and checking the box forms a binding electronic acknowledgment under the U.S. ESIGN Act and UETA. Each signature is recorded with a timestamp. This click-through agreement is a practical safeguard, not a substitute for a fully negotiated non-disclosure agreement or a dedicated e-signature platform for highly sensitive transactions &mdash; consult your attorney for those. Files are provided &ldquo;as is&rdquo; and remain the confidential property of Amin Realty, Inc. and its clients.
+      </p>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== NDA MODAL ===================== -->
+<div class="modal-backdrop" id="ndaBackdrop" inert>
+  <div class="modal" id="ndaModal" role="dialog" aria-modal="true" aria-labelledby="ndaTitle" aria-describedby="ndaIntro">
+    <div class="modal-head">
+      <div>
+        <h2 id="ndaTitle">Confidentiality Agreement</h2>
+        <p>Regarding: <strong id="ndaDoc"></strong></p>
+      </div>
+      <button type="button" class="modal-close" data-nda-close aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p id="ndaIntro" style="font-size:.92rem;color:var(--ink-soft);margin-bottom:1rem">Please read the following before downloading. <em>Template wording &mdash; have your attorney review and adjust.</em></p>
+      <div class="agreement" tabindex="0" role="region" aria-label="Confidentiality agreement text">
+        <h3>Mutual Confidentiality Acknowledgment</h3>
+        <p>By signing below, I (&ldquo;Recipient&rdquo;) acknowledge that the materials I am requesting from <strong data-company>Amin Realty, Inc.</strong> (&ldquo;Broker&rdquo;) and its clients contain confidential and proprietary information provided solely to evaluate a possible transaction.</p>
+        <p>I agree that I will: (a) keep the materials and all information in them strictly confidential; (b) use them only to evaluate a potential transaction and for no other purpose; (c) not copy, distribute, or disclose them to any third party without the Broker's prior written consent, except to my own advisors who are bound by confidentiality; and (d) return or destroy the materials upon request.</p>
+        <p>I understand the information is deemed reliable but not guaranteed, is subject to change or withdrawal without notice, and does not constitute an offer or investment, legal, or tax advice. I am not relying on the Broker for such advice. I acknowledge the Broker represents the seller/owner unless a separate written agreement states otherwise.</p>
+        <p>This acknowledgment is governed by the laws of the State of Texas. I am at least 18 years old and authorized to enter into this agreement.</p>
+      </div>
+
+      <form id="ndaForm" novalidate>
+        <div class="form-row">
+          <div class="field-block">
+            <label for="ndaName">Full Legal Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="ndaName" name="name" autocomplete="name" required />
+          </div>
+          <div class="field-block">
+            <label for="ndaEmail">Email <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="ndaEmail" name="email" autocomplete="email" required />
+          </div>
+        </div>
+        <div class="field-block">
+          <label for="ndaCompany">Company / Organization</label>
+          <input type="text" id="ndaCompany" name="company" autocomplete="organization" />
+        </div>
+        <div class="field-block">
+          <label for="ndaSignature">Signature &mdash; type your full legal name <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="ndaSignature" name="signature" class="sig-input" autocomplete="off" required aria-describedby="sigHelp" />
+          <span id="sigHelp" class="fineprint">Typing your name here serves as your electronic signature.</span>
+        </div>
+        <div class="check-row">
+          <input type="checkbox" id="ndaAgree" name="agree" required />
+          <label for="ndaAgree" style="font-weight:600;margin:0">I have read and agree to keep this information confidential, and I consent to electronic signing and to my agreement being recorded. <span class="req" aria-hidden="true">*</span></label>
+        </div>
+        <p class="modal-status" id="ndaStatus" role="status" aria-live="polite"></p>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-outline" data-nda-close>Cancel</button>
+          <button type="submit" class="btn btn-primary" id="ndaSubmit">Agree &amp; Download</button>
+        </div>
+      </form>
+
+      <div id="ndaDownload" hidden></div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="listings.html">Listings</a>
+      <a href="documents.html">Documents</a>
+      <a href="legal/privacy.html">Privacy</a>
+      <a href="legal/terms.html">Terms</a>
+      <a href="legal/accessibility.html">Accessibility</a>
+    </div>
+    <p class="foot-copy">&copy; <span id="year">2026</span> Amin Realty, Inc. All rights reserved. Materials in this center are confidential. Licensed Texas Real Estate Brokerage. TREC Broker License No. <strong>[VERIFY-LICENSE]</strong>.</p>
+  </div>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/documents.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

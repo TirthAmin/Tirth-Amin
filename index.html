@@ -76,6 +76,7 @@
   --navy-600:#1f4a78;
   --gold:#d4af6a;
   --gold-dark:#b8923f;
+  --gold-link:#7e6220; /* accessible gold for text on light backgrounds (>=4.5:1) */
   --cream:#f7f4ee;
   --paper:#ffffff;
   --ink:#15263b;          /* dark text on light bg */
@@ -131,7 +132,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 .section-cream{background:var(--cream)}
 .eyebrow{
   display:inline-block;font-family:var(--sans);font-size:.8rem;font-weight:700;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.9rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold-link);margin-bottom:.9rem;
 }
 .section-dark .eyebrow{color:var(--gold)}
 .section-head{max-width:62ch;margin-bottom:clamp(2rem,4vw,3rem)}
@@ -375,7 +376,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   font-family:var(--serif);font-size:2rem;font-weight:700;border:2px solid var(--gold);
 }
 .team-card h3{font-size:1.2rem}
-.team-role{color:var(--gold-dark);font-weight:700;font-size:.9rem;margin-bottom:.6rem}
+.team-role{color:var(--gold-link);font-weight:700;font-size:.9rem;margin-bottom:.6rem}
 .team-card p{color:var(--ink-soft);font-size:.94rem}
 
 /* ---------- 14. Contact ---------- */
@@ -508,9 +509,9 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
     <nav id="navLinks" class="nav-links" aria-label="Primary">
       <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#listings">Listings</a>
+      <a href="listings.html">Listings</a>
+      <a href="documents.html">Documents</a>
       <a href="#process">Process</a>
-      <a href="#team">Team</a>
       <a class="btn btn-primary" href="#contact">Contact Us</a>
     </nav>
   </div>
@@ -671,7 +672,11 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
       </div>
 
       <div class="listing-grid" id="listingGrid" aria-live="polite"></div>
-      <p class="listings-note">Sample inventory shown for demonstration. All figures are illustrative &mdash; replace with live listings before launch. Listings subject to change and prior sale.</p>
+      <div class="reveal" style="text-align:center;margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-primary" href="listings.html">View Full Catalog</a>
+        <a class="btn btn-ghost" href="documents.html">Secure Document Center</a>
+      </div>
+      <p class="listings-note">Featured selection shown. See the <a href="listings.html" style="color:var(--gold)">full catalog</a> for all listings. Figures are illustrative &mdash; replace with live listings before launch. Subject to change and prior sale.</p>
     </div>
   </section>
 
@@ -760,7 +765,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
       <div class="section-head reveal" style="margin-inline:auto;text-align:center">
         <span class="eyebrow">Questions</span>
         <h2 id="faq-title">Frequently asked questions</h2>
-        <p style="margin-inline:auto">Answers to what owners and investors ask us most. Don't see yours? <a href="#contact" style="color:var(--gold-dark);font-weight:600">Get in touch.</a></p>
+        <p style="margin-inline:auto">Answers to what owners and investors ask us most. Don't see yours? <a href="#contact" style="color:var(--gold-link);font-weight:600">Get in touch.</a></p>
       </div>
       <div class="faq reveal">
         <details>
@@ -873,7 +878,8 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
         <ul class="footer-links">
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#listings">Listings</a></li>
+          <li><a href="listings.html">Listings</a></li>
+          <li><a href="documents.html">Document Center</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -914,6 +920,10 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 15 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
 
+<!-- Shared listings (optional). When present, the homepage and the full
+     Listings page read from this one file. Safe to omit (e.g. Wix embed):
+     the homepage falls back to its built-in copy. -->
+<script src="assets/listings.js"></script>
 <script>
 /* ============================================================
    AMIN REALTY, INC. — Behavior
@@ -1010,7 +1020,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
      OPTIONAL: add  image:"https://.../photo.jpg"  to show a real photo
        instead of the icon placeholder (alt text is generated for you).
      ============================================================ */
-  var LISTINGS = [
+  var FALLBACK_LISTINGS = [
     { title:"85-Key Franchise Hotel", type:"Franchise Hotel", location:"Houston, TX", status:"Available",
       price:7900000, priceLabel:"$7,900,000", icon:"hotel",
       specs:[["Keys","85"],["Brand","Flagged"],["Year Built","2016"]] },
@@ -1030,6 +1040,14 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
       price:3100000, priceLabel:"$3,100,000", icon:"motel",
       specs:[["Rooms","58"],["Lot","2.3 ac"],["Status","Closed 2025"]] }
   ];
+
+  // Prefer the shared master list (assets/listings.js) so you manage listings in
+  // ONE place; show the items flagged featured:true. If that file isn't loaded
+  // (e.g. inside a single-file Wix embed), fall back to the inline copy above.
+  var sharedListings = (window.AMIN_LISTINGS || []);
+  var featuredListings = sharedListings.filter(function (l) { return l.featured; });
+  var LISTINGS = featuredListings.length ? featuredListings
+                 : (sharedListings.length ? sharedListings.slice(0, 6) : FALLBACK_LISTINGS);
 
   var ICONS = {
     hotel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V6a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v15M9 9h.01M12 9h.01M15 9h.01M9 13h.01M12 13h.01M15 13h.01M10 21v-4h4v4" stroke-linecap="round" stroke-linejoin="round"/></svg>',

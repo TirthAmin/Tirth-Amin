@@ -1,0 +1,9 @@
+AMIN REALTY, INC. — SAMPLE OFFERING MEMORANDUM (PLACEHOLDER)
+============================================================
+This is a SAMPLE placeholder file used to demonstrate the secure,
+signature-gated download on the Document Center page.
+
+Replace this file with your real offering memorandum (e.g., a PDF)
+and update its entry in assets/documents.js.
+
+CONFIDENTIAL — For authorized recipients only.
