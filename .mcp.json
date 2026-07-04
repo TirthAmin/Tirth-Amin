@@ -20,6 +20,53 @@
       "headers": {
         "x-api-key": "${API_KEY_21ST}"
       }
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": ["-y", "shadcn@latest", "mcp"]
+    },
+    "magicui": {
+      "command": "npx",
+      "args": ["-y", "@magicuidesign/mcp"]
+    },
+    "heroui": {
+      "command": "npx",
+      "args": ["-y", "@heroui/react-mcp"]
+    },
+    "mui": {
+      "command": "npx",
+      "args": ["-y", "@mui/mcp"]
+    },
+    "iconify": {
+      "command": "npx",
+      "args": ["-y", "iconify-mcp"]
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp"]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp"]
+    },
+    "lighthouse": {
+      "command": "npx",
+      "args": ["-y", "lighthouse-mcp"]
+    },
+    "a11y": {
+      "command": "npx",
+      "args": ["-y", "a11y-mcp"]
+    },
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "figma-developer-mcp", "--stdio"],
+      "env": {
+        "FIGMA_API_KEY": "${FIGMA_API_KEY}"
+      }
     }
   }
 }
