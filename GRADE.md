@@ -178,3 +178,10 @@ configuration (the audit ran against a bare `python3 -m http.server`);
 enable gzip/brotli + far-future caching for `assets/` on the production host.
 CSS/JS are intentionally left unminified so the owner can edit listings and
 copy directly, per `DEPLOY.md`.
+
+### Desktop Lighthouse (subpages)
+
+`listings.html`: **100 / 100 / 100 / 100**. `documents.html`: 100 / 100 / 100
+with SEO flagged only for `is-crawlable` — the Document Center is
+**deliberately `noindex, follow`** because it gates confidential deal
+materials; that flag is policy, not a defect.
