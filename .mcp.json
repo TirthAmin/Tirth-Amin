@@ -37,9 +37,29 @@
       "command": "npx",
       "args": ["-y", "@mui/mcp"]
     },
+    "antd": {
+      "command": "npx",
+      "args": ["-y", "@jzone-mcp/antd-components-mcp"]
+    },
+    "chakra": {
+      "command": "npx",
+      "args": ["-y", "@chakra-ui/react-mcp"]
+    },
+    "tailwind": {
+      "command": "npx",
+      "args": ["-y", "tailwindcss-mcp"]
+    },
+    "flowbite": {
+      "command": "npx",
+      "args": ["-y", "flowbite-mcp"]
+    },
     "iconify": {
       "command": "npx",
       "args": ["-y", "iconify-mcp"]
+    },
+    "color-palette": {
+      "command": "npx",
+      "args": ["-y", "color-palette-mcp"]
     },
     "context7": {
       "command": "npx",
@@ -61,11 +81,50 @@
       "command": "npx",
       "args": ["-y", "a11y-mcp"]
     },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {
+        "MEMORY_FILE_PATH": ".claude/memory.json"
+      }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
     "figma": {
       "command": "npx",
       "args": ["-y", "figma-developer-mcp", "--stdio"],
       "env": {
         "FIGMA_API_KEY": "${FIGMA_API_KEY}"
+      }
+    },
+    "unsplash": {
+      "command": "npx",
+      "args": ["-y", "unsplash-mcp-server"],
+      "env": {
+        "UNSPLASH_ACCESS_KEY": "${UNSPLASH_ACCESS_KEY}"
+      }
+    },
+    "pexels": {
+      "command": "npx",
+      "args": ["-y", "pexels-mcp-server"],
+      "env": {
+        "PEXELS_API_KEY": "${PEXELS_API_KEY}"
+      }
+    },
+    "netlify": {
+      "command": "npx",
+      "args": ["-y", "@netlify/mcp"],
+      "env": {
+        "NETLIFY_PERSONAL_ACCESS_TOKEN": "${NETLIFY_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
       }
     }
   }
