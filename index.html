@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#0a1a2f" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1a2f">
 <title>Amin Realty, Inc. | Hotel &amp; Commercial Real Estate Brokerage</title>
-<meta name="description" content="Amin Realty, Inc. is a national commercial real estate brokerage specializing in hotel and motel acquisitions and dispositions since 2012. Serving independent motels, franchise hotels, distressed assets, 1031 Exchange, EB-5, REIT and international investors." />
-<meta name="author" content="Amin Realty, Inc." />
-<link rel="canonical" href="https://aminrealtyinc.com/" />
+<meta name="description" content="Amin Realty, Inc. is a national commercial real estate brokerage specializing in hotel and motel acquisitions and dispositions since 2012. Serving independent motels, franchise hotels, distressed assets, 1031 Exchange, EB-5, REIT and international investors.">
+<meta name="author" content="Amin Realty, Inc.">
+<link rel="canonical" href="https://aminrealtyinc.com/">
 
 <!-- Open Graph / social -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Amin Realty, Inc. | Hotel &amp; Commercial Real Estate Brokerage" />
-<meta property="og:description" content="National hotel & commercial real estate brokerage. Secure, confidential, professional transactions since 2012." />
-<meta property="og:url" content="https://aminrealtyinc.com/" />
-<meta property="og:site_name" content="Amin Realty, Inc." />
-<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:type" content="website">
+<meta property="og:title" content="Amin Realty, Inc. | Hotel &amp; Commercial Real Estate Brokerage">
+<meta property="og:description" content="National hotel & commercial real estate brokerage. Secure, confidential, professional transactions since 2012.">
+<meta property="og:url" content="https://aminrealtyinc.com/">
+<meta property="og:site_name" content="Amin Realty, Inc.">
+<meta name="twitter:card" content="summary_large_image">
 
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <!-- Favicon (inline SVG, no external dependency) -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23d4af6a' text-anchor='middle' font-weight='700'%3EA%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23d4af6a' text-anchor='middle' font-weight='700'%3EA%3C/text%3E%3C/svg%3E">
 
 <!-- Structured data for search engines -->
 <script type="application/ld+json">
@@ -64,26 +67,53 @@
 <style>
 /* ============================================================
    AMIN REALTY, INC. — Design System & Styles
-   Self-contained. No external fonts/CDNs (works offline,
-   on GoDaddy hosting, and inside a Wix HTML embed).
+   Self-hosted fonts (assets/fonts), no external CDNs.
+   Display: Fraunces (variable) · Text/UI: Archivo (variable)
+   Motion is progressive enhancement: everything gated behind
+   html.js and prefers-reduced-motion is fully honored.
    ============================================================ */
+
+/* ---------- 0. Fonts (self-hosted, variable, latin subset) ---------- */
+@font-face{
+  font-family:"Fraunces";src:url("assets/fonts/fraunces.woff2") format("woff2");
+  font-weight:300 700;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Fraunces";src:url("assets/fonts/fraunces-italic.woff2") format("woff2");
+  font-weight:300 700;font-style:italic;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Archivo";src:url("assets/fonts/archivo.woff2") format("woff2");
+  font-weight:100 900;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Archivo";src:url("assets/fonts/archivo-italic.woff2") format("woff2");
+  font-weight:100 900;font-style:italic;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD;
+}
 
 /* ---------- 1. Design tokens ---------- */
 :root{
+  --navy-950:#071120;
   --navy-900:#0a1a2f;
+  --navy-850:#0c2036;
   --navy-800:#0f2742;
   --navy-700:#16395f;
   --navy-600:#1f4a78;
   --gold:#d4af6a;
+  --gold-bright:#e6c689;    /* large display numbers on dark */
   --gold-dark:#b8923f;
-  --gold-link:#7e6220; /* accessible gold for text on light backgrounds (>=4.5:1) */
+  --gold-link:#7e6220;      /* accessible gold for text on light backgrounds (>=4.5:1) */
   --cream:#f7f4ee;
-  --paper:#ffffff;
-  --ink:#15263b;          /* dark text on light bg */
-  --ink-soft:#41546b;     /* secondary text on light bg */
-  --light:#eef3f9;        /* light text on dark bg */
-  --light-soft:#a9bdd4;   /* secondary text on dark bg (>=4.5:1 on navy-900) */
-  --line:#e2e6ec;
+  --paper:#fffdf9;          /* warm white */
+  --ink:#15263b;            /* dark text on light bg */
+  --ink-soft:#41546b;       /* secondary text on light bg */
+  --light:#eef3f9;          /* light text on dark bg */
+  --light-soft:#a9bdd4;     /* secondary text on dark bg (>=4.5:1 on navy-900) */
+  --line:#e7e3d8;
   --line-dark:rgba(212,175,106,.22);
   --shadow:0 10px 40px -12px rgba(8,20,38,.35);
   --shadow-lg:0 24px 60px -20px rgba(8,20,38,.55);
@@ -91,8 +121,9 @@
   --radius-sm:10px;
   --maxw:1180px;
   --ease:cubic-bezier(.22,.61,.36,1);
-  --serif:Georgia,"Times New Roman",serif;
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
 
 /* ---------- 2. Reset / base ---------- */
@@ -108,13 +139,14 @@ body{
 }
 img{max-width:100%;display:block}
 a{color:inherit}
-h1,h2,h3,h4{font-family:var(--serif);line-height:1.15;font-weight:700;letter-spacing:-.01em}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.12;font-weight:560;letter-spacing:-.015em}
 ul{list-style:none}
+::selection{background:var(--gold);color:var(--navy-900)}
 
 /* ---------- 3. Accessibility helpers ---------- */
 .skip-link{
-  position:absolute;left:8px;top:-48px;z-index:200;
-  background:var(--gold);color:var(--navy-900);
+  position:absolute;left:8px;top:-90px;z-index:200;
+  background:var(--navy-900);color:#fff;border:2px solid var(--gold);
   padding:.7rem 1.1rem;border-radius:8px;font-weight:700;text-decoration:none;
   transition:top .2s var(--ease);
 }
@@ -123,33 +155,47 @@ ul{list-style:none}
   position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
 }
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+:focus-visible{outline:3px solid var(--gold-link);outline-offset:3px;border-radius:4px}
+.section-dark :focus-visible,.site-header :focus-visible,.hero :focus-visible,
+.site-footer :focus-visible,.marquee :focus-visible{outline-color:var(--gold)}
 
 /* ---------- 4. Layout ---------- */
 .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
-section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
+section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
 .section-dark{background:var(--navy-900);color:var(--light)}
-.section-cream{background:var(--cream)}
-.eyebrow{
-  display:inline-block;font-family:var(--sans);font-size:.8rem;font-weight:700;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--gold-link);margin-bottom:.9rem;
+.section-cream{
+  background:var(--cream);
+  background-image:radial-gradient(rgba(126,98,32,.06) 1px,transparent 1px);
+  background-size:26px 26px;
 }
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.65rem;font-family:var(--sans);font-size:.74rem;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--gold-link);margin-bottom:1.1rem;
+}
+.eyebrow::before{content:"";width:28px;height:2px;background:currentColor;opacity:.65;flex:none}
 .section-dark .eyebrow{color:var(--gold)}
-.section-head{max-width:62ch;margin-bottom:clamp(2rem,4vw,3rem)}
-.section-head h2{font-size:clamp(1.8rem,4vw,2.7rem)}
-.section-head p{margin-top:1rem;color:var(--ink-soft);font-size:1.05rem}
+.section-head{max-width:64ch;margin-bottom:clamp(2rem,4vw,3.2rem)}
+.section-head h2{font-size:clamp(1.9rem,4.2vw,3rem)}
+.section-head p{margin-top:1.1rem;color:var(--ink-soft);font-size:1.06rem;max-width:58ch}
 .section-dark .section-head p{color:var(--light-soft)}
 
 /* ---------- 5. Buttons ---------- */
 .btn{
-  display:inline-flex;align-items:center;gap:.55rem;
-  font-family:var(--sans);font-weight:700;font-size:.98rem;
-  padding:.85rem 1.6rem;border-radius:10px;border:2px solid transparent;
+  position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--sans);font-weight:700;font-size:.98rem;letter-spacing:.01em;
+  padding:.9rem 1.7rem;border-radius:12px;border:2px solid transparent;
   text-decoration:none;cursor:pointer;transition:transform .25s var(--ease),
-    background .25s var(--ease),box-shadow .25s var(--ease),color .25s var(--ease);
+    background .25s var(--ease),box-shadow .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease);
 }
+.btn:active{transform:translateY(0) scale(.985)}
 .btn-primary{background:var(--gold);color:var(--navy-900)}
-.btn-primary:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(184,146,63,.7)}
+.btn-primary::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.5) 50%,transparent 58%);
+  transform:translateX(-130%);transition:transform .7s var(--ease);
+}
+.btn-primary:hover{background:var(--gold-dark);color:#fff;transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(184,146,63,.7)}
+.btn-primary:hover::after{transform:translateX(130%)}
 .btn-ghost{background:transparent;color:var(--light);border-color:rgba(212,175,106,.55)}
 .btn-ghost:hover{background:rgba(212,175,106,.12);border-color:var(--gold);transform:translateY(-2px)}
 .btn-dark{background:var(--navy-900);color:#fff}
@@ -157,32 +203,45 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 
 /* ---------- 6. Header / nav ---------- */
 .site-header{
-  position:sticky;top:0;z-index:100;
-  background:rgba(10,26,47,.82);backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:100;--progress:0;
+  background:rgba(10,26,47,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line-dark);
-  transition:background .3s var(--ease),padding .3s var(--ease);
+  transition:background .3s var(--ease);
 }
-.site-header.scrolled{background:rgba(10,26,47,.97)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:1rem}
+.site-header.scrolled{background:rgba(7,17,32,.97)}
+.site-header::after{ /* reading-progress hairline */
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;
+  background:linear-gradient(90deg,var(--gold-dark),var(--gold));
+  transform:scaleX(var(--progress));transform-origin:left;pointer-events:none;
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.95rem}
 .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--light)}
 .brand-mark{
-  width:42px;height:42px;border-radius:9px;flex:none;
+  width:42px;height:42px;border-radius:10px;flex:none;
   background:linear-gradient(135deg,var(--gold),var(--gold-dark));
   display:grid;place-items:center;color:var(--navy-900);
-  font-family:var(--serif);font-weight:700;font-size:1.3rem;
+  font-family:var(--display);font-weight:640;font-size:1.35rem;
+  transition:transform .35s var(--ease);
 }
+.brand:hover .brand-mark{transform:rotate(-6deg) scale(1.05)}
 .brand-text{display:flex;flex-direction:column;line-height:1.1}
-.brand-text b{font-family:var(--serif);font-size:1.12rem;letter-spacing:.01em}
-.brand-text span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-.nav-links{display:flex;align-items:center;gap:.3rem}
+.brand-text b{font-family:var(--display);font-size:1.12rem;letter-spacing:.01em;font-weight:600}
+.brand-text span{font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:.25rem}
 .nav-links a{
-  text-decoration:none;color:var(--light);font-size:.95rem;font-weight:600;
+  position:relative;text-decoration:none;color:var(--light);font-size:.95rem;font-weight:600;
   padding:.55rem .85rem;border-radius:8px;transition:color .2s var(--ease),background .2s var(--ease);
 }
-.nav-links a:hover{color:var(--gold);background:rgba(212,175,106,.1)}
+.nav-links a:not(.btn)::after{
+  content:"";position:absolute;left:.85rem;right:.85rem;bottom:.3rem;height:2px;border-radius:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease);
+}
+.nav-links a:not(.btn):hover::after,.nav-links a:not(.btn).active::after{transform:scaleX(1)}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
 .nav-links .btn{margin-left:.5rem;padding:.6rem 1.15rem}
 /* Keep the primary button's dark text legible in the nav (overrides .nav-links a color) */
-.nav-links a.btn-primary,.nav-links a.btn-primary:hover{color:var(--navy-900)}
+.nav-links a.btn-primary{color:var(--navy-900)}
+.nav-links a.btn-primary:hover{color:#fff}
 .nav-toggle{
   display:none;background:none;border:2px solid var(--line-dark);border-radius:8px;
   width:46px;height:46px;cursor:pointer;color:var(--light);
@@ -200,56 +259,132 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   }
   .nav-links.open{max-height:80vh;visibility:visible}
   .nav-links a{padding:.85rem .6rem;border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav-links a:not(.btn)::after{display:none}
   .nav-links .btn{margin:.6rem 0 0;justify-content:center}
 }
 
 /* ---------- 7. Hero ---------- */
 .hero{
-  position:relative;background:var(--navy-900);color:var(--light);
-  padding-block:clamp(4rem,9vw,7.5rem);overflow:hidden;
+  position:relative;background:linear-gradient(180deg,var(--navy-950) 0%,var(--navy-900) 55%,var(--navy-850) 100%);
+  color:var(--light);
+  padding-top:clamp(4rem,8.5vw,7rem);
+  padding-bottom:clamp(11rem,22vw,17rem); /* room for the skyline */
+  overflow:hidden;
 }
-.hero-bg{position:absolute;inset:0;z-index:0;opacity:.9}
-.hero-bg::before{
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg::before{ /* dawn glow rising behind the skyline */
   content:"";position:absolute;inset:-20%;
   background:
-    radial-gradient(40% 50% at 78% 18%,rgba(212,175,106,.20),transparent 60%),
-    radial-gradient(45% 55% at 12% 88%,rgba(31,74,120,.55),transparent 60%);
-  animation:drift 18s var(--ease) infinite alternate;
+    radial-gradient(46% 42% at 74% 96%,rgba(212,175,106,.22),transparent 70%),
+    radial-gradient(40% 50% at 12% 10%,rgba(31,74,120,.45),transparent 65%);
+  animation:dawn 16s var(--ease) infinite alternate;
 }
-.hero-grid-lines{
-  position:absolute;inset:0;z-index:0;opacity:.16;
-  background-image:linear-gradient(rgba(212,175,106,.25) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(212,175,106,.25) 1px,transparent 1px);
-  background-size:64px 64px;
-  -webkit-mask-image:radial-gradient(70% 60% at 70% 30%,#000,transparent);
-  mask-image:radial-gradient(70% 60% at 70% 30%,#000,transparent);
+@keyframes dawn{from{opacity:.75;transform:translate3d(0,0,0)}to{opacity:1;transform:translate3d(-2%,1.5%,0) scale(1.06)}}
+.hero-stars{ /* faint high stars, decorative */
+  position:absolute;inset:0 0 45% 0;z-index:0;opacity:.55;
+  background-image:
+    radial-gradient(1px 1px at 12% 28%,rgba(255,255,255,.8),transparent 100%),
+    radial-gradient(1px 1px at 26% 12%,rgba(255,255,255,.55),transparent 100%),
+    radial-gradient(1.5px 1.5px at 38% 34%,rgba(230,198,137,.7),transparent 100%),
+    radial-gradient(1px 1px at 54% 8%,rgba(255,255,255,.6),transparent 100%),
+    radial-gradient(1px 1px at 63% 24%,rgba(255,255,255,.45),transparent 100%),
+    radial-gradient(1.5px 1.5px at 78% 15%,rgba(230,198,137,.65),transparent 100%),
+    radial-gradient(1px 1px at 88% 32%,rgba(255,255,255,.7),transparent 100%),
+    radial-gradient(1px 1px at 95% 10%,rgba(255,255,255,.5),transparent 100%);
+  animation:starfade 7s ease-in-out infinite alternate;
 }
-@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-3%,2%,0) scale(1.08)}}
-.hero-inner{position:relative;z-index:1;max-width:760px}
+@keyframes starfade{from{opacity:.35}to{opacity:.7}}
+.hero-glow{ /* cursor-following lantern (pointer:fine only, added by JS) */
+  position:absolute;z-index:0;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,175,106,.14),transparent 62%);
+  transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .6s var(--ease);
+}
+.hero-glow.on{opacity:1}
+.hero-inner{position:relative;z-index:2;max-width:920px}
 .hero .tag{
-  display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
-  border:1px solid var(--line-dark);border-radius:999px;padding:.4rem .9rem;margin-bottom:1.4rem;
+  display:inline-flex;align-items:center;gap:.55rem;font-size:.78rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  border:1px solid var(--line-dark);border-radius:999px;padding:.45rem 1rem;margin-bottom:1.6rem;
+  background:rgba(7,17,32,.4);
 }
 .hero .tag .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(212,175,106,.7);animation:pulse 2.4s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(212,175,106,.6)}70%{box-shadow:0 0 0 10px rgba(212,175,106,0)}100%{box-shadow:0 0 0 0 rgba(212,175,106,0)}}
-.hero h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.05}
-.hero h1 .accent{color:var(--gold)}
-.hero p.lead{margin-top:1.4rem;font-size:clamp(1.05rem,2vw,1.25rem);color:var(--light-soft);max-width:60ch}
-.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.2rem}
-.hero-stats{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;
-  margin-top:3rem;max-width:560px;
+.hero h1{
+  font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.04;font-weight:440;letter-spacing:-.02em;
 }
-.hero-stat b{display:block;font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.4rem);color:var(--gold)}
-.hero-stat span{font-size:.85rem;color:var(--light-soft);letter-spacing:.02em}
+.hero h1 .hl{display:block;overflow:hidden;padding-block:.06em}
+.hero h1 .hl-inner{display:block}
+.hero h1 .accent{
+  font-style:italic;font-weight:480;
+  background:linear-gradient(100deg,var(--gold-bright),var(--gold) 55%,var(--gold-dark));
+  -webkit-background-clip:text;background-clip:text;color:var(--gold);
+  -webkit-text-fill-color:transparent;
+}
+.hero p.lead{margin-top:1.6rem;font-size:clamp(1.06rem,2vw,1.28rem);color:var(--light-soft);max-width:56ch;line-height:1.7}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.4rem}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4rem;
+  margin-top:3.2rem;max-width:600px;border-top:1px solid rgba(212,175,106,.25);padding-top:1.6rem;
+}
+.hero-stat b{display:block;font-family:var(--display);font-weight:560;font-size:clamp(1.8rem,4vw,2.6rem);color:var(--gold-bright);line-height:1.1}
+.hero-stat span{font-size:.82rem;color:var(--light-soft);letter-spacing:.06em;text-transform:uppercase;font-weight:600}
 
-/* ---------- 8. Trust bar ---------- */
-.trustbar{background:var(--navy-800);border-block:1px solid var(--line-dark)}
-.trustbar .container{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
-  gap:clamp(1rem,4vw,3rem);padding-block:1.5rem;text-align:center}
-.trustbar span{color:var(--light-soft);font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
-.trustbar b{color:var(--light);font-family:var(--serif)}
+/* Hero entrance choreography (JS adds html.js; CSS animations play on load) */
+.js .hero .tag,.js .hero p.lead,.js .hero-cta,.js .hero-stats{opacity:0;animation:rise .9s var(--ease-out) forwards}
+.js .hero .tag{animation-delay:.15s}
+.js .hero h1 .hl-inner{transform:translateY(112%);animation:lift 1s var(--ease-out) forwards}
+.js .hero h1 .hl:nth-child(1) .hl-inner{animation-delay:.3s}
+.js .hero h1 .hl:nth-child(2) .hl-inner{animation-delay:.45s}
+.js .hero p.lead{animation-delay:.62s}
+.js .hero-cta{animation-delay:.78s}
+.js .hero-stats{animation-delay:.94s}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes lift{to{transform:translateY(0)}}
+
+/* Skyline signature */
+.hero-skyline{
+  position:absolute;left:0;right:0;bottom:0;z-index:1;pointer-events:none;
+  line-height:0;
+}
+.hero-skyline::after{ /* gold horizon hairline */
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold-dark) 18%,var(--gold) 50%,var(--gold-dark) 82%,transparent);
+  opacity:.65;
+}
+.skyline-strip{display:block;width:100%;height:clamp(130px,18vw,250px)}
+.skyline-strip .win{fill:var(--gold);opacity:0}
+.js .skyline-strip .win{animation:winOn .9s ease forwards;animation-delay:calc(var(--d)*.5 + .8s)}
+.no-js .skyline-strip .win,html:not(.js) .skyline-strip .win{opacity:.75}
+@keyframes winOn{from{opacity:0}to{opacity:.92}}
+.skyline-strip .win-tw{animation:winOn .9s ease forwards,twinkle 5.5s ease-in-out calc(var(--d) + 2s) infinite}
+@keyframes twinkle{0%,100%{opacity:.85}50%{opacity:.25}}
+.skyline-strip .beacon{fill:var(--gold-bright)}
+.skyline-strip .beacon-halo{fill:rgba(212,175,106,.35);animation:beacon 3s ease-in-out infinite}
+@keyframes beacon{0%,100%{opacity:.2;transform:scale(.6);transform-origin:center;transform-box:fill-box}50%{opacity:.7;transform:scale(1.25)}}
+
+/* ---------- 8. Marquee (asset classes we broker) ---------- */
+.marquee{background:var(--navy-850);border-block:1px solid var(--line-dark);position:relative;overflow:hidden;padding-block:0;scroll-margin-top:84px}
+.marquee-track{display:flex;width:max-content;animation:marquee 36s linear infinite}
+.marquee.paused .marquee-track,.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee ul{display:flex;align-items:center;flex:none}
+.marquee li{
+  display:flex;align-items:center;gap:clamp(1.2rem,3vw,2.6rem);padding-right:clamp(1.2rem,3vw,2.6rem);
+  color:var(--light-soft);font-size:.84rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+  padding-block:1.15rem;white-space:nowrap;
+}
+.marquee li b{color:var(--light);font-family:var(--display);font-weight:520;font-size:1.02rem;letter-spacing:.12em}
+.marquee li .diamond{color:var(--gold);font-size:.7rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-pause{
+  position:absolute;right:.6rem;top:50%;transform:translateY(-50%);z-index:2;
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--line-dark);
+  background:rgba(7,17,32,.85);color:var(--gold);cursor:pointer;display:grid;place-items:center;
+}
+.marquee-pause:hover{background:var(--navy-700)}
+.marquee-pause svg{width:16px;height:16px}
+.marquee-pause .icon-play{display:none}
+.marquee.paused .icon-pause{display:none}
+.marquee.paused .icon-play{display:block}
 
 /* ---------- 9. Generic cards / grids ---------- */
 .grid{display:grid;gap:1.5rem}
@@ -260,16 +395,26 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 @media (max-width:620px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}}
 
 .card{
+  position:relative;overflow:hidden;
   background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
-  padding:1.8rem;box-shadow:var(--shadow);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+  padding:1.9rem;box-shadow:var(--shadow);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
 }
-.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
+.card::before{ /* gold sweep across the top on hover */
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-dark));
+  transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease);
+}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(184,146,63,.55)}
+.card:hover::before{transform:scaleX(1)}
 .card .icon{
-  width:54px;height:54px;border-radius:12px;display:grid;place-items:center;margin-bottom:1.1rem;
-  background:linear-gradient(135deg,rgba(212,175,106,.18),rgba(31,74,120,.12));color:var(--gold-dark);
+  width:56px;height:56px;border-radius:50%;display:grid;place-items:center;margin-bottom:1.2rem;
+  border:1px solid rgba(184,146,63,.45);color:var(--gold-dark);background:transparent;
+  transition:background .35s var(--ease),transform .35s var(--ease),color .35s var(--ease);
 }
-.card .icon svg{width:28px;height:28px}
-.card h3{font-size:1.25rem;margin-bottom:.5rem}
+.card:hover .icon{background:rgba(212,175,106,.14);transform:translateY(-3px)}
+.card .icon svg{width:26px;height:26px}
+.card h3{font-size:1.28rem;margin-bottom:.55rem;font-weight:580}
 .card p{color:var(--ink-soft);font-size:.97rem}
 
 /* ---------- 10. About / split ---------- */
@@ -277,7 +422,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 @media (max-width:860px){.split{grid-template-columns:1fr}}
 .about-visual{
   position:relative;border-radius:var(--radius);overflow:hidden;min-height:380px;
-  background:linear-gradient(160deg,var(--navy-700),var(--navy-900));box-shadow:var(--shadow-lg);
+  background:linear-gradient(160deg,var(--navy-700),var(--navy-950));box-shadow:var(--shadow-lg);
   display:grid;place-items:center;color:var(--light);
 }
 .about-visual .skyline{width:100%;height:auto;opacity:.9}
@@ -285,18 +430,18 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   position:absolute;left:1.4rem;bottom:1.4rem;background:rgba(10,26,47,.78);
   border:1px solid var(--line-dark);border-radius:12px;padding:1rem 1.3rem;backdrop-filter:blur(6px);
 }
-.about-visual .badge b{display:block;font-family:var(--serif);color:var(--gold);font-size:1.5rem}
+.about-visual .badge b{display:block;font-family:var(--display);color:var(--gold);font-size:1.5rem;font-weight:560}
 .about-visual .badge span{font-size:.82rem;color:var(--light-soft)}
 .checklist{margin-top:1.6rem;display:grid;gap:.85rem}
 .checklist li{display:flex;gap:.75rem;align-items:flex-start;color:var(--ink-soft)}
 .checklist svg{flex:none;width:22px;height:22px;color:var(--gold-dark);margin-top:2px}
 
-/* ---------- 11. Listings (HVS-style) ---------- */
+/* ---------- 11. Listings ---------- */
 .listings-toolbar{
   display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-bottom:2rem;
 }
 .listings-toolbar .field{display:flex;flex-direction:column;gap:.3rem}
-.listings-toolbar label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.listings-toolbar label{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
 .listings-toolbar select,.listings-toolbar input{
   font-family:var(--sans);font-size:.95rem;padding:.6rem .8rem;border-radius:9px;
   border:1px solid var(--line-dark);background:var(--navy-800);color:var(--light);min-width:165px;
@@ -312,13 +457,17 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 .listing{
   background:var(--navy-800);border:1px solid var(--line-dark);border-radius:var(--radius);
   overflow:hidden;display:flex;flex-direction:column;
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
 }
 .listing:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
 .listing-media{
   position:relative;aspect-ratio:16/10;display:grid;place-items:center;color:rgba(255,255,255,.85);
+  overflow:hidden;
 }
-.listing-media svg{width:64px;height:64px;opacity:.85}
+.listing-media svg{width:64px;height:64px;opacity:.85;transition:transform .5s var(--ease)}
+.listing:hover .listing-media svg{transform:scale(1.12)}
+.listing-media img{transition:transform .6s var(--ease)}
+.listing:hover .listing-media img{transform:scale(1.06)}
 .listing-status{
   position:absolute;top:.85rem;left:.85rem;font-size:.72rem;font-weight:700;letter-spacing:.08em;
   text-transform:uppercase;padding:.35rem .7rem;border-radius:999px;color:#fff;backdrop-filter:blur(4px);
@@ -331,8 +480,8 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   background:rgba(10,26,47,.78);color:var(--light);padding:.3rem .65rem;border-radius:8px;
 }
 .listing-body{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
-.listing-price{font-family:var(--serif);font-size:1.45rem;color:var(--gold);font-weight:700}
-.listing-title{font-family:var(--serif);font-size:1.12rem;color:var(--light);line-height:1.3}
+.listing-price{font-family:var(--display);font-size:1.5rem;color:var(--gold);font-weight:600}
+.listing-title{font-family:var(--display);font-size:1.14rem;color:var(--light);line-height:1.3;font-weight:560}
 .listing-loc{display:flex;align-items:center;gap:.4rem;color:var(--light-soft);font-size:.9rem}
 .listing-loc svg{width:16px;height:16px;flex:none;color:var(--gold)}
 .listing-specs{
@@ -340,7 +489,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   border-top:1px solid rgba(255,255,255,.08);padding-top:.9rem;
 }
 .listing-spec{font-size:.83rem;color:var(--light-soft)}
-.listing-spec b{color:var(--light);font-family:var(--serif);display:block;font-size:1rem}
+.listing-spec b{color:var(--light);font-family:var(--display);display:block;font-size:1rem;font-weight:560}
 .listing-cta{margin-top:auto;padding-top:1rem}
 .listing-cta a{
   display:inline-flex;align-items:center;gap:.4rem;color:var(--gold);font-weight:700;
@@ -355,16 +504,29 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 }
 .listings-note{margin-top:1.5rem;font-size:.85rem;color:var(--light-soft);text-align:center}
 
-/* ---------- 12. Process steps ---------- */
-.steps{counter-reset:step;display:grid;gap:1.3rem}
-.step{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start}
+/* ---------- 12. Process steps (a real sequence: the line draws in) ---------- */
+.steps{position:relative;counter-reset:step;display:grid;gap:1.5rem}
+.steps::before{
+  content:"";position:absolute;left:24px;top:28px;bottom:28px;width:2px;
+  background:linear-gradient(180deg,var(--gold),rgba(184,146,63,.15));
+}
+.js .steps::before{transform:scaleY(0);transform-origin:top;transition:transform 1.6s var(--ease) .3s}
+.js .steps.in::before{transform:scaleY(1)}
+.step{position:relative;display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start}
+.js .steps .step{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .steps.in .step{opacity:1;transform:none}
+.js .steps.in .step:nth-child(1){transition-delay:.15s}
+.js .steps.in .step:nth-child(2){transition-delay:.4s}
+.js .steps.in .step:nth-child(3){transition-delay:.65s}
+.js .steps.in .step:nth-child(4){transition-delay:.9s}
 .step-num{
   counter-increment:step;width:48px;height:48px;border-radius:50%;flex:none;display:grid;place-items:center;
   background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy-900);
-  font-family:var(--serif);font-weight:700;font-size:1.25rem;
+  font-family:var(--display);font-weight:640;font-size:1.2rem;position:relative;z-index:1;
+  box-shadow:0 0 0 6px var(--paper);
 }
 .step-num::before{content:counter(step,decimal-leading-zero)}
-.step h3{font-size:1.2rem;margin-bottom:.3rem}
+.step h3{font-size:1.22rem;margin-bottom:.3rem;font-weight:580}
 .step p{color:var(--ink-soft)}
 .section-dark .step p{color:var(--light-soft)}
 
@@ -373,10 +535,12 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 .team-avatar{
   width:96px;height:96px;border-radius:50%;margin:0 auto 1rem;display:grid;place-items:center;
   background:linear-gradient(135deg,var(--navy-700),var(--navy-900));color:var(--gold);
-  font-family:var(--serif);font-size:2rem;font-weight:700;border:2px solid var(--gold);
+  font-family:var(--display);font-size:2rem;font-weight:600;border:2px solid var(--gold);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
 }
-.team-card h3{font-size:1.2rem}
-.team-role{color:var(--gold-link);font-weight:700;font-size:.9rem;margin-bottom:.6rem}
+.card:hover .team-avatar{transform:scale(1.06);box-shadow:0 10px 26px -8px rgba(212,175,106,.55)}
+.team-card h3{font-size:1.22rem}
+.team-role{color:var(--gold-link);font-weight:700;font-size:.88rem;margin-bottom:.6rem;letter-spacing:.04em}
 .team-card p{color:var(--ink-soft);font-size:.94rem}
 
 /* ---------- 14. Contact ---------- */
@@ -384,11 +548,11 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 @media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
 .contact-info li{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1.3rem}
 .contact-info .ic{
-  width:46px;height:46px;border-radius:11px;flex:none;display:grid;place-items:center;
-  background:rgba(212,175,106,.14);color:var(--gold);
+  width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;
+  border:1px solid rgba(212,175,106,.4);background:rgba(212,175,106,.1);color:var(--gold);
 }
 .contact-info .ic svg{width:22px;height:22px}
-.contact-info b{display:block;color:var(--light);font-family:var(--serif);font-size:1.05rem}
+.contact-info b{display:block;color:var(--light);font-family:var(--display);font-size:1.05rem;font-weight:580}
 .contact-info a,.contact-info span{color:var(--light-soft);text-decoration:none}
 .contact-info a:hover{color:var(--gold)}
 .form-field{margin-bottom:1.1rem}
@@ -397,8 +561,9 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 .form-field input,.form-field select,.form-field textarea{
   width:100%;font-family:var(--sans);font-size:1rem;padding:.8rem .9rem;border-radius:10px;
   border:1px solid var(--line-dark);background:var(--navy-800);color:var(--light);
+  transition:border-color .25s var(--ease),box-shadow .25s var(--ease);
 }
-.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold)}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,106,.18)}
 .form-field textarea{resize:vertical;min-height:120px}
 .form-note{font-size:.82rem;color:var(--light-soft);margin-top:.6rem}
 .form-status{margin-top:1rem;font-size:.95rem;font-weight:600}
@@ -406,13 +571,19 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 .form-status[data-state="err"]{color:#ff9a8a}
 
 /* ---------- 15. Footer ---------- */
-.site-footer{background:#07131f;color:var(--light-soft);padding-block:3rem 2rem;font-size:.92rem}
+.site-footer{background:var(--navy-950);color:var(--light-soft);padding-block:3rem 2rem;font-size:.92rem;border-top:1px solid var(--line-dark)}
 .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem;margin-bottom:2.4rem}
 @media (max-width:780px){.footer-top{grid-template-columns:1fr}}
-.site-footer h4{color:var(--light);font-size:1rem;margin-bottom:1rem;font-family:var(--sans);letter-spacing:.04em}
-.site-footer a{color:var(--light-soft);text-decoration:none}
+.site-footer h3{color:var(--light);font-size:.85rem;margin-bottom:1rem;font-family:var(--sans);letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+.site-footer a{color:var(--light-soft);text-decoration:none;transition:color .2s var(--ease)}
 .site-footer a:hover{color:var(--gold)}
 .footer-links li{margin-bottom:.6rem}
+.footer-links a{position:relative}
+.footer-links a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:var(--gold);
+  transition:right .3s var(--ease);
+}
+.footer-links a:hover::after{right:0}
 .footer-legal{
   border-top:1px solid rgba(255,255,255,.1);padding-top:1.6rem;
   display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;
@@ -423,72 +594,102 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 .footer-disclaimer a{color:var(--gold);text-decoration:underline}
 .footer-legal-links{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem}
 
-/* ---------- 15b. Listing photos (optional, used when a listing has an image) ---------- */
-.listing-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.listing-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(7,19,31,.55));pointer-events:none}
-
 /* ---------- 15c. Testimonials ---------- */
 .quote{
   background:var(--navy-800);border:1px solid var(--line-dark);border-radius:var(--radius);
   padding:2rem 1.8rem;display:flex;flex-direction:column;gap:1.1rem;height:100%;
-  transition:transform .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease);
+  transition:transform .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease);
 }
 .quote:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow-lg)}
 .quote .stars{display:flex;gap:.15rem;color:var(--gold)}
 .quote .stars svg{width:18px;height:18px}
-.quote blockquote{color:var(--light);font-size:1.02rem;font-style:italic;line-height:1.6;margin:0}
+.quote blockquote{position:relative;color:var(--light);font-family:var(--display);font-size:1.08rem;font-style:italic;font-weight:420;line-height:1.6;margin:0;padding-top:1.4rem}
+.quote blockquote::before{
+  content:"\201C";position:absolute;top:-.35rem;left:-.4rem;font-family:var(--display);
+  font-size:4rem;line-height:1;color:var(--gold);opacity:.28;pointer-events:none;
+}
 .quote .who{display:flex;align-items:center;gap:.8rem;margin-top:auto}
 .quote .who .av{
   width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;
   background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy-900);
-  font-family:var(--serif);font-weight:700;
+  font-family:var(--display);font-weight:640;
 }
-.quote .who b{display:block;color:var(--light);font-family:var(--serif);font-size:1rem;font-style:normal}
+.quote .who b{display:block;color:var(--light);font-family:var(--display);font-size:1rem;font-style:normal;font-weight:580}
 .quote .who span{color:var(--light-soft);font-size:.85rem}
 
-/* ---------- 15d. FAQ (native <details> = accessible, keyboard-ready, no JS) ---------- */
+/* ---------- 15d. FAQ (native <details>; JS adds smooth height) ---------- */
 .faq{max-width:820px;margin:0 auto;display:grid;gap:.9rem}
 .faq details{
   border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--paper);
   overflow:hidden;transition:border-color .25s var(--ease),box-shadow .25s var(--ease);
 }
-.faq details[open]{border-color:var(--gold);box-shadow:var(--shadow)}
+.faq details[open]{border-color:var(--gold-dark);box-shadow:var(--shadow)}
 .faq summary{
-  list-style:none;cursor:pointer;padding:1.15rem 1.3rem;font-family:var(--serif);
-  font-size:1.08rem;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  list-style:none;cursor:pointer;padding:1.15rem 1.3rem;font-family:var(--display);
+  font-size:1.08rem;font-weight:540;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:1rem;
 }
 .faq summary::-webkit-details-marker{display:none}
-.faq summary:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+.faq summary:focus-visible{outline:3px solid var(--gold-link);outline-offset:-3px}
 .faq summary .chev{flex:none;width:22px;height:22px;color:var(--gold-dark);transition:transform .3s var(--ease)}
 .faq details[open] summary .chev{transform:rotate(180deg)}
-.faq .ans{padding:0 1.3rem 1.3rem;color:var(--ink-soft);font-size:.97rem;line-height:1.65}
+.faq .ans{padding:0 1.3rem 1.3rem;color:var(--ink-soft);font-size:.97rem;line-height:1.65;font-family:var(--sans)}
 
-/* ---------- 16. Scroll-reveal animation ---------- */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-.reveal[data-delay="1"]{transition-delay:.08s}
-.reveal[data-delay="2"]{transition-delay:.16s}
-.reveal[data-delay="3"]{transition-delay:.24s}
+/* ---------- 16. Scroll-reveal (JS-gated so content is never hidden without JS) ---------- */
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+.js .reveal[data-delay="1"]{transition-delay:.1s}
+.js .reveal[data-delay="2"]{transition-delay:.2s}
+.js .reveal[data-delay="3"]{transition-delay:.3s}
 
-/* Back-to-top */
+/* Back-to-top with scroll progress ring */
 .to-top{
-  position:fixed;right:1.2rem;bottom:1.2rem;z-index:90;width:48px;height:48px;border-radius:50%;
-  background:var(--gold);color:var(--navy-900);border:none;cursor:pointer;display:grid;place-items:center;
+  position:fixed;right:1.2rem;bottom:1.2rem;z-index:90;width:52px;height:52px;border-radius:50%;
+  background:var(--navy-900);color:var(--gold);border:1px solid var(--line-dark);cursor:pointer;display:grid;place-items:center;
   box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transform:translateY(12px);
-  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s;
+  transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s,background .3s var(--ease);
 }
 .to-top.show{opacity:1;visibility:visible;transform:none}
-.to-top:hover{background:var(--gold-dark)}
-.to-top svg{width:22px;height:22px}
+.to-top:hover{background:var(--navy-700)}
+.to-top .ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.to-top .ring circle{fill:none;stroke:var(--gold);stroke-width:2.5;stroke-linecap:round;
+  stroke-dasharray:151;stroke-dashoffset:151}
+.to-top .arrow{position:relative;width:20px;height:20px}
+
+/* ---------- 18. Utilities (replacing inline styles) ---------- */
+.sub{margin-top:1rem;color:var(--ink-soft)}
+.link-gold{color:var(--gold)}
+.link-strong{color:var(--gold-link);font-weight:600}
+.gold-note{color:var(--gold)}
+.field-grow{flex:1 1 200px}
+.center-row{text-align:center;margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.mt-lg{margin-top:1.8rem}
+.mt-14{margin-top:1.4rem}
+.center-head{margin-inline:auto;text-align:center}
+.mx-auto{margin-inline:auto}
+.btn-block{width:100%;justify-content:center}
+.mb-1{margin-bottom:1rem}
+.narrow{max-width:38ch}
+.fine{font-size:.8rem}
+.site-footer .brand-text b{color:var(--light)}
 
 /* ---------- 17. Reduced-motion: honor user/OS preference ---------- */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
     transition-duration:.001ms!important;scroll-behavior:auto!important}
-  .reveal{opacity:1;transform:none}
-  .hero-bg::before{animation:none}
+  .js .reveal,.js .steps .step{opacity:1;transform:none}
+  .js .steps::before{transform:none}
+  .js .hero .tag,.js .hero p.lead,.js .hero-cta,.js .hero-stats{opacity:1;animation:none}
+  .js .hero h1 .hl-inner{transform:none;animation:none}
+  .hero-bg::before,.hero-stars{animation:none}
+  .js .skyline-strip .win{animation:none;opacity:.8}
+  .skyline-strip .win-tw{animation:none;opacity:.8}
+  .skyline-strip .beacon-halo{animation:none;opacity:.4}
+  .hero-glow{display:none}
+  .marquee-track{animation:none;flex-wrap:wrap;width:auto}
+  .marquee ul[aria-hidden="true"]{display:none}
 }
 </style>
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -496,7 +697,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 <!-- ============ HEADER ============ -->
 <header class="site-header" id="top">
   <div class="container nav">
-    <a class="brand" href="#top" aria-label="Amin Realty, Inc. home">
+    <a class="brand" href="#top">
       <span class="brand-mark" aria-hidden="true">A</span>
       <span class="brand-text">
         <b>Amin Realty, Inc.</b>
@@ -522,33 +723,49 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   <!-- ============ HERO ============ -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-grid-lines" aria-hidden="true"></div>
+    <div class="hero-stars" aria-hidden="true"></div>
     <div class="container hero-inner">
       <span class="tag"><span class="dot" aria-hidden="true"></span> Nationwide Hotel &amp; Commercial Brokerage</span>
-      <h1 id="hero-title">Where Hospitality Assets<br><span class="accent">Find Their Future.</span></h1>
+      <h1 id="hero-title"><span class="hl"><span class="hl-inner">Where Hospitality Assets</span></span><span class="hl"><span class="hl-inner accent">Find Their Future.</span></span></h1>
       <p class="lead">Since 2012, Amin Realty, Inc. has guided owners and investors through confidential hotel, motel, and commercial real estate transactions across the United States — with discretion, market intelligence, and results.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#listings">View Listings</a>
         <a class="btn btn-ghost" href="#contact">Schedule a Consultation</a>
       </div>
-      <div class="hero-stats" role="list">
-        <div class="hero-stat" role="listitem"><b data-count="12" data-suffix="+">12+</b><span>Years in Business</span></div>
-        <div class="hero-stat" role="listitem"><b data-count="11" data-suffix="">11</b><span>States Served</span></div>
-        <div class="hero-stat" role="listitem"><b data-count="100" data-suffix="%">100%</b><span>Confidential Process</span></div>
-      </div>
+      <ul class="hero-stats">
+        <li class="hero-stat"><b data-count="12" data-suffix="+">12+</b><span>Years in Business</span></li>
+        <li class="hero-stat"><b data-count="11" data-suffix="">11</b><span>States Served</span></li>
+        <li class="hero-stat"><b data-count="100" data-suffix="%">100%</b><span>Confidential Process</span></li>
+      </ul>
+    </div>
+    <div class="hero-skyline" aria-hidden="true">
+      <svg class="skyline-strip" viewBox="0 0 1440 250" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><rect x="-20" y="155" width="70" height="95" fill="#0e2540"/><rect x="54" y="100" width="55" height="150" fill="#0c2036"/><rect x="109" y="130" width="90" height="120" fill="#0d2238"/><rect x="144" y="122" width="20" height="8" fill="#0d2238"/><rect x="203" y="180" width="40" height="70" fill="#0d2238"/><rect x="245" y="75" width="75" height="175" fill="#0e2540"/><rect x="322" y="145" width="60" height="105" fill="#0c2036"/><rect x="382" y="110" width="110" height="140" fill="#0e2540"/><rect x="492" y="170" width="50" height="80" fill="#0c2036"/><rect x="542" y="50" width="85" height="200" fill="#0c2036"/><rect x="629" y="135" width="65" height="115" fill="#0d2238"/><rect x="696" y="90" width="95" height="160" fill="#0c2036"/><rect x="791" y="185" width="45" height="65" fill="#0e2540"/><rect x="836" y="120" width="120" height="130" fill="#0d2238"/><rect x="886" y="112" width="20" height="8" fill="#0d2238"/><rect x="958" y="160" width="58" height="90" fill="#0c2036"/><rect x="1016" y="32" width="100" height="218" fill="#0d2238"/><rect x="1118" y="175" width="52" height="75" fill="#0c2036"/><rect x="1174" y="105" width="88" height="145" fill="#0c2036"/><rect x="1262" y="140" width="62" height="110" fill="#0c2036"/><rect x="1324" y="80" width="78" height="170" fill="#0c2036"/><rect x="1402" y="165" width="48" height="85" fill="#0e2540"/><rect x="1452" y="125" width="105" height="125" fill="#0d2238"/><g class="wins"><rect class="win" x="37" y="167" width="6" height="9" rx="1" style="--d:0.49s"/><rect class="win" x="61" y="132" width="6" height="9" rx="1" style="--d:0.7s"/><rect class="win" x="96" y="132" width="6" height="9" rx="1" style="--d:3.99s"/><rect class="win" x="96" y="152" width="6" height="9" rx="1" style="--d:0.39s"/><rect class="win" x="116" y="142" width="6" height="9" rx="1" style="--d:0.92s"/><rect class="win" x="139" y="142" width="6" height="9" rx="1" style="--d:1.69s"/><rect class="win" x="139" y="162" width="6" height="9" rx="1" style="--d:1.91s"/><rect class="win" x="163" y="162" width="6" height="9" rx="1" style="--d:2.01s"/><rect class="win" x="186" y="162" width="6" height="9" rx="1" style="--d:3.0s"/><rect class="win" x="116" y="182" width="6" height="9" rx="1" style="--d:2.3s"/><rect class="win" x="139" y="182" width="6" height="9" rx="1" style="--d:1.35s"/><rect class="win" x="116" y="202" width="6" height="9" rx="1" style="--d:0.81s"/><rect class="win" x="163" y="202" width="6" height="9" rx="1" style="--d:3.26s"/><rect class="win" x="186" y="202" width="6" height="9" rx="1" style="--d:1.45s"/><rect class="win" x="252" y="87" width="6" height="9" rx="1" style="--d:2.52s"/><rect class="win" x="280" y="87" width="6" height="9" rx="1" style="--d:3.98s"/><rect class="win" x="307" y="87" width="6" height="9" rx="1" style="--d:0.44s"/><rect class="win" x="252" y="107" width="6" height="9" rx="1" style="--d:4.17s"/><rect class="win" x="252" y="127" width="6" height="9" rx="1" style="--d:0.29s"/><rect class="win" x="280" y="147" width="6" height="9" rx="1" style="--d:0.72s"/><rect class="win" x="252" y="167" width="6" height="9" rx="1" style="--d:0.52s"/><rect class="win" x="307" y="167" width="6" height="9" rx="1" style="--d:3.48s"/><rect class="win win-tw" x="329" y="157" width="6" height="9" rx="1" style="--d:4.03s"/><rect class="win win-tw" x="369" y="197" width="6" height="9" rx="1" style="--d:1.25s"/><rect class="win" x="434" y="122" width="6" height="9" rx="1" style="--d:4.01s"/><rect class="win win-tw" x="479" y="122" width="6" height="9" rx="1" style="--d:2.9s"/><rect class="win" x="389" y="142" width="6" height="9" rx="1" style="--d:3.32s"/><rect class="win" x="412" y="142" width="6" height="9" rx="1" style="--d:1.77s"/><rect class="win win-tw" x="456" y="142" width="6" height="9" rx="1" style="--d:0.45s"/><rect class="win win-tw" x="456" y="182" width="6" height="9" rx="1" style="--d:2.66s"/><rect class="win" x="456" y="202" width="6" height="9" rx="1" style="--d:4.17s"/><rect class="win win-tw" x="549" y="62" width="6" height="9" rx="1" style="--d:0.85s"/><rect class="win win-tw" x="571" y="62" width="6" height="9" rx="1" style="--d:2.31s"/><rect class="win" x="571" y="82" width="6" height="9" rx="1" style="--d:3.65s"/><rect class="win" x="571" y="102" width="6" height="9" rx="1" style="--d:2.33s"/><rect class="win" x="549" y="122" width="6" height="9" rx="1" style="--d:4.14s"/><rect class="win" x="571" y="122" width="6" height="9" rx="1" style="--d:3.47s"/><rect class="win" x="571" y="162" width="6" height="9" rx="1" style="--d:4.03s"/><rect class="win" x="592" y="162" width="6" height="9" rx="1" style="--d:4.15s"/><rect class="win" x="636" y="147" width="6" height="9" rx="1" style="--d:3.8s"/><rect class="win win-tw" x="681" y="147" width="6" height="9" rx="1" style="--d:3.4s"/><rect class="win" x="636" y="167" width="6" height="9" rx="1" style="--d:3.84s"/><rect class="win" x="658" y="167" width="6" height="9" rx="1" style="--d:2.11s"/><rect class="win" x="681" y="167" width="6" height="9" rx="1" style="--d:1.53s"/><rect class="win" x="636" y="187" width="6" height="9" rx="1" style="--d:1.78s"/><rect class="win" x="658" y="187" width="6" height="9" rx="1" style="--d:3.1s"/><rect class="win win-tw" x="658" y="207" width="6" height="9" rx="1" style="--d:3.43s"/><rect class="win" x="681" y="207" width="6" height="9" rx="1" style="--d:4.12s"/><rect class="win" x="703" y="122" width="6" height="9" rx="1" style="--d:2.8s"/><rect class="win" x="728" y="122" width="6" height="9" rx="1" style="--d:1.94s"/><rect class="win" x="753" y="122" width="6" height="9" rx="1" style="--d:1.04s"/><rect class="win" x="728" y="142" width="6" height="9" rx="1" style="--d:1.24s"/><rect class="win" x="778" y="142" width="6" height="9" rx="1" style="--d:1.62s"/><rect class="win" x="703" y="162" width="6" height="9" rx="1" style="--d:3.82s"/><rect class="win" x="728" y="162" width="6" height="9" rx="1" style="--d:2.21s"/><rect class="win" x="778" y="182" width="6" height="9" rx="1" style="--d:0.89s"/><rect class="win" x="703" y="202" width="6" height="9" rx="1" style="--d:2.43s"/><rect class="win win-tw" x="753" y="202" width="6" height="9" rx="1" style="--d:3.34s"/><rect class="win" x="778" y="202" width="6" height="9" rx="1" style="--d:1.19s"/><rect class="win" x="798" y="197" width="6" height="9" rx="1" style="--d:2.23s"/><rect class="win" x="823" y="197" width="6" height="9" rx="1" style="--d:3.85s"/><rect class="win" x="798" y="217" width="6" height="9" rx="1" style="--d:2.22s"/><rect class="win" x="823" y="217" width="6" height="9" rx="1" style="--d:2.01s"/><rect class="win" x="863" y="132" width="6" height="9" rx="1" style="--d:3.0s"/><rect class="win" x="883" y="132" width="6" height="9" rx="1" style="--d:1.24s"/><rect class="win win-tw" x="903" y="132" width="6" height="9" rx="1" style="--d:3.56s"/><rect class="win" x="903" y="152" width="6" height="9" rx="1" style="--d:3.34s"/><rect class="win win-tw" x="943" y="152" width="6" height="9" rx="1" style="--d:2.84s"/><rect class="win" x="843" y="172" width="6" height="9" rx="1" style="--d:4.07s"/><rect class="win" x="863" y="172" width="6" height="9" rx="1" style="--d:1.79s"/><rect class="win" x="883" y="172" width="6" height="9" rx="1" style="--d:3.53s"/><rect class="win" x="883" y="192" width="6" height="9" rx="1" style="--d:0.28s"/><rect class="win win-tw" x="965" y="172" width="6" height="9" rx="1" style="--d:2.25s"/><rect class="win" x="1003" y="172" width="6" height="9" rx="1" style="--d:3.35s"/><rect class="win win-tw" x="1043" y="44" width="6" height="9" rx="1" style="--d:1.28s"/><rect class="win" x="1083" y="44" width="6" height="9" rx="1" style="--d:3.48s"/><rect class="win" x="1023" y="64" width="6" height="9" rx="1" style="--d:2.48s"/><rect class="win win-tw" x="1083" y="64" width="6" height="9" rx="1" style="--d:1.9s"/><rect class="win" x="1103" y="64" width="6" height="9" rx="1" style="--d:2.74s"/><rect class="win" x="1043" y="84" width="6" height="9" rx="1" style="--d:0.47s"/><rect class="win" x="1103" y="84" width="6" height="9" rx="1" style="--d:3.91s"/><rect class="win" x="1103" y="124" width="6" height="9" rx="1" style="--d:1.36s"/><rect class="win" x="1023" y="164" width="6" height="9" rx="1" style="--d:2.4s"/><rect class="win" x="1063" y="164" width="6" height="9" rx="1" style="--d:0.63s"/><rect class="win" x="1023" y="184" width="6" height="9" rx="1" style="--d:1.77s"/><rect class="win" x="1043" y="184" width="6" height="9" rx="1" style="--d:4.13s"/><rect class="win" x="1063" y="184" width="6" height="9" rx="1" style="--d:3.03s"/><rect class="win" x="1157" y="207" width="6" height="9" rx="1" style="--d:1.22s"/><rect class="win" x="1204" y="117" width="6" height="9" rx="1" style="--d:3.68s"/><rect class="win" x="1204" y="157" width="6" height="9" rx="1" style="--d:4.09s"/><rect class="win" x="1249" y="157" width="6" height="9" rx="1" style="--d:1.44s"/><rect class="win" x="1331" y="92" width="6" height="9" rx="1" style="--d:2.32s"/><rect class="win" x="1360" y="92" width="6" height="9" rx="1" style="--d:3.06s"/><rect class="win" x="1360" y="112" width="6" height="9" rx="1" style="--d:0.8s"/><rect class="win" x="1389" y="112" width="6" height="9" rx="1" style="--d:0.38s"/><rect class="win" x="1331" y="132" width="6" height="9" rx="1" style="--d:2.71s"/><rect class="win" x="1360" y="132" width="6" height="9" rx="1" style="--d:0.76s"/><rect class="win" x="1331" y="152" width="6" height="9" rx="1" style="--d:3.42s"/><rect class="win" x="1360" y="152" width="6" height="9" rx="1" style="--d:3.77s"/><rect class="win win-tw" x="1389" y="152" width="6" height="9" rx="1" style="--d:1.12s"/><rect class="win" x="1331" y="192" width="6" height="9" rx="1" style="--d:2.43s"/><rect class="win" x="1360" y="192" width="6" height="9" rx="1" style="--d:2.92s"/><rect class="win" x="1409" y="177" width="6" height="9" rx="1" style="--d:3.19s"/><rect class="win" x="1409" y="197" width="6" height="9" rx="1" style="--d:0.46s"/><rect class="win" x="1502" y="137" width="6" height="9" rx="1" style="--d:1.02s"/><rect class="win" x="1523" y="137" width="6" height="9" rx="1" style="--d:2.18s"/><rect class="win" x="1459" y="157" width="6" height="9" rx="1" style="--d:3.27s"/><rect class="win win-tw" x="1480" y="157" width="6" height="9" rx="1" style="--d:0.51s"/><rect class="win" x="1523" y="157" width="6" height="9" rx="1" style="--d:1.42s"/><rect class="win" x="1502" y="177" width="6" height="9" rx="1" style="--d:2.97s"/><rect class="win" x="1523" y="197" width="6" height="9" rx="1" style="--d:1.0s"/><rect class="win" x="1544" y="197" width="6" height="9" rx="1" style="--d:0.27s"/></g><line x1="1066.0" y1="32" x2="1066.0" y2="18" stroke="#0d2238" stroke-width="3"/><circle class="beacon-halo" cx="1066.0" cy="15" r="10"/><circle class="beacon" cx="1066.0" cy="15" r="3.2"/></svg>
     </div>
   </section>
 
-  <!-- ============ TRUST BAR ============ -->
-  <div class="trustbar">
-    <div class="container">
-      <span><b>Independent Motels</b></span>
-      <span><b>Franchise Hotels</b></span>
-      <span><b>Distressed Assets</b></span>
-      <span><b>Land &amp; Development</b></span>
-      <span><b>1031 &middot; EB-5 &middot; REIT</b></span>
+  <!-- ============ ASSET MARQUEE ============ -->
+  <section class="marquee" id="assetMarquee" aria-label="Asset classes we broker">
+    <div class="marquee-track">
+      <ul>
+        <li><b>Independent Motels</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+        <li><b>Franchise Hotels</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+        <li><b>Distressed Assets</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+        <li><b>Land &amp; Development</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+        <li><b>1031 &middot; EB-5 &middot; REIT</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+      </ul>
+      <ul aria-hidden="true">
+        <li><b>Independent Motels</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+        <li><b>Franchise Hotels</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+        <li><b>Distressed Assets</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+        <li><b>Land &amp; Development</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+        <li><b>1031 &middot; EB-5 &middot; REIT</b><span class="diamond" aria-hidden="true">&#9670;</span></li>
+      </ul>
     </div>
-  </div>
+    <button type="button" class="marquee-pause" id="marqueePause" aria-pressed="false" aria-label="Pause scrolling banner">
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+  </section>
 
   <!-- ============ ABOUT ============ -->
   <section id="about" aria-labelledby="about-title">
@@ -556,7 +773,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
       <div class="reveal">
         <span class="eyebrow">About the Firm</span>
         <h2 id="about-title">A specialized brokerage built on trust and hospitality expertise.</h2>
-        <p style="margin-top:1rem;color:var(--ink-soft)">Amin Realty, Inc. is a commercial real estate brokerage focused exclusively on the hospitality sector. From single independent motels to multi-property franchise portfolios, we represent buyers and sellers with the confidentiality and diligence that high-value transactions demand. Our reach extends nationwide, and our relationships span private owners, institutional investors, and international capital.</p>
+        <p class="sub">Amin Realty, Inc. is a commercial real estate brokerage focused exclusively on the hospitality sector. From single independent motels to multi-property franchise portfolios, we represent buyers and sellers with the confidentiality and diligence that high-value transactions demand. Our reach extends nationwide, and our relationships span private owners, institutional investors, and international capital.</p>
         <ul class="checklist">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Access to private, off-market listings</strong> across the country.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Specialists in hospitality</strong> — independent &amp; franchise hotels and motels.</span></li>
@@ -631,7 +848,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
       <div class="section-head reveal">
         <span class="eyebrow">Current Opportunities</span>
         <h2 id="listings-title">Featured Listings</h2>
-        <p>Browse a selection of our active hospitality and commercial opportunities. Filter by property type, location, status, or price. Many of our best opportunities are off-market &mdash; <a href="#contact" style="color:var(--gold)">contact us</a> for private inventory.</p>
+        <p>Browse a selection of our active hospitality and commercial opportunities. Filter by property type, location, status, or price. Many of our best opportunities are off-market &mdash; <a href="#contact" class="link-gold">contact us</a> for private inventory.</p>
       </div>
 
       <div class="listings-toolbar reveal" id="listingsFilters" aria-label="Filter listings" role="search">
@@ -664,19 +881,19 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
             <option value="100000000">$10M+</option>
           </select>
         </div>
-        <div class="field" style="flex:1 1 200px">
+        <div class="field field-grow">
           <label for="filterSearch">Search Location / Keyword</label>
-          <input type="search" id="filterSearch" name="q" placeholder="e.g. Houston, TX" autocomplete="off" />
+          <input type="search" id="filterSearch" name="q" placeholder="e.g. Houston, TX" autocomplete="off">
         </div>
         <div class="listings-count" id="listingsCount" aria-live="polite"></div>
       </div>
 
       <div class="listing-grid" id="listingGrid" aria-live="polite"></div>
-      <div class="reveal" style="text-align:center;margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <div class="reveal center-row">
         <a class="btn btn-primary" href="listings.html">View Full Catalog</a>
         <a class="btn btn-ghost" href="documents.html">Secure Document Center</a>
       </div>
-      <p class="listings-note">Featured selection shown. See the <a href="listings.html" style="color:var(--gold)">full catalog</a> for all listings. Figures are illustrative &mdash; replace with live listings before launch. Subject to change and prior sale.</p>
+      <p class="listings-note">Featured selection shown. See the <a href="listings.html" class="link-gold">full catalog</a> for all listings. Figures are illustrative &mdash; replace with live listings before launch. Subject to change and prior sale.</p>
     </div>
   </section>
 
@@ -686,8 +903,8 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
       <div class="reveal">
         <span class="eyebrow">How We Work</span>
         <h2 id="process-title">A confidential, four-step path to closing.</h2>
-        <p style="margin-top:1rem;color:var(--ink-soft)">Every engagement is tailored, but our disciplined process keeps transactions moving while protecting your privacy and your value.</p>
-        <div class="hero-cta" style="margin-top:1.8rem">
+        <p class="sub">Every engagement is tailored, but our disciplined process keeps transactions moving while protecting your privacy and your value.</p>
+        <div class="hero-cta mt-lg">
           <a class="btn btn-dark" href="#contact">Start a Conversation</a>
         </div>
       </div>
@@ -762,10 +979,10 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   <!-- ============ FAQ ============ -->
   <section id="faq" aria-labelledby="faq-title">
     <div class="container">
-      <div class="section-head reveal" style="margin-inline:auto;text-align:center">
+      <div class="section-head reveal center-head">
         <span class="eyebrow">Questions</span>
         <h2 id="faq-title">Frequently asked questions</h2>
-        <p style="margin-inline:auto">Answers to what owners and investors ask us most. Don't see yours? <a href="#contact" style="color:var(--gold-link);font-weight:600">Get in touch.</a></p>
+        <p class="mx-auto">Answers to what owners and investors ask us most. Don't see yours? <a href="#contact" class="link-strong">Get in touch.</a></p>
       </div>
       <div class="faq reveal">
         <details>
@@ -809,14 +1026,14 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
             </li>
             <li>
               <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></span>
-              <span><b>Phone</b><a href="tel:+1XXXXXXXXXX">(XXX) XXX-XXXX <span style="color:var(--gold)">[VERIFY]</span></a></span>
+              <span><b>Phone</b><a href="tel:+1XXXXXXXXXX">(XXX)&nbsp;XXX&#8209;XXXX <span class="gold-note">[VERIFY]</span></a></span>
             </li>
             <li>
               <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
-              <span><b>Email</b><a href="mailto:info@aminrealtyinc.com">info@aminrealtyinc.com <span style="color:var(--gold)">[VERIFY]</span></a></span>
+              <span><b>Email</b><a href="mailto:info@aminrealtyinc.com">info@aminrealtyinc.com <span class="gold-note">[VERIFY]</span></a></span>
             </li>
           </ul>
-          <p class="form-note" style="margin-top:1.4rem">Amin Realty, Inc. is a licensed Texas real estate brokerage. We hold all inquiries in strict confidence and never share your information with third parties without consent. See our <a href="legal/privacy.html" style="color:var(--gold)">Privacy Policy</a>.</p>
+          <p class="form-note mt-14">Amin Realty, Inc. is a licensed Texas real estate brokerage. We hold all inquiries in strict confidence and never share your information with third parties without consent. See our <a href="legal/privacy.html" class="link-gold">Privacy Policy</a>.</p>
         </div>
 
         <form class="reveal" data-delay="1" id="contactForm" novalidate
@@ -826,19 +1043,19 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
                "_gotcha" is also recognized natively by Formspree as a spam trap. -->
           <div class="visually-hidden" aria-hidden="true">
             <label for="cf-company">Company (leave this field empty)</label>
-            <input type="text" id="cf-company" name="_gotcha" tabindex="-1" autocomplete="off" />
+            <input type="text" id="cf-company" name="_gotcha" tabindex="-1" autocomplete="off">
           </div>
           <div class="form-field">
             <label for="cf-name">Full Name <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="cf-name" name="name" required autocomplete="name" />
+            <input type="text" id="cf-name" name="name" required autocomplete="name">
           </div>
           <div class="form-field">
             <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input type="email" id="cf-email" name="email" required autocomplete="email" />
+            <input type="email" id="cf-email" name="email" required autocomplete="email">
           </div>
           <div class="form-field">
             <label for="cf-phone">Phone</label>
-            <input type="tel" id="cf-phone" name="phone" autocomplete="tel" />
+            <input type="tel" id="cf-phone" name="phone" autocomplete="tel">
           </div>
           <div class="form-field">
             <label for="cf-interest">I am interested in</label>
@@ -853,9 +1070,9 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
             <label for="cf-message">Message <span class="req" aria-hidden="true">*</span></label>
             <textarea id="cf-message" name="message" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Message</button>
+          <button type="submit" class="btn btn-primary btn-block">Send Message</button>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-          <p class="form-note">By submitting, you agree to our <a href="legal/terms.html" style="color:var(--gold)">Terms</a> and <a href="legal/privacy.html" style="color:var(--gold)">Privacy Policy</a>. This form is not for transmitting confidential financial data.</p>
+          <p class="form-note">By submitting, you agree to our <a href="legal/terms.html" class="link-gold">Terms</a> and <a href="legal/privacy.html" class="link-gold">Privacy Policy</a>. This form is not for transmitting confidential financial data.</p>
         </form>
       </div>
     </div>
@@ -867,14 +1084,14 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
   <div class="container">
     <div class="footer-top">
       <div>
-        <a class="brand" href="#top" aria-label="Amin Realty, Inc. home" style="margin-bottom:1rem">
+        <a class="brand mb-1" href="#top">
           <span class="brand-mark" aria-hidden="true">A</span>
-          <span class="brand-text"><b style="color:var(--light)">Amin Realty, Inc.</b><span>Hotel &amp; Commercial Brokerage</span></span>
+          <span class="brand-text"><b>Amin Realty, Inc.</b><span>Hotel &amp; Commercial Brokerage</span></span>
         </a>
-        <p style="max-width:38ch">National commercial real estate brokerage specializing in hospitality assets. Secure, confidential, and professional service since 2012.</p>
+        <p class="narrow">National commercial real estate brokerage specializing in hospitality assets. Secure, confidential, and professional service since 2012.</p>
       </div>
       <div>
-        <h4>Explore</h4>
+        <h3>Explore</h3>
         <ul class="footer-links">
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
@@ -886,7 +1103,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
         </ul>
       </div>
       <div>
-        <h4>Legal &amp; Compliance</h4>
+        <h3>Legal &amp; Compliance</h3>
         <ul class="footer-links">
           <li><a href="legal/privacy.html">Privacy Policy</a></li>
           <li><a href="legal/terms.html">Terms of Use</a></li>
@@ -900,7 +1117,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
     <div class="footer-legal">
       <div class="fh">
         <svg class="fh-logo" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="6" fill="none" stroke="#a9bdd4" stroke-width="2"/><path d="M24 11 13 21h3v15h16V21h3L24 11Z" fill="none" stroke="#a9bdd4" stroke-width="2" stroke-linejoin="round"/><rect x="21" y="27" width="6" height="9" fill="none" stroke="#a9bdd4" stroke-width="2"/><text x="24" y="45.5" font-family="Arial" font-size="3.4" fill="#a9bdd4" text-anchor="middle">EQUAL HOUSING</text></svg>
-        <span style="font-size:.8rem">Amin Realty, Inc. is an Equal Housing Opportunity brokerage. We do business in accordance with the Federal Fair Housing Act and all applicable state and local fair housing laws.</span>
+        <span class="fine">Amin Realty, Inc. is an Equal Housing Opportunity brokerage. We do business in accordance with the Federal Fair Housing Act and all applicable state and local fair housing laws.</span>
       </div>
       <div class="footer-legal-links">
         <a href="legal/privacy.html">Privacy</a>
@@ -917,7 +1134,8 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 </footer>
 
 <button type="button" class="to-top" id="toTop" aria-label="Back to top">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 15 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg class="ring" viewBox="0 0 52 52" aria-hidden="true"><circle id="toTopRing" cx="26" cy="26" r="24"/></svg>
+  <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 15 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
 
 <!-- Shared listings (optional). When present, the homepage and the full
@@ -1090,7 +1308,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
 
     grid.innerHTML = "";
     if (!filtered.length){
-      grid.innerHTML = '<p class="listings-empty">No listings match your filters. <a href="#contact" style="color:var(--gold)">Contact us</a> about off-market opportunities.</p>';
+      grid.innerHTML = '<p class="listings-empty">No listings match your filters. <a href="#contact" class="link-gold">Contact us</a> about off-market opportunities.</p>';
     } else {
       filtered.forEach(function(l){
         var specs = l.specs.map(function(sp){
@@ -1114,7 +1332,7 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
             '<h3 class="listing-title">'+ l.title +'</h3>'+
             '<span class="listing-loc">'+ pinIcon +' '+ escapeHtml(l.location) +'</span>'+
             '<div class="listing-specs">'+ specs +'</div>'+
-            '<div class="listing-cta"><a href="#contact" aria-label="Inquire about '+ escapeHtml(l.title.replace(/&amp;/g,"and")) +'">Request details '+ arrowIcon +'</a></div>'+
+            '<div class="listing-cta"><a href="#contact" aria-label="Request details: '+ escapeHtml(l.title.replace(/&amp;/g,"and")) +'">Request details '+ arrowIcon +'</a></div>'+
           '</div>';
         grid.appendChild(article);
       });
@@ -1170,6 +1388,148 @@ section{padding-block:clamp(3.5rem,7vw,6rem);scroll-margin-top:80px}
             status.setAttribute("data-state","err");
           });
       }
+    });
+  }
+})();
+</script>
+<script>
+/* ============================================================
+   AMIN REALTY, INC. — Motion & interaction enhancements.
+   Everything here is progressive enhancement on top of the
+   core behavior above; the page is fully usable without it.
+   Honors prefers-reduced-motion throughout.
+   ============================================================ */
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- Reading progress (header hairline) + back-to-top ring ---- */
+  var header = document.querySelector(".site-header");
+  var ring = document.getElementById("toTopRing");
+  var RING_LEN = 151; // 2 * PI * r(24)
+  var ticking = false;
+  function paint(){
+    ticking = false;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+    if (header) header.style.setProperty("--progress", p.toFixed(4));
+    if (ring) ring.style.strokeDashoffset = String(RING_LEN * (1 - p));
+  }
+  window.addEventListener("scroll", function(){
+    if (!ticking){ ticking = true; requestAnimationFrame(paint); }
+  }, {passive:true});
+  paint();
+
+  /* ---- Marquee: pause/play control (WCAG 2.2.2) ---- */
+  var marquee = document.getElementById("assetMarquee");
+  var pauseBtn = document.getElementById("marqueePause");
+  if (marquee && pauseBtn){
+    pauseBtn.addEventListener("click", function(){
+      var paused = marquee.classList.toggle("paused");
+      pauseBtn.setAttribute("aria-pressed", String(paused));
+      pauseBtn.setAttribute("aria-label", paused ? "Resume scrolling banner" : "Pause scrolling banner");
+    });
+  }
+
+  /* ---- Hero: cursor lantern + skyline parallax ---- */
+  var hero = document.querySelector(".hero");
+  var skyline = document.querySelector(".hero-skyline");
+  if (hero && !reduceMotion && window.matchMedia("(pointer: fine)").matches){
+    var glow = document.createElement("div");
+    glow.className = "hero-glow";
+    glow.setAttribute("aria-hidden", "true");
+    hero.appendChild(glow);
+    var gx = 0, gy = 0, tx = 0, ty = 0, glowRaf = null;
+    function stepGlow(){
+      gx += (tx - gx) * 0.08;
+      gy += (ty - gy) * 0.08;
+      glow.style.left = gx + "px";
+      glow.style.top = gy + "px";
+      if (Math.abs(tx - gx) + Math.abs(ty - gy) > 0.5){ glowRaf = requestAnimationFrame(stepGlow); }
+      else { glowRaf = null; }
+    }
+    hero.addEventListener("pointermove", function(e){
+      var r = hero.getBoundingClientRect();
+      tx = e.clientX - r.left; ty = e.clientY - r.top;
+      glow.classList.add("on");
+      if (!glowRaf) glowRaf = requestAnimationFrame(stepGlow);
+    });
+    hero.addEventListener("pointerleave", function(){ glow.classList.remove("on"); });
+  }
+  if (skyline && !reduceMotion){
+    var skyTicking = false;
+    function paintSky(){
+      skyTicking = false;
+      var y = window.scrollY;
+      if (y < window.innerHeight * 1.2){
+        skyline.style.transform = "translateY(" + Math.min(y * 0.18, 140).toFixed(1) + "px)";
+      }
+    }
+    window.addEventListener("scroll", function(){
+      if (!skyTicking){ skyTicking = true; requestAnimationFrame(paintSky); }
+    }, {passive:true});
+  }
+
+  /* ---- Scrollspy: highlight the section you're reading ---- */
+  var spyLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]:not(.btn)'));
+  var spyMap = {};
+  spyLinks.forEach(function(a){
+    var id = a.getAttribute("href").slice(1);
+    var sec = document.getElementById(id);
+    if (sec) spyMap[id] = a;
+  });
+  if ("IntersectionObserver" in window && Object.keys(spyMap).length){
+    var current = null;
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          if (current) current.classList.remove("active");
+          current = spyMap[en.target.id];
+          if (current) current.classList.add("active");
+        } else if (spyMap[en.target.id] === current){
+          current.classList.remove("active");
+          current = null;
+        }
+      });
+    }, {rootMargin:"-35% 0px -55% 0px"});
+    Object.keys(spyMap).forEach(function(id){ spy.observe(document.getElementById(id)); });
+  }
+
+  /* ---- FAQ: smooth open/close (keyboard + reduced-motion safe) ---- */
+  if (!reduceMotion && "animate" in Element.prototype){
+    document.querySelectorAll(".faq details").forEach(function(d){
+      var summary = d.querySelector("summary");
+      var ans = d.querySelector(".ans");
+      if (!summary || !ans) return;
+      var animating = false;
+      summary.addEventListener("click", function(e){
+        e.preventDefault();
+        if (animating) return;
+        animating = true;
+        ans.style.overflow = "hidden";
+        if (d.open){
+          var h0 = ans.offsetHeight;
+          var closing = ans.animate(
+            [{height:h0 + "px", opacity:1}, {height:"0px", opacity:0}],
+            {duration:260, easing:"cubic-bezier(.22,.61,.36,1)"});
+          closing.onfinish = function(){
+            d.open = false;
+            ans.style.overflow = "";
+            animating = false;
+          };
+        } else {
+          d.open = true;
+          var h1 = ans.offsetHeight;
+          var opening = ans.animate(
+            [{height:"0px", opacity:0}, {height:h1 + "px", opacity:1}],
+            {duration:320, easing:"cubic-bezier(.22,.61,.36,1)"});
+          opening.onfinish = function(){
+            ans.style.overflow = "";
+            animating = false;
+          };
+        }
+      });
     });
   }
 })();

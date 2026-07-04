@@ -98,3 +98,83 @@ The audit scripts used live outside the repo (in the build scratch space). To
 re-audit after edits, run any accessibility engine against the files — e.g.
 open each page in Chrome and run **Lighthouse**, or use the **WAVE** browser
 extension. Aim to keep every page at **0 violations**.
+
+---
+
+## Round 2 — Award-level design elevation + re-grade (July 2026)
+
+The site was redesigned to a significantly higher visual standard and then
+re-graded from scratch with a stricter bar than Round 1.
+
+### What changed (design)
+
+- **Typography**: self-hosted variable fonts — *Fraunces* (display serif) and
+  *Archivo* (text/UI) in `assets/fonts/` (~220 KB total, latin subset,
+  `font-display: swap`, preloaded). No external CDN calls; GDPR-safe.
+- **Signature hero**: a generated skyline of 21 hotel silhouettes with 112
+  windows that light up on a staggered schedule, a pulsing rooftop beacon, a
+  slow "dawn" gradient, faint stars, and a gold horizon hairline. Subtle
+  parallax on scroll; a cursor-following "lantern" glow on fine pointers.
+- **Motion system** (all gated behind `html.js` and fully disabled under
+  `prefers-reduced-motion`): orchestrated hero entrance (clipped line lifts,
+  staggered fade-rise), infinite trust-bar marquee **with an accessible
+  pause/play button (WCAG 2.2.2)**, reading-progress hairline in the header,
+  scrollspy underline in the nav, count-up stats, drawing process line with
+  staggered steps, card top-border sweeps + icon lifts, button sheen sweeps,
+  smooth FAQ expand/collapse (Web Animations API on top of native
+  `<details>`), listing-media zoom on hover, back-to-top button with a
+  scroll-progress ring.
+- **No-JS safety**: content is never hidden without JavaScript — all
+  animation-hidden initial states apply only under an `html.js` class.
+
+### Round 2 grades
+
+| Check | Result |
+|---|---|
+| axe-core (WCAG 2.0/2.1/**2.2** A+AA **+ best-practice**), 9 pages, reveals forced visible | **0 violations** |
+| html-validate (recommended; only allowance: `--d` CSS custom property carriers on skyline windows) | **0 errors** |
+| Lighthouse (mobile, throttled, local server) | **Perf 96 · A11y 100 · Best-practices 100 · SEO 100** |
+| Functional/interaction suite | **18/18 pass** |
+| JS console errors across all pages | **0** |
+
+### Issues found and fixed in Round 2
+
+1. **Skip link peeked into the viewport** (bottom 2px visible at the top of
+   every page) — `top:-48px` did not fully hide it; now `-90px`.
+2. **Footer heading order** (`h2 → h4` skip) — footer group headings are now
+   `h3` (axe best-practice `heading-order`).
+3. **Label-in-name mismatches (WCAG 2.5.3)** — listing CTAs had
+   `aria-label="Inquire about …"` on links whose visible text is "Request
+   details" (screen-reader users saying "click Request details" would fail);
+   now `aria-label="Request details: …"`. Redundant `aria-label` removed from
+   the brand links.
+4. **ARIA roles replaced with native elements** — hero stats are a real
+   `<ul>/<li>`, the marquee and the scrollable NDA agreement box are
+   `<section>` elements.
+5. **A corrupted `style` attribute** on `legal/consumer-protection.html`
+   (nested quotes) found by html-validate's parser — replaced with a class.
+6. **All inline styles migrated to utility classes** (26 across the site) and
+   all self-closed void elements normalized (77) — passes the strict
+   `no-inline-style` / `void-style` rules.
+7. **Phone number wrapping** — non-breaking space/hyphen in the tel link.
+8. **Font loading** — preload hints for the three above-the-fold font files
+   (FCP 2.7 s → 1.5 s on throttled mobile; Lighthouse perf 92 → 96).
+
+### Functional suite (Round 2, all passing)
+
+Hero entrance completes; marquee animates, pauses via button
+(`aria-pressed`), and is static with the duplicate list hidden under reduced
+motion; skyline windows light; scroll progress + back-to-top ring track
+scroll; scrollspy highlights the active section; FAQ opens/closes smoothly by
+mouse **and** Enter key; first Tab focuses the skip link; listings filter to
+2 cards for "Independent Motel"; mobile nav opens with correct
+`aria-expanded`; zero horizontal overflow at 390 px; reduced-motion leaves
+every element visible and every animation off (cursor glow removed entirely).
+
+### Remaining Lighthouse notes (server-side, not fixable in static files)
+
+Text compression, cache lifetimes, and document latency are host
+configuration (the audit ran against a bare `python3 -m http.server`);
+enable gzip/brotli + far-future caching for `assets/` on the production host.
+CSS/JS are intentionally left unminified so the owner can edit listings and
+copy directly, per `DEPLOY.md`.

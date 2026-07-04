@@ -88,7 +88,7 @@
           '<h2 class="listing-title">' + esc(l.title) + '</h2>' +
           '<span class="listing-loc">' + PIN + " " + esc(l.location) + '</span>' +
           '<div class="listing-specs">' + specs + '</div>' +
-          '<div class="listing-cta"><a href="index.html#contact" aria-label="Inquire about ' + esc(plain) + '">Request details ' + ARROW + '</a></div>' +
+          '<div class="listing-cta"><a href="index.html#contact" aria-label="Request details: ' + esc(plain) + '">Request details ' + ARROW + '</a></div>' +
         '</div></article>';
     }
 
