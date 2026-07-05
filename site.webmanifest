@@ -4,11 +4,11 @@
   "description": "Hotel & commercial real estate brokerage since 2012.",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#0a1a2f",
-  "theme_color": "#0a1a2f",
+  "background_color": "#071c3d",
+  "theme_color": "#071c3d",
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230a1a2f'/%3E%3Ctext x='256' y='350' font-family='Georgia,serif' font-size='300' fill='%23d4af6a' text-anchor='middle' font-weight='700'%3EA%3C/text%3E%3C/svg%3E",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%23071c3d'/%3E%3Ctext x='256' y='350' font-family='Georgia,serif' font-size='300' fill='%235aa7ff' text-anchor='middle' font-weight='700'%3EA%3C/text%3E%3C/svg%3E",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"

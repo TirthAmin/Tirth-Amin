@@ -78,7 +78,7 @@
         return '<span class="listing-spec"><b>' + esc(s[1]) + '</b>' + esc(s[0]) + '</span>';
       }).join("");
       return '<article class="listing">' +
-        '<div class="listing-media" style="background:linear-gradient(150deg,#16395f,#0a1a2f)">' +
+        '<div class="listing-media" style="background:linear-gradient(150deg,#123f85,#071c3d)">' +
           media +
           '<span class="listing-status ' + statusClass(l.status) + '">' + esc(l.status) + '</span>' +
           '<span class="listing-type">' + esc(l.type) + '</span>' +

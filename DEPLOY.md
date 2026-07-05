@@ -141,7 +141,7 @@ visitors to email you directly — it never silently fails.
    **WAVE** ([wave.webaim.org](https://wave.webaim.org)) for a fresh
    accessibility + performance score.
 2. Tab through the whole page with the keyboard — every control should show a
-   visible gold focus ring.
+   visible blue focus ring.
 3. Test on a phone and at 200% browser zoom.
 4. Submit the contact form to confirm you receive the email.
 

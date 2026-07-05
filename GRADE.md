@@ -1,5 +1,48 @@
 # Self-Audit & Grade — Amin Realty, Inc. Website
 
+## Grading round 2 — blue/white palette conversion (2026-07-05)
+
+The site was converted from navy/gold to a **powerful blue and white** color
+system (`--blue-950…700` + `--accent` blues, white/blue-tint surfaces), then
+fully re-graded. Every candidate color pairing was verified mathematically
+against WCAG before it shipped (contrast script in the build scratch space).
+
+**Results after conversion (all 9 pages):**
+
+- axe-core WCAG 2.1 A/AA (with `.reveal` elements forced visible and
+  transitions disabled so nothing is skipped): **0 violations, 0 JS errors**.
+- `html-validate` correctness rules: **0 errors** (a phone number was fixed to
+  use `&nbsp;`/`&#8209;` so it can't wrap mid-number).
+- Functional suite (9 checks): mobile menu open/close, skip-link is first tab
+  stop, contact-form invalid-submit blocking, listings filter narrowing
+  (12 → 3) and empty state, NDA modal focus management + Esc close, and
+  reduced-motion showing all content immediately — **all passing**.
+
+**Contrast fixes made during round 2:**
+
+1. Primary button hover previously darkened (gold-dark); dark-on-`#2f7fe0` is
+   only 4.21:1. Hover now goes **lighter** (`--accent-light: #8fc2ff`,
+   ≥ 8:1 with dark text) — the idiomatic direction for blue-on-dark UIs.
+2. The brand tagline (10.5px, over the translucent sticky header) measured
+   3.88:1 with `--accent`; it and the nav hover color now use
+   `--accent-light` (≥ 5:1 over the worst-case blended header background).
+
+**Efficiency grade (round 2):**
+
+- Homepage: one self-contained file, **~18.5 KB gzipped**, zero external
+  fonts/CDNs/frameworks; only outbound references are the form endpoint and
+  required TREC regulatory links.
+- Dead CSS removed: `.cols-2`, `.cols-4`, `.spacer` (homepage),
+  `.visually-hidden`, `.btn-ghost` (site.css) — verified unused by a
+  class-usage scan that also covers classes generated in JavaScript
+  (`status-*` classes are dynamic and were kept).
+- No further removals possible without changing behavior — grading stopped
+  because nothing actionable remains, not because checks were skipped.
+
+---
+
+## Grading round 1 (original build)
+
 This site was graded with an automated, headless-browser audit (Chromium +
 [axe-core](https://github.com/dequelabs/axe-core), the engine behind most
 accessibility checkers) and a set of functional/interaction tests, then fixed

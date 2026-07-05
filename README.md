@@ -6,7 +6,7 @@ hotel and motel transactions since 2012.
 
 ## Highlights
 
-- **Modern, professional design** — navy-and-gold palette, serif/sans pairing,
+- **Modern, professional design** — powerful blue-and-white palette, serif/sans pairing,
   tasteful scroll animations, animated stat counters, and hover effects.
 - **HVS-style listings section** — a filterable grid of property cards
   (filter by type, status, price, and keyword) with status badges, pricing,
