@@ -185,3 +185,52 @@ copy directly, per `DEPLOY.md`.
 with SEO flagged only for `is-crawlable` — the Document Center is
 **deliberately `noindex, follow`** because it gates confidential deal
 materials; that flag is policy, not a defect.
+
+---
+
+## Round 3 — Simplification & efficiency pass (July 2026)
+
+Code-level grading loop: measure → simplify → re-grade, until the graders
+came back clean.
+
+### What was simplified
+
+1. **One script instead of two on the homepage.** The behavior script and the
+   later "enhancements" script were merged into a single IIFE with **one**
+   scroll listener driving header state, reading progress, back-to-top +
+   ring, and skyline parallax through a single requestAnimationFrame pipeline
+   (previously three separate scroll listeners), and one shared
+   `reduceMotion` check.
+2. **Skyline windows: 112 inline `style="--d:…"` attributes replaced by 8
+   delay-bucket classes** (`d0`–`d7`, second delay value phases the
+   twinkle). SVG shrank ~1.7 KB, and the html-validate config exception for
+   custom properties was deleted — the site now passes the stock
+   `html-validate:recommended` preset with **zero configuration overrides**.
+3. **Dead CSS removed** (verified against the rendered DOM of every page that
+   loads each sheet, including JS-injected states): `.cols-2`, `.cols-4`,
+   `.spacer` from the homepage; `.visually-hidden`, `.btn-ghost` from
+   `site.css`.
+4. **Last inline styles moved out of JS templates** — the listing-media
+   gradient and the empty-state color now live in the stylesheets.
+
+### Efficiency grader results (final)
+
+| Check | Result |
+|---|---|
+| Unused CSS classes (homepage inline sheet, 135 defined) | **0** |
+| Unused CSS classes (`site.css`, 72 defined) | **0** |
+| Scroll listeners on homepage | **1** (rAF-throttled) |
+| html-validate, stock recommended preset, no overrides | **0 errors** |
+| axe (WCAG 2.0/2.1/2.2 A+AA + best-practice), 9 pages | **0 violations** |
+| Functional suite | **18/18** |
+| Lighthouse mobile | **Perf 97 · A11y 100 · BP 100 · SEO 100** (TBT 40 ms, CLS 0) |
+| index.html size | 101.1 KB → **97.9 KB** raw (24.0 KB gzipped) |
+
+### Redundancy that is deliberate (do not "fix")
+
+- The homepage keeps its own inline CSS/JS and a 6-item listings fallback so
+  it can be pasted as a **single-file Wix embed** and still work offline —
+  `assets/listings.js` remains the one place to manage listings normally.
+- CSS/JS stay unminified so the owner can edit copy and listings directly
+  (see `DEPLOY.md`); enable gzip on the host, which already brings the
+  homepage to ~24 KB on the wire.

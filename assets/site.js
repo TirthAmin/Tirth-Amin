@@ -78,7 +78,7 @@
         return '<span class="listing-spec"><b>' + esc(s[1]) + '</b>' + esc(s[0]) + '</span>';
       }).join("");
       return '<article class="listing">' +
-        '<div class="listing-media" style="background:linear-gradient(150deg,#16395f,#0a1a2f)">' +
+        '<div class="listing-media">' +
           media +
           '<span class="listing-status ' + statusClass(l.status) + '">' + esc(l.status) + '</span>' +
           '<span class="listing-type">' + esc(l.type) + '</span>' +
@@ -133,7 +133,7 @@
           '<div class="locked">' + LOCK + ' Confidential — signature required</div><br>' +
           '<button type="button" class="btn btn-outline" data-doc="' + i + '">Request access ' + ARROW + '</button>' +
         '</div></article>';
-    }).join("") : '<p class="empty" style="color:var(--ink-soft)">No documents are available right now. Please <a href="index.html#contact">contact us</a>.</p>';
+    }).join("") : '<p class="empty empty-on-light">No documents are available right now. Please <a href="index.html#contact">contact us</a>.</p>';
 
     docGrid.addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-doc]");

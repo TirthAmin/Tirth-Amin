@@ -353,10 +353,15 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
 }
 .skyline-strip{display:block;width:100%;height:clamp(130px,18vw,250px)}
 .skyline-strip .win{fill:var(--gold);opacity:0}
-.js .skyline-strip .win{animation:winOn .9s ease forwards;animation-delay:calc(var(--d)*.5 + .8s)}
-.no-js .skyline-strip .win,html:not(.js) .skyline-strip .win{opacity:.75}
+.js .skyline-strip .win{animation:winOn .9s ease forwards}
+.js .skyline-strip .win-tw{animation:winOn .9s ease forwards,twinkle 5.5s ease-in-out infinite}
+/* staggered lighting: 8 delay buckets (second value phases the twinkle) */
+.js .skyline-strip .d0{animation-delay:.8s,2.1s}.js .skyline-strip .d1{animation-delay:1.05s,2.7s}
+.js .skyline-strip .d2{animation-delay:1.3s,3.3s}.js .skyline-strip .d3{animation-delay:1.55s,3.9s}
+.js .skyline-strip .d4{animation-delay:1.8s,4.5s}.js .skyline-strip .d5{animation-delay:2.05s,5.1s}
+.js .skyline-strip .d6{animation-delay:2.3s,5.7s}.js .skyline-strip .d7{animation-delay:2.55s,6.3s}
+html:not(.js) .skyline-strip .win{opacity:.75}
 @keyframes winOn{from{opacity:0}to{opacity:.92}}
-.skyline-strip .win-tw{animation:winOn .9s ease forwards,twinkle 5.5s ease-in-out calc(var(--d) + 2s) infinite}
 @keyframes twinkle{0%,100%{opacity:.85}50%{opacity:.25}}
 .skyline-strip .beacon{fill:var(--gold-bright)}
 .skyline-strip .beacon-halo{fill:rgba(212,175,106,.35);animation:beacon 3s ease-in-out infinite}
@@ -388,11 +393,9 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
 
 /* ---------- 9. Generic cards / grids ---------- */
 .grid{display:grid;gap:1.5rem}
-.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
-@media (max-width:900px){.cols-3,.cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:620px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}}
+@media (max-width:900px){.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.cols-3{grid-template-columns:1fr}}
 
 .card{
   position:relative;overflow:hidden;
@@ -447,7 +450,6 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
   border:1px solid var(--line-dark);background:var(--navy-800);color:var(--light);min-width:165px;
 }
 .listings-toolbar select:focus,.listings-toolbar input:focus{border-color:var(--gold)}
-.listings-toolbar .spacer{flex:1 1 auto}
 .listings-count{color:var(--light-soft);font-size:.9rem;align-self:flex-end;padding-bottom:.55rem}
 
 .listing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
@@ -462,7 +464,7 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
 .listing:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
 .listing-media{
   position:relative;aspect-ratio:16/10;display:grid;place-items:center;color:rgba(255,255,255,.85);
-  overflow:hidden;
+  overflow:hidden;background:linear-gradient(150deg,#16395f,#0a1a2f);
 }
 .listing-media svg{width:64px;height:64px;opacity:.85;transition:transform .5s var(--ease)}
 .listing:hover .listing-media svg{transform:scale(1.12)}
@@ -682,7 +684,6 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
   .js .hero h1 .hl-inner{transform:none;animation:none}
   .hero-bg::before,.hero-stars{animation:none}
   .js .skyline-strip .win{animation:none;opacity:.8}
-  .skyline-strip .win-tw{animation:none;opacity:.8}
   .skyline-strip .beacon-halo{animation:none;opacity:.4}
   .hero-glow{display:none}
   .marquee-track{animation:none;flex-wrap:wrap;width:auto}
@@ -739,7 +740,7 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
       </ul>
     </div>
     <div class="hero-skyline" aria-hidden="true">
-      <svg class="skyline-strip" viewBox="0 0 1440 250" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><rect x="-20" y="155" width="70" height="95" fill="#0e2540"/><rect x="54" y="100" width="55" height="150" fill="#0c2036"/><rect x="109" y="130" width="90" height="120" fill="#0d2238"/><rect x="144" y="122" width="20" height="8" fill="#0d2238"/><rect x="203" y="180" width="40" height="70" fill="#0d2238"/><rect x="245" y="75" width="75" height="175" fill="#0e2540"/><rect x="322" y="145" width="60" height="105" fill="#0c2036"/><rect x="382" y="110" width="110" height="140" fill="#0e2540"/><rect x="492" y="170" width="50" height="80" fill="#0c2036"/><rect x="542" y="50" width="85" height="200" fill="#0c2036"/><rect x="629" y="135" width="65" height="115" fill="#0d2238"/><rect x="696" y="90" width="95" height="160" fill="#0c2036"/><rect x="791" y="185" width="45" height="65" fill="#0e2540"/><rect x="836" y="120" width="120" height="130" fill="#0d2238"/><rect x="886" y="112" width="20" height="8" fill="#0d2238"/><rect x="958" y="160" width="58" height="90" fill="#0c2036"/><rect x="1016" y="32" width="100" height="218" fill="#0d2238"/><rect x="1118" y="175" width="52" height="75" fill="#0c2036"/><rect x="1174" y="105" width="88" height="145" fill="#0c2036"/><rect x="1262" y="140" width="62" height="110" fill="#0c2036"/><rect x="1324" y="80" width="78" height="170" fill="#0c2036"/><rect x="1402" y="165" width="48" height="85" fill="#0e2540"/><rect x="1452" y="125" width="105" height="125" fill="#0d2238"/><g class="wins"><rect class="win" x="37" y="167" width="6" height="9" rx="1" style="--d:0.49s"/><rect class="win" x="61" y="132" width="6" height="9" rx="1" style="--d:0.7s"/><rect class="win" x="96" y="132" width="6" height="9" rx="1" style="--d:3.99s"/><rect class="win" x="96" y="152" width="6" height="9" rx="1" style="--d:0.39s"/><rect class="win" x="116" y="142" width="6" height="9" rx="1" style="--d:0.92s"/><rect class="win" x="139" y="142" width="6" height="9" rx="1" style="--d:1.69s"/><rect class="win" x="139" y="162" width="6" height="9" rx="1" style="--d:1.91s"/><rect class="win" x="163" y="162" width="6" height="9" rx="1" style="--d:2.01s"/><rect class="win" x="186" y="162" width="6" height="9" rx="1" style="--d:3.0s"/><rect class="win" x="116" y="182" width="6" height="9" rx="1" style="--d:2.3s"/><rect class="win" x="139" y="182" width="6" height="9" rx="1" style="--d:1.35s"/><rect class="win" x="116" y="202" width="6" height="9" rx="1" style="--d:0.81s"/><rect class="win" x="163" y="202" width="6" height="9" rx="1" style="--d:3.26s"/><rect class="win" x="186" y="202" width="6" height="9" rx="1" style="--d:1.45s"/><rect class="win" x="252" y="87" width="6" height="9" rx="1" style="--d:2.52s"/><rect class="win" x="280" y="87" width="6" height="9" rx="1" style="--d:3.98s"/><rect class="win" x="307" y="87" width="6" height="9" rx="1" style="--d:0.44s"/><rect class="win" x="252" y="107" width="6" height="9" rx="1" style="--d:4.17s"/><rect class="win" x="252" y="127" width="6" height="9" rx="1" style="--d:0.29s"/><rect class="win" x="280" y="147" width="6" height="9" rx="1" style="--d:0.72s"/><rect class="win" x="252" y="167" width="6" height="9" rx="1" style="--d:0.52s"/><rect class="win" x="307" y="167" width="6" height="9" rx="1" style="--d:3.48s"/><rect class="win win-tw" x="329" y="157" width="6" height="9" rx="1" style="--d:4.03s"/><rect class="win win-tw" x="369" y="197" width="6" height="9" rx="1" style="--d:1.25s"/><rect class="win" x="434" y="122" width="6" height="9" rx="1" style="--d:4.01s"/><rect class="win win-tw" x="479" y="122" width="6" height="9" rx="1" style="--d:2.9s"/><rect class="win" x="389" y="142" width="6" height="9" rx="1" style="--d:3.32s"/><rect class="win" x="412" y="142" width="6" height="9" rx="1" style="--d:1.77s"/><rect class="win win-tw" x="456" y="142" width="6" height="9" rx="1" style="--d:0.45s"/><rect class="win win-tw" x="456" y="182" width="6" height="9" rx="1" style="--d:2.66s"/><rect class="win" x="456" y="202" width="6" height="9" rx="1" style="--d:4.17s"/><rect class="win win-tw" x="549" y="62" width="6" height="9" rx="1" style="--d:0.85s"/><rect class="win win-tw" x="571" y="62" width="6" height="9" rx="1" style="--d:2.31s"/><rect class="win" x="571" y="82" width="6" height="9" rx="1" style="--d:3.65s"/><rect class="win" x="571" y="102" width="6" height="9" rx="1" style="--d:2.33s"/><rect class="win" x="549" y="122" width="6" height="9" rx="1" style="--d:4.14s"/><rect class="win" x="571" y="122" width="6" height="9" rx="1" style="--d:3.47s"/><rect class="win" x="571" y="162" width="6" height="9" rx="1" style="--d:4.03s"/><rect class="win" x="592" y="162" width="6" height="9" rx="1" style="--d:4.15s"/><rect class="win" x="636" y="147" width="6" height="9" rx="1" style="--d:3.8s"/><rect class="win win-tw" x="681" y="147" width="6" height="9" rx="1" style="--d:3.4s"/><rect class="win" x="636" y="167" width="6" height="9" rx="1" style="--d:3.84s"/><rect class="win" x="658" y="167" width="6" height="9" rx="1" style="--d:2.11s"/><rect class="win" x="681" y="167" width="6" height="9" rx="1" style="--d:1.53s"/><rect class="win" x="636" y="187" width="6" height="9" rx="1" style="--d:1.78s"/><rect class="win" x="658" y="187" width="6" height="9" rx="1" style="--d:3.1s"/><rect class="win win-tw" x="658" y="207" width="6" height="9" rx="1" style="--d:3.43s"/><rect class="win" x="681" y="207" width="6" height="9" rx="1" style="--d:4.12s"/><rect class="win" x="703" y="122" width="6" height="9" rx="1" style="--d:2.8s"/><rect class="win" x="728" y="122" width="6" height="9" rx="1" style="--d:1.94s"/><rect class="win" x="753" y="122" width="6" height="9" rx="1" style="--d:1.04s"/><rect class="win" x="728" y="142" width="6" height="9" rx="1" style="--d:1.24s"/><rect class="win" x="778" y="142" width="6" height="9" rx="1" style="--d:1.62s"/><rect class="win" x="703" y="162" width="6" height="9" rx="1" style="--d:3.82s"/><rect class="win" x="728" y="162" width="6" height="9" rx="1" style="--d:2.21s"/><rect class="win" x="778" y="182" width="6" height="9" rx="1" style="--d:0.89s"/><rect class="win" x="703" y="202" width="6" height="9" rx="1" style="--d:2.43s"/><rect class="win win-tw" x="753" y="202" width="6" height="9" rx="1" style="--d:3.34s"/><rect class="win" x="778" y="202" width="6" height="9" rx="1" style="--d:1.19s"/><rect class="win" x="798" y="197" width="6" height="9" rx="1" style="--d:2.23s"/><rect class="win" x="823" y="197" width="6" height="9" rx="1" style="--d:3.85s"/><rect class="win" x="798" y="217" width="6" height="9" rx="1" style="--d:2.22s"/><rect class="win" x="823" y="217" width="6" height="9" rx="1" style="--d:2.01s"/><rect class="win" x="863" y="132" width="6" height="9" rx="1" style="--d:3.0s"/><rect class="win" x="883" y="132" width="6" height="9" rx="1" style="--d:1.24s"/><rect class="win win-tw" x="903" y="132" width="6" height="9" rx="1" style="--d:3.56s"/><rect class="win" x="903" y="152" width="6" height="9" rx="1" style="--d:3.34s"/><rect class="win win-tw" x="943" y="152" width="6" height="9" rx="1" style="--d:2.84s"/><rect class="win" x="843" y="172" width="6" height="9" rx="1" style="--d:4.07s"/><rect class="win" x="863" y="172" width="6" height="9" rx="1" style="--d:1.79s"/><rect class="win" x="883" y="172" width="6" height="9" rx="1" style="--d:3.53s"/><rect class="win" x="883" y="192" width="6" height="9" rx="1" style="--d:0.28s"/><rect class="win win-tw" x="965" y="172" width="6" height="9" rx="1" style="--d:2.25s"/><rect class="win" x="1003" y="172" width="6" height="9" rx="1" style="--d:3.35s"/><rect class="win win-tw" x="1043" y="44" width="6" height="9" rx="1" style="--d:1.28s"/><rect class="win" x="1083" y="44" width="6" height="9" rx="1" style="--d:3.48s"/><rect class="win" x="1023" y="64" width="6" height="9" rx="1" style="--d:2.48s"/><rect class="win win-tw" x="1083" y="64" width="6" height="9" rx="1" style="--d:1.9s"/><rect class="win" x="1103" y="64" width="6" height="9" rx="1" style="--d:2.74s"/><rect class="win" x="1043" y="84" width="6" height="9" rx="1" style="--d:0.47s"/><rect class="win" x="1103" y="84" width="6" height="9" rx="1" style="--d:3.91s"/><rect class="win" x="1103" y="124" width="6" height="9" rx="1" style="--d:1.36s"/><rect class="win" x="1023" y="164" width="6" height="9" rx="1" style="--d:2.4s"/><rect class="win" x="1063" y="164" width="6" height="9" rx="1" style="--d:0.63s"/><rect class="win" x="1023" y="184" width="6" height="9" rx="1" style="--d:1.77s"/><rect class="win" x="1043" y="184" width="6" height="9" rx="1" style="--d:4.13s"/><rect class="win" x="1063" y="184" width="6" height="9" rx="1" style="--d:3.03s"/><rect class="win" x="1157" y="207" width="6" height="9" rx="1" style="--d:1.22s"/><rect class="win" x="1204" y="117" width="6" height="9" rx="1" style="--d:3.68s"/><rect class="win" x="1204" y="157" width="6" height="9" rx="1" style="--d:4.09s"/><rect class="win" x="1249" y="157" width="6" height="9" rx="1" style="--d:1.44s"/><rect class="win" x="1331" y="92" width="6" height="9" rx="1" style="--d:2.32s"/><rect class="win" x="1360" y="92" width="6" height="9" rx="1" style="--d:3.06s"/><rect class="win" x="1360" y="112" width="6" height="9" rx="1" style="--d:0.8s"/><rect class="win" x="1389" y="112" width="6" height="9" rx="1" style="--d:0.38s"/><rect class="win" x="1331" y="132" width="6" height="9" rx="1" style="--d:2.71s"/><rect class="win" x="1360" y="132" width="6" height="9" rx="1" style="--d:0.76s"/><rect class="win" x="1331" y="152" width="6" height="9" rx="1" style="--d:3.42s"/><rect class="win" x="1360" y="152" width="6" height="9" rx="1" style="--d:3.77s"/><rect class="win win-tw" x="1389" y="152" width="6" height="9" rx="1" style="--d:1.12s"/><rect class="win" x="1331" y="192" width="6" height="9" rx="1" style="--d:2.43s"/><rect class="win" x="1360" y="192" width="6" height="9" rx="1" style="--d:2.92s"/><rect class="win" x="1409" y="177" width="6" height="9" rx="1" style="--d:3.19s"/><rect class="win" x="1409" y="197" width="6" height="9" rx="1" style="--d:0.46s"/><rect class="win" x="1502" y="137" width="6" height="9" rx="1" style="--d:1.02s"/><rect class="win" x="1523" y="137" width="6" height="9" rx="1" style="--d:2.18s"/><rect class="win" x="1459" y="157" width="6" height="9" rx="1" style="--d:3.27s"/><rect class="win win-tw" x="1480" y="157" width="6" height="9" rx="1" style="--d:0.51s"/><rect class="win" x="1523" y="157" width="6" height="9" rx="1" style="--d:1.42s"/><rect class="win" x="1502" y="177" width="6" height="9" rx="1" style="--d:2.97s"/><rect class="win" x="1523" y="197" width="6" height="9" rx="1" style="--d:1.0s"/><rect class="win" x="1544" y="197" width="6" height="9" rx="1" style="--d:0.27s"/></g><line x1="1066.0" y1="32" x2="1066.0" y2="18" stroke="#0d2238" stroke-width="3"/><circle class="beacon-halo" cx="1066.0" cy="15" r="10"/><circle class="beacon" cx="1066.0" cy="15" r="3.2"/></svg>
+      <svg class="skyline-strip" viewBox="0 0 1440 250" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><rect x="-20" y="155" width="70" height="95" fill="#0e2540"/><rect x="54" y="100" width="55" height="150" fill="#0c2036"/><rect x="109" y="130" width="90" height="120" fill="#0d2238"/><rect x="144" y="122" width="20" height="8" fill="#0d2238"/><rect x="203" y="180" width="40" height="70" fill="#0d2238"/><rect x="245" y="75" width="75" height="175" fill="#0e2540"/><rect x="322" y="145" width="60" height="105" fill="#0c2036"/><rect x="382" y="110" width="110" height="140" fill="#0e2540"/><rect x="492" y="170" width="50" height="80" fill="#0c2036"/><rect x="542" y="50" width="85" height="200" fill="#0c2036"/><rect x="629" y="135" width="65" height="115" fill="#0d2238"/><rect x="696" y="90" width="95" height="160" fill="#0c2036"/><rect x="791" y="185" width="45" height="65" fill="#0e2540"/><rect x="836" y="120" width="120" height="130" fill="#0d2238"/><rect x="886" y="112" width="20" height="8" fill="#0d2238"/><rect x="958" y="160" width="58" height="90" fill="#0c2036"/><rect x="1016" y="32" width="100" height="218" fill="#0d2238"/><rect x="1118" y="175" width="52" height="75" fill="#0c2036"/><rect x="1174" y="105" width="88" height="145" fill="#0c2036"/><rect x="1262" y="140" width="62" height="110" fill="#0c2036"/><rect x="1324" y="80" width="78" height="170" fill="#0c2036"/><rect x="1402" y="165" width="48" height="85" fill="#0e2540"/><rect x="1452" y="125" width="105" height="125" fill="#0d2238"/><g class="wins"><rect class="win d0" x="37" y="167" width="6" height="9" rx="1"/><rect class="win d1" x="61" y="132" width="6" height="9" rx="1"/><rect class="win d7" x="96" y="132" width="6" height="9" rx="1"/><rect class="win d0" x="96" y="152" width="6" height="9" rx="1"/><rect class="win d1" x="116" y="142" width="6" height="9" rx="1"/><rect class="win d3" x="139" y="142" width="6" height="9" rx="1"/><rect class="win d3" x="139" y="162" width="6" height="9" rx="1"/><rect class="win d3" x="163" y="162" width="6" height="9" rx="1"/><rect class="win d5" x="186" y="162" width="6" height="9" rx="1"/><rect class="win d4" x="116" y="182" width="6" height="9" rx="1"/><rect class="win d2" x="139" y="182" width="6" height="9" rx="1"/><rect class="win d1" x="116" y="202" width="6" height="9" rx="1"/><rect class="win d6" x="163" y="202" width="6" height="9" rx="1"/><rect class="win d2" x="186" y="202" width="6" height="9" rx="1"/><rect class="win d4" x="252" y="87" width="6" height="9" rx="1"/><rect class="win d7" x="280" y="87" width="6" height="9" rx="1"/><rect class="win d0" x="307" y="87" width="6" height="9" rx="1"/><rect class="win d7" x="252" y="107" width="6" height="9" rx="1"/><rect class="win d0" x="252" y="127" width="6" height="9" rx="1"/><rect class="win d1" x="280" y="147" width="6" height="9" rx="1"/><rect class="win d0" x="252" y="167" width="6" height="9" rx="1"/><rect class="win d6" x="307" y="167" width="6" height="9" rx="1"/><rect class="win win-tw d7" x="329" y="157" width="6" height="9" rx="1"/><rect class="win win-tw d2" x="369" y="197" width="6" height="9" rx="1"/><rect class="win d7" x="434" y="122" width="6" height="9" rx="1"/><rect class="win win-tw d5" x="479" y="122" width="6" height="9" rx="1"/><rect class="win d6" x="389" y="142" width="6" height="9" rx="1"/><rect class="win d3" x="412" y="142" width="6" height="9" rx="1"/><rect class="win win-tw d0" x="456" y="142" width="6" height="9" rx="1"/><rect class="win win-tw d5" x="456" y="182" width="6" height="9" rx="1"/><rect class="win d7" x="456" y="202" width="6" height="9" rx="1"/><rect class="win win-tw d1" x="549" y="62" width="6" height="9" rx="1"/><rect class="win win-tw d4" x="571" y="62" width="6" height="9" rx="1"/><rect class="win d6" x="571" y="82" width="6" height="9" rx="1"/><rect class="win d4" x="571" y="102" width="6" height="9" rx="1"/><rect class="win d7" x="549" y="122" width="6" height="9" rx="1"/><rect class="win d6" x="571" y="122" width="6" height="9" rx="1"/><rect class="win d7" x="571" y="162" width="6" height="9" rx="1"/><rect class="win d7" x="592" y="162" width="6" height="9" rx="1"/><rect class="win d7" x="636" y="147" width="6" height="9" rx="1"/><rect class="win win-tw d6" x="681" y="147" width="6" height="9" rx="1"/><rect class="win d7" x="636" y="167" width="6" height="9" rx="1"/><rect class="win d4" x="658" y="167" width="6" height="9" rx="1"/><rect class="win d2" x="681" y="167" width="6" height="9" rx="1"/><rect class="win d3" x="636" y="187" width="6" height="9" rx="1"/><rect class="win d5" x="658" y="187" width="6" height="9" rx="1"/><rect class="win win-tw d6" x="658" y="207" width="6" height="9" rx="1"/><rect class="win d7" x="681" y="207" width="6" height="9" rx="1"/><rect class="win d5" x="703" y="122" width="6" height="9" rx="1"/><rect class="win d3" x="728" y="122" width="6" height="9" rx="1"/><rect class="win d1" x="753" y="122" width="6" height="9" rx="1"/><rect class="win d2" x="728" y="142" width="6" height="9" rx="1"/><rect class="win d3" x="778" y="142" width="6" height="9" rx="1"/><rect class="win d7" x="703" y="162" width="6" height="9" rx="1"/><rect class="win d4" x="728" y="162" width="6" height="9" rx="1"/><rect class="win d1" x="778" y="182" width="6" height="9" rx="1"/><rect class="win d4" x="703" y="202" width="6" height="9" rx="1"/><rect class="win win-tw d6" x="753" y="202" width="6" height="9" rx="1"/><rect class="win d2" x="778" y="202" width="6" height="9" rx="1"/><rect class="win d4" x="798" y="197" width="6" height="9" rx="1"/><rect class="win d7" x="823" y="197" width="6" height="9" rx="1"/><rect class="win d4" x="798" y="217" width="6" height="9" rx="1"/><rect class="win d3" x="823" y="217" width="6" height="9" rx="1"/><rect class="win d5" x="863" y="132" width="6" height="9" rx="1"/><rect class="win d2" x="883" y="132" width="6" height="9" rx="1"/><rect class="win win-tw d6" x="903" y="132" width="6" height="9" rx="1"/><rect class="win d6" x="903" y="152" width="6" height="9" rx="1"/><rect class="win win-tw d5" x="943" y="152" width="6" height="9" rx="1"/><rect class="win d7" x="843" y="172" width="6" height="9" rx="1"/><rect class="win d3" x="863" y="172" width="6" height="9" rx="1"/><rect class="win d6" x="883" y="172" width="6" height="9" rx="1"/><rect class="win d0" x="883" y="192" width="6" height="9" rx="1"/><rect class="win win-tw d4" x="965" y="172" width="6" height="9" rx="1"/><rect class="win d6" x="1003" y="172" width="6" height="9" rx="1"/><rect class="win win-tw d2" x="1043" y="44" width="6" height="9" rx="1"/><rect class="win d6" x="1083" y="44" width="6" height="9" rx="1"/><rect class="win d4" x="1023" y="64" width="6" height="9" rx="1"/><rect class="win win-tw d3" x="1083" y="64" width="6" height="9" rx="1"/><rect class="win d5" x="1103" y="64" width="6" height="9" rx="1"/><rect class="win d0" x="1043" y="84" width="6" height="9" rx="1"/><rect class="win d7" x="1103" y="84" width="6" height="9" rx="1"/><rect class="win d2" x="1103" y="124" width="6" height="9" rx="1"/><rect class="win d4" x="1023" y="164" width="6" height="9" rx="1"/><rect class="win d1" x="1063" y="164" width="6" height="9" rx="1"/><rect class="win d3" x="1023" y="184" width="6" height="9" rx="1"/><rect class="win d7" x="1043" y="184" width="6" height="9" rx="1"/><rect class="win d5" x="1063" y="184" width="6" height="9" rx="1"/><rect class="win d2" x="1157" y="207" width="6" height="9" rx="1"/><rect class="win d7" x="1204" y="117" width="6" height="9" rx="1"/><rect class="win d7" x="1204" y="157" width="6" height="9" rx="1"/><rect class="win d2" x="1249" y="157" width="6" height="9" rx="1"/><rect class="win d4" x="1331" y="92" width="6" height="9" rx="1"/><rect class="win d5" x="1360" y="92" width="6" height="9" rx="1"/><rect class="win d1" x="1360" y="112" width="6" height="9" rx="1"/><rect class="win d0" x="1389" y="112" width="6" height="9" rx="1"/><rect class="win d5" x="1331" y="132" width="6" height="9" rx="1"/><rect class="win d1" x="1360" y="132" width="6" height="9" rx="1"/><rect class="win d6" x="1331" y="152" width="6" height="9" rx="1"/><rect class="win d7" x="1360" y="152" width="6" height="9" rx="1"/><rect class="win win-tw d2" x="1389" y="152" width="6" height="9" rx="1"/><rect class="win d4" x="1331" y="192" width="6" height="9" rx="1"/><rect class="win d5" x="1360" y="192" width="6" height="9" rx="1"/><rect class="win d6" x="1409" y="177" width="6" height="9" rx="1"/><rect class="win d0" x="1409" y="197" width="6" height="9" rx="1"/><rect class="win d1" x="1502" y="137" width="6" height="9" rx="1"/><rect class="win d4" x="1523" y="137" width="6" height="9" rx="1"/><rect class="win d6" x="1459" y="157" width="6" height="9" rx="1"/><rect class="win win-tw d0" x="1480" y="157" width="6" height="9" rx="1"/><rect class="win d2" x="1523" y="157" width="6" height="9" rx="1"/><rect class="win d5" x="1502" y="177" width="6" height="9" rx="1"/><rect class="win d1" x="1523" y="197" width="6" height="9" rx="1"/><rect class="win d0" x="1544" y="197" width="6" height="9" rx="1"/></g><line x1="1066.0" y1="32" x2="1066.0" y2="18" stroke="#0d2238" stroke-width="3"/><circle class="beacon-halo" cx="1066.0" cy="15" r="10"/><circle class="beacon" cx="1066.0" cy="15" r="3.2"/></svg>
     </div>
   </section>
 
@@ -1145,8 +1146,8 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
 <script>
 /* ============================================================
    AMIN REALTY, INC. — Behavior
-   Vanilla JS, no dependencies. Degrades gracefully and
-   honors prefers-reduced-motion.
+   Vanilla JS, no dependencies. Degrades gracefully (the page is
+   fully readable with JS off) and honors prefers-reduced-motion.
    ============================================================ */
 (function(){
   "use strict";
@@ -1173,34 +1174,41 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
     });
   }
 
-  /* ---- Header shrink + back-to-top on scroll ---- */
-  var header = document.querySelector(".site-header");
-  var toTop  = document.getElementById("toTop");
-  function onScroll(){
+  /* ---- Unified scroll pipeline (one listener, one rAF) ----
+     Drives: header state, reading progress, back-to-top + ring,
+     and the skyline parallax. */
+  var header  = document.querySelector(".site-header");
+  var toTop   = document.getElementById("toTop");
+  var ring    = document.getElementById("toTopRing");
+  var skyline = document.querySelector(".hero-skyline");
+  var RING_LEN = 151; // 2 * PI * r(24)
+  var ticking = false;
+  function paint(){
+    ticking = false;
     var y = window.scrollY || window.pageYOffset;
-    if (header) header.classList.toggle("scrolled", y > 20);
-    if (toTop)  toTop.classList.toggle("show", y > 600);
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(y / max, 1) : 0;
+    if (header){
+      header.classList.toggle("scrolled", y > 20);
+      header.style.setProperty("--progress", p.toFixed(4));
+    }
+    if (toTop) toTop.classList.toggle("show", y > 600);
+    if (ring)  ring.style.strokeDashoffset = String(RING_LEN * (1 - p));
+    if (skyline && !reduceMotion && y < window.innerHeight * 1.2){
+      skyline.style.transform = "translateY(" + Math.min(y * 0.18, 140).toFixed(1) + "px)";
+    }
   }
-  window.addEventListener("scroll", onScroll, {passive:true});
-  onScroll();
+  window.addEventListener("scroll", function(){
+    if (!ticking){ ticking = true; requestAnimationFrame(paint); }
+  }, {passive:true});
+  paint();
   if (toTop) toTop.addEventListener("click", function(){
     window.scrollTo({top:0, behavior: reduceMotion ? "auto" : "smooth"});
   });
 
-  /* ---- Scroll-reveal (IntersectionObserver) ---- */
-  var reveals = document.querySelectorAll(".reveal");
-  if (reduceMotion || !("IntersectionObserver" in window)){
-    reveals.forEach(function(el){ el.classList.add("in"); });
-  } else {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
-      });
-    }, {threshold:0.12, rootMargin:"0px 0px -40px 0px"});
-    reveals.forEach(function(el){ io.observe(el); });
-  }
-
-  /* ---- Animated stat counters ---- */
+  /* ---- Scroll-reveal + stat counters (IntersectionObserver) ---- */
+  var reveals  = document.querySelectorAll(".reveal");
   var counters = document.querySelectorAll("[data-count]");
   function animateCount(el){
     var target = parseFloat(el.getAttribute("data-count"));
@@ -1209,34 +1217,123 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
     var start = null, dur = 1400;
     function tick(ts){
       if (!start) start = ts;
-      var p = Math.min((ts - start)/dur, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if (p < 1) requestAnimationFrame(tick);
+      var pr = Math.min((ts - start)/dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - pr, 3))) + suffix;
+      if (pr < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   }
-  if ("IntersectionObserver" in window){
+  if (reduceMotion || !("IntersectionObserver" in window)){
+    reveals.forEach(function(el){ el.classList.add("in"); });
+    counters.forEach(animateCount);
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, {threshold:0.12, rootMargin:"0px 0px -40px 0px"});
+    reveals.forEach(function(el){ io.observe(el); });
     var cObs = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         if (en.isIntersecting){ animateCount(en.target); cObs.unobserve(en.target); }
       });
     }, {threshold:0.6});
     counters.forEach(function(el){ cObs.observe(el); });
-  } else {
-    counters.forEach(animateCount);
+  }
+
+  /* ---- Scrollspy: highlight the section you're reading ---- */
+  var spyMap = {};
+  document.querySelectorAll('.nav-links a[href^="#"]:not(.btn)').forEach(function(a){
+    var sec = document.getElementById(a.getAttribute("href").slice(1));
+    if (sec) spyMap[sec.id] = a;
+  });
+  if ("IntersectionObserver" in window && Object.keys(spyMap).length){
+    var current = null;
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){
+          if (current) current.classList.remove("active");
+          current = spyMap[en.target.id];
+          if (current) current.classList.add("active");
+        } else if (spyMap[en.target.id] === current){
+          current.classList.remove("active");
+          current = null;
+        }
+      });
+    }, {rootMargin:"-35% 0px -55% 0px"});
+    Object.keys(spyMap).forEach(function(id){ spy.observe(document.getElementById(id)); });
+  }
+
+  /* ---- Marquee: pause/play control (WCAG 2.2.2) ---- */
+  var marquee  = document.getElementById("assetMarquee");
+  var pauseBtn = document.getElementById("marqueePause");
+  if (marquee && pauseBtn){
+    pauseBtn.addEventListener("click", function(){
+      var paused = marquee.classList.toggle("paused");
+      pauseBtn.setAttribute("aria-pressed", String(paused));
+      pauseBtn.setAttribute("aria-label", paused ? "Resume scrolling banner" : "Pause scrolling banner");
+    });
+  }
+
+  /* ---- Hero: cursor lantern (fine pointers, motion allowed) ---- */
+  var hero = document.querySelector(".hero");
+  if (hero && !reduceMotion && window.matchMedia("(pointer: fine)").matches){
+    var glow = document.createElement("div");
+    glow.className = "hero-glow";
+    glow.setAttribute("aria-hidden", "true");
+    hero.appendChild(glow);
+    var gx = 0, gy = 0, tx = 0, ty = 0, glowRaf = null;
+    function stepGlow(){
+      gx += (tx - gx) * 0.08;
+      gy += (ty - gy) * 0.08;
+      glow.style.left = gx + "px";
+      glow.style.top  = gy + "px";
+      if (Math.abs(tx - gx) + Math.abs(ty - gy) > 0.5) glowRaf = requestAnimationFrame(stepGlow);
+      else glowRaf = null;
+    }
+    hero.addEventListener("pointermove", function(e){
+      var r = hero.getBoundingClientRect();
+      tx = e.clientX - r.left; ty = e.clientY - r.top;
+      glow.classList.add("on");
+      if (!glowRaf) glowRaf = requestAnimationFrame(stepGlow);
+    });
+    hero.addEventListener("pointerleave", function(){ glow.classList.remove("on"); });
+  }
+
+  /* ---- FAQ: smooth open/close on top of native <details> ---- */
+  if (!reduceMotion && "animate" in Element.prototype){
+    document.querySelectorAll(".faq details").forEach(function(d){
+      var summary = d.querySelector("summary");
+      var ans = d.querySelector(".ans");
+      if (!summary || !ans) return;
+      var animating = false;
+      summary.addEventListener("click", function(e){
+        e.preventDefault();
+        if (animating) return;
+        animating = true;
+        ans.style.overflow = "hidden";
+        var easing = "cubic-bezier(.22,.61,.36,1)";
+        if (d.open){
+          var closing = ans.animate(
+            [{height:ans.offsetHeight + "px", opacity:1}, {height:"0px", opacity:0}],
+            {duration:260, easing:easing});
+          closing.onfinish = function(){ d.open = false; ans.style.overflow = ""; animating = false; };
+        } else {
+          d.open = true;
+          var opening = ans.animate(
+            [{height:"0px", opacity:0}, {height:ans.offsetHeight + "px", opacity:1}],
+            {duration:320, easing:easing});
+          opening.onfinish = function(){ ans.style.overflow = ""; animating = false; };
+        }
+      });
+    });
   }
 
   /* ============================================================
-     LISTINGS DATA
-     ---- EDIT THIS ARRAY to manage your listings. ----
-     Each listing: title, type, location, status, price (number),
-     priceLabel (string shown), and specs (label/value pairs).
-     status values: "Available" | "Under Contract" | "Sold"
-     type values must match the filter dropdown options.
-     icon values: "hotel" | "motel" | "land" | "commercial"
-     OPTIONAL: add  image:"https://.../photo.jpg"  to show a real photo
-       instead of the icon placeholder (alt text is generated for you).
+     LISTINGS
+     Manage listings in assets/listings.js (one shared file for the
+     homepage + the Listings page). The FALLBACK list below is used
+     only when that file isn't loaded (e.g. a single-file Wix embed).
      ============================================================ */
   var FALLBACK_LISTINGS = [
     { title:"85-Key Franchise Hotel", type:"Franchise Hotel", location:"Houston, TX", status:"Available",
@@ -1258,11 +1355,7 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
       price:3100000, priceLabel:"$3,100,000", icon:"motel",
       specs:[["Rooms","58"],["Lot","2.3 ac"],["Status","Closed 2025"]] }
   ];
-
-  // Prefer the shared master list (assets/listings.js) so you manage listings in
-  // ONE place; show the items flagged featured:true. If that file isn't loaded
-  // (e.g. inside a single-file Wix embed), fall back to the inline copy above.
-  var sharedListings = (window.AMIN_LISTINGS || []);
+  var sharedListings   = (window.AMIN_LISTINGS || []);
   var featuredListings = sharedListings.filter(function (l) { return l.featured; });
   var LISTINGS = featuredListings.length ? featuredListings
                  : (sharedListings.length ? sharedListings.slice(0, 6) : FALLBACK_LISTINGS);
@@ -1276,12 +1369,12 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
   var pinIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
   var arrowIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-  var grid     = document.getElementById("listingGrid");
-  var countEl  = document.getElementById("listingsCount");
-  var fType    = document.getElementById("filterType");
-  var fStatus  = document.getElementById("filterStatus");
-  var fPrice   = document.getElementById("filterPrice");
-  var fSearch  = document.getElementById("filterSearch");
+  var grid    = document.getElementById("listingGrid");
+  var countEl = document.getElementById("listingsCount");
+  var fType   = document.getElementById("filterType");
+  var fStatus = document.getElementById("filterStatus");
+  var fPrice  = document.getElementById("filterPrice");
+  var fSearch = document.getElementById("filterSearch");
 
   function statusClass(s){
     return "status-" + s.toLowerCase().replace(/\s+/g,"-");
@@ -1322,7 +1415,7 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
         var article = document.createElement("article");
         article.className = "listing";
         article.innerHTML =
-          '<div class="listing-media" style="background:linear-gradient(150deg,#16395f,#0a1a2f)">'+
+          '<div class="listing-media">'+
             media +
             '<span class="listing-status '+ statusClass(l.status) +'">'+ escapeHtml(l.status) +'</span>'+
             '<span class="listing-type">'+ escapeHtml(l.type) +'</span>'+
@@ -1332,7 +1425,7 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
             '<h3 class="listing-title">'+ l.title +'</h3>'+
             '<span class="listing-loc">'+ pinIcon +' '+ escapeHtml(l.location) +'</span>'+
             '<div class="listing-specs">'+ specs +'</div>'+
-            '<div class="listing-cta"><a href="#contact" aria-label="Request details: '+ escapeHtml(l.title.replace(/&amp;/g,"and")) +'">Request details '+ arrowIcon +'</a></div>'+
+            '<div class="listing-cta"><a href="#contact" aria-label="Request details: '+ escapeHtml(plainTitle) +'">Request details '+ arrowIcon +'</a></div>'+
           '</div>';
         grid.appendChild(article);
       });
@@ -1349,7 +1442,7 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
   /* ---- Contact form (progressive enhancement) ----
      Works with Formspree/Web3Forms/Wix forms. If no real endpoint
      is configured, it shows a friendly fallback instead of failing. */
-  var form = document.getElementById("contactForm");
+  var form   = document.getElementById("contactForm");
   var status = document.getElementById("formStatus");
   if (form){
     form.addEventListener("submit", function(e){
@@ -1388,148 +1481,6 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
             status.setAttribute("data-state","err");
           });
       }
-    });
-  }
-})();
-</script>
-<script>
-/* ============================================================
-   AMIN REALTY, INC. — Motion & interaction enhancements.
-   Everything here is progressive enhancement on top of the
-   core behavior above; the page is fully usable without it.
-   Honors prefers-reduced-motion throughout.
-   ============================================================ */
-(function(){
-  "use strict";
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ---- Reading progress (header hairline) + back-to-top ring ---- */
-  var header = document.querySelector(".site-header");
-  var ring = document.getElementById("toTopRing");
-  var RING_LEN = 151; // 2 * PI * r(24)
-  var ticking = false;
-  function paint(){
-    ticking = false;
-    var doc = document.documentElement;
-    var max = doc.scrollHeight - window.innerHeight;
-    var p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-    if (header) header.style.setProperty("--progress", p.toFixed(4));
-    if (ring) ring.style.strokeDashoffset = String(RING_LEN * (1 - p));
-  }
-  window.addEventListener("scroll", function(){
-    if (!ticking){ ticking = true; requestAnimationFrame(paint); }
-  }, {passive:true});
-  paint();
-
-  /* ---- Marquee: pause/play control (WCAG 2.2.2) ---- */
-  var marquee = document.getElementById("assetMarquee");
-  var pauseBtn = document.getElementById("marqueePause");
-  if (marquee && pauseBtn){
-    pauseBtn.addEventListener("click", function(){
-      var paused = marquee.classList.toggle("paused");
-      pauseBtn.setAttribute("aria-pressed", String(paused));
-      pauseBtn.setAttribute("aria-label", paused ? "Resume scrolling banner" : "Pause scrolling banner");
-    });
-  }
-
-  /* ---- Hero: cursor lantern + skyline parallax ---- */
-  var hero = document.querySelector(".hero");
-  var skyline = document.querySelector(".hero-skyline");
-  if (hero && !reduceMotion && window.matchMedia("(pointer: fine)").matches){
-    var glow = document.createElement("div");
-    glow.className = "hero-glow";
-    glow.setAttribute("aria-hidden", "true");
-    hero.appendChild(glow);
-    var gx = 0, gy = 0, tx = 0, ty = 0, glowRaf = null;
-    function stepGlow(){
-      gx += (tx - gx) * 0.08;
-      gy += (ty - gy) * 0.08;
-      glow.style.left = gx + "px";
-      glow.style.top = gy + "px";
-      if (Math.abs(tx - gx) + Math.abs(ty - gy) > 0.5){ glowRaf = requestAnimationFrame(stepGlow); }
-      else { glowRaf = null; }
-    }
-    hero.addEventListener("pointermove", function(e){
-      var r = hero.getBoundingClientRect();
-      tx = e.clientX - r.left; ty = e.clientY - r.top;
-      glow.classList.add("on");
-      if (!glowRaf) glowRaf = requestAnimationFrame(stepGlow);
-    });
-    hero.addEventListener("pointerleave", function(){ glow.classList.remove("on"); });
-  }
-  if (skyline && !reduceMotion){
-    var skyTicking = false;
-    function paintSky(){
-      skyTicking = false;
-      var y = window.scrollY;
-      if (y < window.innerHeight * 1.2){
-        skyline.style.transform = "translateY(" + Math.min(y * 0.18, 140).toFixed(1) + "px)";
-      }
-    }
-    window.addEventListener("scroll", function(){
-      if (!skyTicking){ skyTicking = true; requestAnimationFrame(paintSky); }
-    }, {passive:true});
-  }
-
-  /* ---- Scrollspy: highlight the section you're reading ---- */
-  var spyLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]:not(.btn)'));
-  var spyMap = {};
-  spyLinks.forEach(function(a){
-    var id = a.getAttribute("href").slice(1);
-    var sec = document.getElementById(id);
-    if (sec) spyMap[id] = a;
-  });
-  if ("IntersectionObserver" in window && Object.keys(spyMap).length){
-    var current = null;
-    var spy = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if (en.isIntersecting){
-          if (current) current.classList.remove("active");
-          current = spyMap[en.target.id];
-          if (current) current.classList.add("active");
-        } else if (spyMap[en.target.id] === current){
-          current.classList.remove("active");
-          current = null;
-        }
-      });
-    }, {rootMargin:"-35% 0px -55% 0px"});
-    Object.keys(spyMap).forEach(function(id){ spy.observe(document.getElementById(id)); });
-  }
-
-  /* ---- FAQ: smooth open/close (keyboard + reduced-motion safe) ---- */
-  if (!reduceMotion && "animate" in Element.prototype){
-    document.querySelectorAll(".faq details").forEach(function(d){
-      var summary = d.querySelector("summary");
-      var ans = d.querySelector(".ans");
-      if (!summary || !ans) return;
-      var animating = false;
-      summary.addEventListener("click", function(e){
-        e.preventDefault();
-        if (animating) return;
-        animating = true;
-        ans.style.overflow = "hidden";
-        if (d.open){
-          var h0 = ans.offsetHeight;
-          var closing = ans.animate(
-            [{height:h0 + "px", opacity:1}, {height:"0px", opacity:0}],
-            {duration:260, easing:"cubic-bezier(.22,.61,.36,1)"});
-          closing.onfinish = function(){
-            d.open = false;
-            ans.style.overflow = "";
-            animating = false;
-          };
-        } else {
-          d.open = true;
-          var h1 = ans.offsetHeight;
-          var opening = ans.animate(
-            [{height:"0px", opacity:0}, {height:h1 + "px", opacity:1}],
-            {duration:320, easing:"cubic-bezier(.22,.61,.36,1)"});
-          opening.onfinish = function(){
-            ans.style.overflow = "";
-            animating = false;
-          };
-        }
-      });
     });
   }
 })();
