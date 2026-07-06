@@ -149,9 +149,21 @@ a{color:var(--gold-link)}
 .doc .locked{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--gold-link);font-weight:700;margin-bottom:.8rem}
 .doc .locked svg{width:15px;height:15px}
 
+/* Deal Room (gated listing files) */
+.deal-btn{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--sans);font-weight:700;font-size:.88rem;cursor:pointer;color:var(--gold);background:transparent;border:1px solid rgba(212,175,106,.5);border-radius:9px;padding:.5rem .85rem;transition:background .25s var(--ease),border-color .25s var(--ease)}
+.deal-btn:hover{background:rgba(212,175,106,.14);border-color:var(--gold)}
+.deal-btn svg{width:15px;height:15px;flex:none}
+.deal-note{font-size:.92rem;color:var(--ink-soft);margin-bottom:1rem}
+.deal-warn{color:#9a6a00;margin-bottom:1rem}
+.deal-files{display:grid;gap:.6rem;margin-bottom:1.2rem}
+.deal-files a{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:700;font-size:.95rem;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;transition:border-color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease)}
+.deal-files a:hover{border-color:var(--gold-dark);background:var(--cream);transform:translateX(3px)}
+.deal-files svg{width:20px;height:20px;flex:none;color:var(--gold-dark)}
+.deal-files a svg:last-child{margin-left:auto;width:16px;height:16px}
+
 /* Modal dialog */
-.modal-backdrop{position:fixed;inset:0;z-index:300;background:rgba(7,19,31,.72);backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;padding:clamp(1rem,4vw,3rem) 1rem;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .25s var(--ease),visibility .25s}
-.modal-backdrop.open{opacity:1;visibility:visible}
+.modal-backdrop{position:fixed;inset:0;z-index:300;background:rgba(7,19,31,.72);backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;padding:clamp(1rem,4vw,3rem) 1rem;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .25s var(--ease),visibility 0s .25s}
+.modal-backdrop.open{opacity:1;visibility:visible;transition:opacity .25s var(--ease),visibility 0s}
 .modal{background:var(--paper);color:var(--ink);width:100%;max-width:620px;border-radius:var(--radius);box-shadow:var(--shadow-lg);transform:translateY(16px);transition:transform .3s var(--ease);overflow:hidden}
 .modal-backdrop.open .modal{transform:none}
 .modal-head{background:var(--navy-900);color:var(--light);padding:1.4rem 1.6rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}

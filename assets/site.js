@@ -66,6 +66,7 @@
   var grid = $("#listingGrid");
   if (grid) {
     var data = (window.AMIN_LISTINGS || []).slice();
+    data.forEach(function (l, i) { l._i = i; });
     var fType = $("#filterType"), fStatus = $("#filterStatus"), fPrice = $("#filterPrice"),
         fSearch = $("#filterSearch"), fSort = $("#sortBy"), countEl = $("#listingsCount");
 
@@ -88,7 +89,11 @@
           '<h2 class="listing-title">' + esc(l.title) + '</h2>' +
           '<span class="listing-loc">' + PIN + " " + esc(l.location) + '</span>' +
           '<div class="listing-specs">' + specs + '</div>' +
-          '<div class="listing-cta"><a href="index.html#contact" aria-label="Request details: ' + esc(plain) + '">Request details ' + ARROW + '</a></div>' +
+          '<div class="listing-cta"><a href="index.html#contact" aria-label="Request details: ' + esc(plain) + '">Request details ' + ARROW + '</a>' +
+            (l.dealRoom && l.dealRoom.length
+              ? '<button type="button" class="deal-btn" data-deal="' + l._i + '" aria-haspopup="dialog">' + LOCK + ' View Deal Room</button>'
+              : '') +
+          '</div>' +
         '</div></article>';
     }
 
@@ -115,6 +120,11 @@
     [fType, fStatus, fPrice, fSort].forEach(function (el) { if (el) el.addEventListener("change", render); });
     if (fSearch) fSearch.addEventListener("input", render);
     render();
+
+    grid.addEventListener("click", function (e) {
+      var btn = e.target.closest("button[data-deal]");
+      if (btn && window.AMIN_DEAL_ROOM) window.AMIN_DEAL_ROOM.open(data[parseInt(btn.getAttribute("data-deal"), 10)], btn);
+    });
   }
 
   /* ============================================================

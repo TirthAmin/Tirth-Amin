@@ -115,3 +115,31 @@ Find the `FALLBACK_LISTINGS` array near the bottom of `index.html`. Each entry l
 
 The sample listings are illustrative. Legal documents are templates and should
 be reviewed by an attorney before launch.
+
+## Deal Rooms (gated files per listing)
+
+Any listing in `assets/listings.js` can have a **Deal Room** — a set of files
+(PDFs, Excel, photos, zips, anything) that visitors unlock by entering their
+first name, last name, and email. Each access is recorded exactly like the
+Document Center signatures (locally, and to `logEndpoint` in
+`assets/config.js` when configured — you'll get an email/sheet row per access
+with the person's name, email, listing, and timestamp).
+
+To add files to a listing:
+
+1. Upload the files to the `documents/` folder (or host them anywhere and use
+   the full `https://` URL).
+2. In `assets/listings.js`, add a `dealRoom` array to that listing:
+
+```js
+dealRoom: [
+  { label: "Offering Memorandum (PDF)", file: "documents/my-om.pdf" },
+  { label: "T-12 Financials (Excel)",   file: "documents/my-t12.xlsx" }
+]
+```
+
+The "View Deal Room" button appears automatically on that listing's card on
+both the homepage and the Listings page. Remove the array to remove the
+button. Note: this is lead capture with an access log, not real security —
+keep truly sensitive files offline and send them manually after reviewing
+the log.

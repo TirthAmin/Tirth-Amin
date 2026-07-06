@@ -234,3 +234,23 @@ came back clean.
 - CSS/JS stay unminified so the owner can edit copy and listings directly
   (see `DEPLOY.md`); enable gzip on the host, which already brings the
   homepage to ~24 KB on the wire.
+
+---
+
+## Round 4 — Deal Room feature (July 2026)
+
+Per-listing gated file access. A listing with a `dealRoom` array in
+`assets/listings.js` shows a **View Deal Room** button on its card (homepage
+and Listings page). Visitors enter first name, last name, and email; the
+access is logged (localStorage + the same `logEndpoint` used for signatures)
+and the file links are revealed. The owner can attach **any** files by
+dropping them in `documents/` and listing `{ label, file }` pairs — see
+README.
+
+Quality gates: accessible dialog (focus trap, Esc, `inert`, focus restore,
+`aria-live` status), axe clean **with the modal open** on both pages,
+html-validate clean, 22/22 deal-room end-to-end checks (×3 runs), 18/18 site
+functional checks, 0 axe violations across all 9 pages. Also fixed a latent
+focus race in all modals (visibility was transitioned, so early `focus()`
+could silently fail — visibility now flips instantly on open, delayed on
+close).

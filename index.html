@@ -674,6 +674,66 @@ html:not(.js) .skyline-strip .win{opacity:.75}
 .fine{font-size:.8rem}
 .site-footer .brand-text b{color:var(--light)}
 
+/* ---------- 19. Deal Room (gated listing files) ---------- */
+.deal-btn{
+  display:inline-flex;align-items:center;gap:.45rem;margin-left:auto;
+  font-family:var(--sans);font-weight:700;font-size:.88rem;cursor:pointer;
+  color:var(--gold);background:transparent;border:1px solid rgba(212,175,106,.5);
+  border-radius:9px;padding:.5rem .85rem;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease);
+}
+.deal-btn:hover{background:rgba(212,175,106,.14);border-color:var(--gold)}
+.deal-btn svg{width:15px;height:15px;flex:none}
+.listing-cta{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.modal-backdrop{
+  position:fixed;inset:0;z-index:300;background:rgba(7,17,32,.72);backdrop-filter:blur(3px);
+  display:flex;align-items:flex-start;justify-content:center;padding:clamp(1rem,4vw,3rem) 1rem;
+  overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .25s var(--ease),visibility 0s .25s;
+}
+.modal-backdrop.open{opacity:1;visibility:visible;transition:opacity .25s var(--ease),visibility 0s}
+.modal{
+  background:var(--paper);color:var(--ink);width:100%;max-width:560px;border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);transform:translateY(16px);transition:transform .3s var(--ease);overflow:hidden;
+}
+.modal-backdrop.open .modal{transform:none}
+.modal-head{background:var(--navy-900);color:var(--light);padding:1.3rem 1.5rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.modal-head h2{font-size:1.35rem;color:#fff}
+.modal-head p{font-size:.85rem;color:var(--light-soft);margin-top:.25rem}
+.modal-close{background:rgba(255,255,255,.08);border:none;color:var(--light);width:38px;height:38px;border-radius:9px;cursor:pointer;flex:none;display:grid;place-items:center}
+.modal-close:hover{background:rgba(255,255,255,.18)}
+.modal-close svg{width:20px;height:20px}
+.modal-body{padding:1.5rem}
+.deal-intro{font-size:.93rem;color:var(--ink-soft);margin-bottom:1.1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:520px){.form-row{grid-template-columns:1fr}}
+.field-block{margin-bottom:1rem}
+.field-block label{display:block;font-size:.85rem;font-weight:700;margin-bottom:.35rem;color:var(--ink)}
+.field-block .req{color:var(--gold-link)}
+.field-block input{
+  width:100%;font-size:1rem;font-family:var(--sans);padding:.75rem .85rem;
+  border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);
+}
+.field-block input:focus{outline:none;border-color:var(--gold-dark);box-shadow:0 0 0 3px rgba(212,175,106,.25)}
+.modal-status{font-size:.9rem;font-weight:600;margin:.4rem 0;min-height:1.2em}
+.modal-status[data-state=err]{color:#b3261e}
+.modal-status[data-state=ok]{color:#1c7a4a}
+.modal-foot{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:flex-end;border-top:1px solid var(--line);padding-top:1.2rem;margin-top:.4rem}
+.btn-modal-outline{background:transparent;color:var(--gold-link);border-color:var(--gold-link)}
+.btn-modal-outline:hover{background:rgba(212,175,106,.12);transform:translateY(-2px)}
+.fineprint{font-size:.78rem;color:var(--ink-soft);margin-top:1rem;line-height:1.6}
+.fineprint a{color:var(--gold-link)}
+.deal-note{font-size:.92rem;color:var(--ink-soft);margin-bottom:1rem}
+.deal-warn{color:#9a6a00;margin-bottom:1rem}
+.deal-files{display:grid;gap:.6rem;margin-bottom:1.2rem}
+.deal-files a{
+  display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:700;font-size:.95rem;
+  color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;
+  transition:border-color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease);
+}
+.deal-files a:hover{border-color:var(--gold-dark);background:var(--cream);transform:translateX(3px)}
+.deal-files svg{width:20px;height:20px;flex:none;color:var(--gold-dark)}
+.deal-files a svg:last-child{margin-left:auto;width:16px;height:16px}
+
 /* ---------- 17. Reduced-motion: honor user/OS preference ---------- */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
@@ -1142,7 +1202,51 @@ html:not(.js) .skyline-strip .win{opacity:.75}
 <!-- Shared listings (optional). When present, the homepage and the full
      Listings page read from this one file. Safe to omit (e.g. Wix embed):
      the homepage falls back to its built-in copy. -->
+
+<!-- ============ DEAL ROOM MODAL (gated file access) ============ -->
+<div class="modal-backdrop" id="dealBackdrop" inert>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dealTitle" aria-describedby="dealIntro" id="dealModal">
+    <div class="modal-head">
+      <div>
+        <h2 id="dealTitle">Deal Room</h2>
+        <p>Confidential materials for: <strong id="dealListing"></strong></p>
+      </div>
+      <button type="button" class="modal-close" data-deal-close aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p id="dealIntro" class="deal-intro">Enter your details to access the deal room. Your access is recorded and the materials are confidential.</p>
+      <form id="dealForm" novalidate>
+        <div class="form-row">
+          <div class="field-block">
+            <label for="dealFirst">First Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="dealFirst" name="firstName" autocomplete="given-name" required>
+          </div>
+          <div class="field-block">
+            <label for="dealLast">Last Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="dealLast" name="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="field-block">
+          <label for="dealEmail">Email <span class="req" aria-hidden="true">*</span></label>
+          <input type="email" id="dealEmail" name="email" autocomplete="email" required>
+        </div>
+        <p class="modal-status" id="dealStatus" role="status" aria-live="polite"></p>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-modal-outline" data-deal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary" id="dealSubmit">Access Deal Room</button>
+        </div>
+        <p class="fineprint">By continuing you agree the materials are confidential and provided only to evaluate a possible transaction. See our <a href="legal/terms.html">Terms</a> and <a href="legal/privacy.html">Privacy Policy</a>.</p>
+      </form>
+      <div id="dealDownload" hidden></div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/config.js"></script>
 <script src="assets/listings.js"></script>
+<script src="assets/dealroom.js"></script>
 <script>
 /* ============================================================
    AMIN REALTY, INC. — Behavior
@@ -1368,6 +1472,7 @@ html:not(.js) .skyline-strip .win{opacity:.75}
   };
   var pinIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
   var arrowIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var lockIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
 
   var grid    = document.getElementById("listingGrid");
   var countEl = document.getElementById("listingsCount");
@@ -1425,7 +1530,11 @@ html:not(.js) .skyline-strip .win{opacity:.75}
             '<h3 class="listing-title">'+ l.title +'</h3>'+
             '<span class="listing-loc">'+ pinIcon +' '+ escapeHtml(l.location) +'</span>'+
             '<div class="listing-specs">'+ specs +'</div>'+
-            '<div class="listing-cta"><a href="#contact" aria-label="Request details: '+ escapeHtml(plainTitle) +'">Request details '+ arrowIcon +'</a></div>'+
+            '<div class="listing-cta"><a href="#contact" aria-label="Request details: '+ escapeHtml(plainTitle) +'">Request details '+ arrowIcon +'</a>'+
+            (l.dealRoom && l.dealRoom.length && window.AMIN_DEAL_ROOM
+              ? '<button type="button" class="deal-btn" data-deal="'+ LISTINGS.indexOf(l) +'" aria-haspopup="dialog">'+ lockIcon +' View Deal Room</button>'
+              : '')+
+          '</div>'+
           '</div>';
         grid.appendChild(article);
       });
@@ -1438,6 +1547,11 @@ html:not(.js) .skyline-strip .win{opacity:.75}
   [fType, fStatus, fPrice].forEach(function(el){ if(el) el.addEventListener("change", renderListings); });
   if (fSearch) fSearch.addEventListener("input", renderListings);
   renderListings();
+
+  if (grid) grid.addEventListener("click", function(e){
+    var btn = e.target.closest("button[data-deal]");
+    if (btn && window.AMIN_DEAL_ROOM) window.AMIN_DEAL_ROOM.open(LISTINGS[parseInt(btn.getAttribute("data-deal"),10)], btn);
+  });
 
   /* ---- Contact form (progressive enhancement) ----
      Works with Formspree/Web3Forms/Wix forms. If no real endpoint

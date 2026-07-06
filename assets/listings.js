@@ -22,17 +22,34 @@
                  (alt text is generated automatically). Omit to use the icon.
      featured    OPTIONAL true to also show it on the homepage
      specs       up to ~4 pairs of [ "Label", "Value" ]
+     dealRoom    OPTIONAL list of gated files for this listing. When present,
+                 the card shows a "View Deal Room" button; visitors enter
+                 first name, last name, and email (logged like signatures)
+                 and then see these links. Upload ANY file types you want
+                 (PDF, Excel, photos, zip, ...) to the documents/ folder —
+                 or use a full https:// URL — and list them here:
+                   dealRoom: [
+                     { label:"Offering Memorandum (PDF)", file:"documents/my-om.pdf" },
+                     { label:"T-12 Financials (Excel)",   file:"documents/my-t12.xlsx" }
+                   ]
    ============================================================ */
 window.AMIN_LISTINGS = [
   {
     title:"85-Key Franchise Hotel", type:"Franchise Hotel", location:"Houston, TX",
     status:"Available", price:7900000, priceLabel:"$7,900,000", icon:"hotel", featured:true,
-    specs:[["Keys","85"],["Brand","Flagged"],["Year Built","2016"]]
+    specs:[["Keys","85"],["Brand","Flagged"],["Year Built","2016"]],
+    dealRoom:[
+      { label:"Offering Memorandum (sample)", file:"documents/SAMPLE-offering-memorandum.txt" },
+      { label:"Property Financials (sample)", file:"documents/SAMPLE-property-financials.txt" }
+    ]
   },
   {
     title:"42-Room Independent Motel", type:"Independent Motel", location:"San Antonio, TX",
     status:"Available", price:2450000, priceLabel:"$2,450,000", icon:"motel", featured:true,
-    specs:[["Rooms","42"],["Lot","1.8 ac"],["Cap Rate","9.1%"]]
+    specs:[["Rooms","42"],["Lot","1.8 ac"],["Cap Rate","9.1%"]],
+    dealRoom:[
+      { label:"Property Financials (sample)", file:"documents/SAMPLE-property-financials.txt" }
+    ]
   },
   {
     title:"Highway-Frontage Development Land", type:"Land / Development", location:"Katy, TX",
