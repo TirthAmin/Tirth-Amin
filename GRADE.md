@@ -266,3 +266,31 @@ confirmation email has been sent to …" in the modal. Mandatory-gate
 verified: with `requireRemoteLog: true` and an unreachable endpoint, files
 stay locked with a visible, retryable error (6/6 endpoint integration
 checks; mock HTTP server).
+
+---
+
+## Round 5 — "Nationwide Reach" interactive property map (July 2026)
+
+Restores (and elevates) the original site's interactive property-location map
+without any map provider, API key, or third-party tiles:
+
+- **Custom Albers-projection US map** (12 KB simplified SVG generated from
+  US Census 10m data) in the site's navy/gold language, framed like an
+  instrument panel with a live readout line.
+- **Pins are data**: any listing in `assets/listings.js` with `lat`/`lng`
+  gets a glowing pin with a staggered radar ping — add coordinates to add a
+  point, delete them to remove it. The runtime projection is an exact port
+  of the generator's (max deviation 0.006 px against d3.geoAlbers).
+- **Interactive**: hover/focus shows a dossier card (status chip, title,
+  price, location) and swaps the readout to live coordinates; click clears
+  the filters, jumps to Featured Listings, and isolates that property.
+  Overlapping pins in dense markets relax apart automatically. HQ star
+  marks Sugar Land.
+- **Accessible**: pins are real buttons with full labels, tooltip is
+  decorative (no double-speak), keyboard operable, reduced motion disables
+  pings/entrance, section hides itself if no listing has coordinates.
+
+Grades after the round: 12/12 map checks, 22/22 deal-room, 18/18 functional,
+axe 0 violations (incl. tooltip open), html-validate clean, 0 unused CSS
+(167 + 77 classes), Lighthouse mobile 92/100/100/100 (LCP cost of the new
+section on an uncompressed local server; enable gzip per DEPLOY.md §5).

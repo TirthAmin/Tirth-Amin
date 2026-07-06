@@ -42,11 +42,17 @@ documents.html                 ← Secure Document Center (signature-gated)
 robots.txt, sitemap.xml        ← search-engine helpers
 site.webmanifest               ← app/icon metadata
 assets/
-  listings.js                  ← edit to add/remove listings
+  listings.js                  ← edit to add/remove listings, map pins & deal-room files
   documents.js                 ← edit to add/remove downloadable files
-  config.js                    ← set your signature-log endpoint here
+  config.js                    ← endpoint + confirmation-email settings
   site.css, site.js            ← shared styles & behavior
-documents/                     ← put your downloadable files here
+  dealroom.js                  ← "View Deal Room" gate (name/email → files)
+  map.js                       ← interactive "Nationwide Reach" property map
+  fonts/                       ← self-hosted Fraunces & Archivo (keep!)
+apps-script/
+  email-endpoint.gs            ← paste into Google Apps Script for the
+                                 access log + confirmation emails (see §6)
+documents/                     ← put your downloadable/deal-room files here
 legal/
   privacy.html
   terms.html
@@ -59,9 +65,11 @@ legal/
 > and `documents.html` reference the `assets/` and `documents/` folders by relative
 > path, so upload the whole tree (not just loose files).
 
-To **edit your listings**, open `index.html`, find the `LISTINGS` array near the
-bottom (inside the `<script>` block — it's clearly commented), and add/edit
-entries. No coding experience needed beyond copying the existing pattern.
+To **edit your listings**, open `assets/listings.js` — one clearly commented
+file controls the catalog, the homepage featured cards, the map pins
+(`lat`/`lng`: add coordinates to drop a pin, delete them to remove it), and
+each listing's Deal Room files. No coding experience needed beyond copying
+the existing pattern.
 
 ---
 
@@ -107,9 +115,14 @@ compromises. (Wix → Domains → DNS records, or move the A/CNAME records.)
    Wix page URLs.
 
 > Notes for Wix embed: relative links like `legal/privacy.html` won't resolve
-> inside an iframe — replace them with the full Wix page URLs. Because
-> everything is inlined and uses no third-party CDNs, the page renders fully
-> inside the Wix sandbox.
+> inside an iframe — replace them with the full Wix page URLs. The hero,
+> animations, and layout are fully inlined and render inside the Wix sandbox;
+> the **fonts, property map, Deal Rooms, and shared listings file live in
+> `assets/`**, which an embed widget cannot load by relative path. For those,
+> either host the `assets/` + `documents/` folders somewhere (e.g. GoDaddy or
+> Netlify) and change the `<link>`/`<script src>` paths in your pasted code to
+> absolute `https://` URLs — or use option **A/B1**, which is why we recommend
+> them: you keep every feature with zero surgery.
 
 ### B3. Use Wix Velo (advanced)
 Developers can recreate the markup in Velo. Usually unnecessary — B1 or B2 is

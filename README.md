@@ -165,3 +165,18 @@ the client won't get.
 Note: this is lead capture with an access log, not real security —
 keep truly sensitive files offline and send them manually after reviewing
 the log.
+
+## Interactive property map ("Nationwide Reach")
+
+The homepage plots every listing that has coordinates on a custom-designed US
+map — gold pins with radar pings, hover/focus dossier cards, a live
+coordinates readout, and click-to-jump-to-the-listing. It reads straight from
+`assets/listings.js`:
+
+- **Add a point:** give the listing `lat` and `lng` (right-click the property
+  in Google Maps and copy the two numbers), e.g. `lat:29.7604, lng:-95.3698`.
+- **Remove a point:** delete the `lat`/`lng` fields (or the listing).
+
+No map provider, no API key, no tracking — the map is a self-contained SVG in
+the site's own design language, fully keyboard-accessible, and honors reduced
+motion. Overlapping pins in dense markets spread apart automatically.
