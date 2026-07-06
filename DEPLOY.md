@@ -35,6 +35,7 @@ information. These are intentionally left blank so nothing false is published.
 ## 1. Files in this project
 
 ```
+.htaccess                      ← Apache config (https redirect, gzip, caching, 404)
 index.html                     ← the homepage (hero, featured listings, contact)
 listings.html                  ← full property catalog (filter + sort)
 documents.html                 ← Secure Document Center (signature-gated)
@@ -78,12 +79,22 @@ the existing pattern.
 GoDaddy has two different products. Use the one that lets you upload files:
 
 ### A1. GoDaddy "Web Hosting" / cPanel (supports file upload — best)
-1. Log in → **My Products** → your Web Hosting plan → **cPanel Admin**.
-2. Open **File Manager** → go to the `public_html` folder.
-3. Upload **all** files and the `legal/` folder, keeping the same structure.
-   (You can drag the files in, or upload a `.zip` and "Extract".)
-4. Make sure `index.html` is in the root of `public_html`.
-5. Visit your domain — you're live.
+1. Log in at godaddy.com → **My Products** → find **Web Hosting** →
+   **Manage** → **cPanel Admin**.
+2. Open **File Manager** → double-click the **`public_html`** folder.
+3. In File Manager **Settings** (top right), tick **"Show Hidden Files
+   (dotfiles)"** — the included `.htaccess` file starts with a dot.
+4. Delete any placeholder files GoDaddy put there (`index.html`,
+   `coming-soon`, `cgi-bin` can stay).
+5. Click **Upload**, upload the site `.zip`, go back, right-click it →
+   **Extract** into `public_html`, then delete the zip. If extraction
+   created a subfolder, move its *contents* up into `public_html`.
+6. Verify `index.html`, `.htaccess`, `assets/`, `documents/`, and `legal/`
+   sit directly inside `public_html`.
+7. Turn on SSL: cPanel **Security → SSL/TLS Status → Run AutoSSL** (or use
+   your GoDaddy SSL). The included `.htaccess` then forces https:// and
+   also enables compression, caching, and the branded 404 page for you.
+8. Visit your domain — you're live.
 
 ### A2. GoDaddy "Websites + Marketing" (the drag-and-drop builder)
 This builder does **not** allow uploading a full HTML site. Two paths:
