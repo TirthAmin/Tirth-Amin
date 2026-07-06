@@ -29,6 +29,7 @@ automatically when the project is opened in Claude Code.
 | `a11y` | Accessibility audits via [axe-core](https://github.com/dequelabs/axe-core) — WCAG compliance checks |
 | `memory` | Persistent knowledge-graph memory across sessions (stored in `.claude/memory.json`, git-ignored) |
 | `sequential-thinking` | Structured step-by-step reasoning for complex design/build planning |
+| `token-optimizer` | [Token Optimizer](https://github.com/ooples/token-optimizer-mcp) — cut context usage 60–90% via caching/compression of large content |
 
 ### Need an API key / config
 

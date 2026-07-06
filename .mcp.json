@@ -2,14 +2,21 @@
   "mcpServers": {
     "stitch": {
       "command": "npx",
-      "args": ["-y", "@_davideast/stitch-mcp", "proxy"],
+      "args": [
+        "-y",
+        "@_davideast/stitch-mcp",
+        "proxy"
+      ],
       "env": {
         "GOOGLE_CLOUD_PROJECT": "${GOOGLE_CLOUD_PROJECT}"
       }
     },
     "nano-banana-2": {
       "command": "npx",
-      "args": ["-y", "nano-banana-2-mcp"],
+      "args": [
+        "-y",
+        "nano-banana-2-mcp"
+      ],
       "env": {
         "GEMINI_API_KEY": "${GEMINI_API_KEY}"
       }
@@ -23,106 +30,181 @@
     },
     "shadcn": {
       "command": "npx",
-      "args": ["-y", "shadcn@latest", "mcp"]
+      "args": [
+        "-y",
+        "shadcn@latest",
+        "mcp"
+      ]
     },
     "magicui": {
       "command": "npx",
-      "args": ["-y", "@magicuidesign/mcp"]
+      "args": [
+        "-y",
+        "@magicuidesign/mcp"
+      ]
     },
     "heroui": {
       "command": "npx",
-      "args": ["-y", "@heroui/react-mcp"]
+      "args": [
+        "-y",
+        "@heroui/react-mcp"
+      ]
     },
     "mui": {
       "command": "npx",
-      "args": ["-y", "@mui/mcp"]
+      "args": [
+        "-y",
+        "@mui/mcp"
+      ]
     },
     "antd": {
       "command": "npx",
-      "args": ["-y", "@jzone-mcp/antd-components-mcp"]
+      "args": [
+        "-y",
+        "@jzone-mcp/antd-components-mcp"
+      ]
     },
     "chakra": {
       "command": "npx",
-      "args": ["-y", "@chakra-ui/react-mcp"]
+      "args": [
+        "-y",
+        "@chakra-ui/react-mcp"
+      ]
     },
     "tailwind": {
       "command": "npx",
-      "args": ["-y", "tailwindcss-mcp"]
+      "args": [
+        "-y",
+        "tailwindcss-mcp"
+      ]
     },
     "flowbite": {
       "command": "npx",
-      "args": ["-y", "flowbite-mcp"]
+      "args": [
+        "-y",
+        "flowbite-mcp"
+      ]
     },
     "iconify": {
       "command": "npx",
-      "args": ["-y", "iconify-mcp"]
+      "args": [
+        "-y",
+        "iconify-mcp"
+      ]
     },
     "color-palette": {
       "command": "npx",
-      "args": ["-y", "color-palette-mcp"]
+      "args": [
+        "-y",
+        "color-palette-mcp"
+      ]
     },
     "context7": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     },
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp"]
+      "args": [
+        "-y",
+        "@playwright/mcp"
+      ]
     },
     "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp"]
+      "args": [
+        "-y",
+        "chrome-devtools-mcp"
+      ]
     },
     "lighthouse": {
       "command": "npx",
-      "args": ["-y", "lighthouse-mcp"]
+      "args": [
+        "-y",
+        "lighthouse-mcp"
+      ]
     },
     "a11y": {
       "command": "npx",
-      "args": ["-y", "a11y-mcp"]
+      "args": [
+        "-y",
+        "a11y-mcp"
+      ]
     },
     "memory": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
       "env": {
         "MEMORY_FILE_PATH": ".claude/memory.json"
       }
     },
     "sequential-thinking": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "token-optimizer": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ooples/token-optimizer-mcp"
+      ]
     },
     "figma": {
       "command": "npx",
-      "args": ["-y", "figma-developer-mcp", "--stdio"],
+      "args": [
+        "-y",
+        "figma-developer-mcp",
+        "--stdio"
+      ],
       "env": {
         "FIGMA_API_KEY": "${FIGMA_API_KEY}"
       }
     },
     "unsplash": {
       "command": "npx",
-      "args": ["-y", "unsplash-mcp-server"],
+      "args": [
+        "-y",
+        "unsplash-mcp-server"
+      ],
       "env": {
         "UNSPLASH_ACCESS_KEY": "${UNSPLASH_ACCESS_KEY}"
       }
     },
     "pexels": {
       "command": "npx",
-      "args": ["-y", "pexels-mcp-server"],
+      "args": [
+        "-y",
+        "pexels-mcp-server"
+      ],
       "env": {
         "PEXELS_API_KEY": "${PEXELS_API_KEY}"
       }
     },
     "netlify": {
       "command": "npx",
-      "args": ["-y", "@netlify/mcp"],
+      "args": [
+        "-y",
+        "@netlify/mcp"
+      ],
       "env": {
         "NETLIFY_PERSONAL_ACCESS_TOKEN": "${NETLIFY_PERSONAL_ACCESS_TOKEN}"
       }
     },
     "firecrawl": {
       "command": "npx",
-      "args": ["-y", "firecrawl-mcp"],
+      "args": [
+        "-y",
+        "firecrawl-mcp"
+      ],
       "env": {
         "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
       }
