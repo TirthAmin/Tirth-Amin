@@ -140,6 +140,28 @@ dealRoom: [
 
 The "View Deal Room" button appears automatically on that listing's card on
 both the homepage and the Listings page. Remove the array to remove the
-button. Note: this is lead capture with an access log, not real security —
+button. Entering first name, last name, and a valid email is **mandatory** —
+the file links do not render until the form passes validation (and, if you
+set `requireRemoteLog: true`, until the access is successfully logged).
+
+### Confirmation emails (to you AND the client)
+
+Use the included Google Apps Script endpoint — `apps-script/email-endpoint.gs`
+(free, ~5 minutes, full instructions in the file). On every deal-room access
+it: logs a row to your Google Sheet, emails you a notification, and emails
+the client a confirmation containing their file links. Then in
+`assets/config.js` set:
+
+```js
+logEndpoint: "https://script.google.com/macros/s/.../exec",
+sendsConfirmationEmail: true,   // shows "a confirmation email has been sent"
+requireRemoteLog: true          // no log = no files (recommended)
+```
+
+Formspree/Web3Forms also work as `logEndpoint` but only notify you; leave
+`sendsConfirmationEmail: false` with those so the site never claims an email
+the client won't get.
+
+Note: this is lead capture with an access log, not real security —
 keep truly sensitive files offline and send them manually after reviewing
 the log.

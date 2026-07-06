@@ -108,10 +108,16 @@
     if (!last) return fail("Please enter your last name.");
     if (!validEmail(email)) return fail("Please enter a valid email address.");
 
+    var fileLinks = current.dealRoom.map(function (f) {
+      return { label: f.label, url: new URL(f.file, location.href).href };
+    });
     var record = {
       id: "DR-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7),
+      kind: "deal-room",
       document: "Deal room: " + current.title.replace(/&amp;/g, "&"),
-      file: current.dealRoom.map(function (f) { return f.file; }).join(" | "),
+      listing: current.title.replace(/&amp;/g, "&"),
+      file: fileLinks.map(function (f) { return f.url; }).join(" | "),
+      filesJson: JSON.stringify(fileLinks),
       name: first + " " + last, firstName: first, lastName: last,
       email: email, company: "", signature: "",
       agreementVersion: CFG.agreementVersion || "1.0",
@@ -131,7 +137,7 @@
       fd.append("_subject", "Deal room access: " + record.document + " — " + record.name);
       fetch(endpoint, { method: "POST", body: fd, headers: { Accept: "application/json" } })
         .then(function (r) { if (!r.ok) throw new Error("bad"); })
-        .then(function () { unlock(record); })
+        .then(function () { unlock(record, null, CFG.sendsConfirmationEmail === true); })
         .catch(function () {
           if (CFG.requireRemoteLog) fail("We couldn't record your access just now. Please try again, or email " + (CFG.contactEmail || "us") + ".");
           else unlock(record, "Saved locally — the central log could not be reached.");
@@ -143,7 +149,7 @@
     }
   });
 
-  function unlock(record, warn) {
+  function unlock(record, warn, emailed) {
     setStatus("Welcome, " + record.firstName + " — the deal room is open.", "ok");
     var intro = document.getElementById("dealIntro");
     if (intro) intro.hidden = true;
@@ -151,6 +157,7 @@
     downloadWrap.hidden = false;
     downloadWrap.innerHTML =
       '<p class="deal-note">Your access was logged on ' + esc(record.timestampLocal) + '. These materials are confidential and may not be shared.</p>' +
+      (emailed ? '<p class="deal-note deal-emailed">A confirmation email with these links has been sent to <strong>' + esc(record.email) + '</strong>.</p>' : '') +
       (warn ? '<p class="fineprint deal-warn">⚠ ' + esc(warn) + '</p>' : '') +
       '<ul class="deal-files">' +
       current.dealRoom.map(function (f) {

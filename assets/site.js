@@ -209,6 +209,7 @@
 
       var record = {
         id: "SIG-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7),
+        kind: "signature",
         document: currentDoc ? currentDoc.title : "",
         file: currentDoc ? currentDoc.file : "",
         name: name, email: email, company: company, signature: signature,

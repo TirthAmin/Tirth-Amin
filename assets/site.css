@@ -154,6 +154,7 @@ a{color:var(--gold-link)}
 .deal-btn:hover{background:rgba(212,175,106,.14);border-color:var(--gold)}
 .deal-btn svg{width:15px;height:15px;flex:none}
 .deal-note{font-size:.92rem;color:var(--ink-soft);margin-bottom:1rem}
+.deal-emailed{color:#1c7a4a}
 .deal-warn{color:#9a6a00;margin-bottom:1rem}
 .deal-files{display:grid;gap:.6rem;margin-bottom:1.2rem}
 .deal-files a{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:700;font-size:.95rem;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;transition:border-color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease)}

@@ -254,3 +254,15 @@ functional checks, 0 axe violations across all 9 pages. Also fixed a latent
 focus race in all modals (visibility was transitioned, so early `focus()`
 could silently fail — visibility now flips instantly on open, delayed on
 close).
+
+### Round 4b — Deal Room confirmation emails
+
+The deal-room POST now carries `kind`, `firstName`/`lastName`, `listing`,
+and `filesJson` (labels + absolute URLs). `apps-script/email-endpoint.gs`
+(free Google Apps Script, setup steps inside) logs every access to a Google
+Sheet, emails the owner, and emails the client a confirmation with their
+file links; `sendsConfirmationEmail: true` in config surfaces "a
+confirmation email has been sent to …" in the modal. Mandatory-gate
+verified: with `requireRemoteLog: true` and an unreachable endpoint, files
+stay locked with a visible, retryable error (6/6 endpoint integration
+checks; mock HTTP server).
