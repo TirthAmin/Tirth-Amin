@@ -98,3 +98,199 @@ The audit scripts used live outside the repo (in the build scratch space). To
 re-audit after edits, run any accessibility engine against the files — e.g.
 open each page in Chrome and run **Lighthouse**, or use the **WAVE** browser
 extension. Aim to keep every page at **0 violations**.
+
+---
+
+## Round 2 — Award-level design elevation + re-grade (July 2026)
+
+The site was redesigned to a significantly higher visual standard and then
+re-graded from scratch with a stricter bar than Round 1.
+
+### What changed (design)
+
+- **Typography**: self-hosted variable fonts — *Fraunces* (display serif) and
+  *Archivo* (text/UI) in `assets/fonts/` (~220 KB total, latin subset,
+  `font-display: swap`, preloaded). No external CDN calls; GDPR-safe.
+- **Signature hero**: a generated skyline of 21 hotel silhouettes with 112
+  windows that light up on a staggered schedule, a pulsing rooftop beacon, a
+  slow "dawn" gradient, faint stars, and a gold horizon hairline. Subtle
+  parallax on scroll; a cursor-following "lantern" glow on fine pointers.
+- **Motion system** (all gated behind `html.js` and fully disabled under
+  `prefers-reduced-motion`): orchestrated hero entrance (clipped line lifts,
+  staggered fade-rise), infinite trust-bar marquee **with an accessible
+  pause/play button (WCAG 2.2.2)**, reading-progress hairline in the header,
+  scrollspy underline in the nav, count-up stats, drawing process line with
+  staggered steps, card top-border sweeps + icon lifts, button sheen sweeps,
+  smooth FAQ expand/collapse (Web Animations API on top of native
+  `<details>`), listing-media zoom on hover, back-to-top button with a
+  scroll-progress ring.
+- **No-JS safety**: content is never hidden without JavaScript — all
+  animation-hidden initial states apply only under an `html.js` class.
+
+### Round 2 grades
+
+| Check | Result |
+|---|---|
+| axe-core (WCAG 2.0/2.1/**2.2** A+AA **+ best-practice**), 9 pages, reveals forced visible | **0 violations** |
+| html-validate (recommended; only allowance: `--d` CSS custom property carriers on skyline windows) | **0 errors** |
+| Lighthouse (mobile, throttled, local server) | **Perf 96 · A11y 100 · Best-practices 100 · SEO 100** |
+| Functional/interaction suite | **18/18 pass** |
+| JS console errors across all pages | **0** |
+
+### Issues found and fixed in Round 2
+
+1. **Skip link peeked into the viewport** (bottom 2px visible at the top of
+   every page) — `top:-48px` did not fully hide it; now `-90px`.
+2. **Footer heading order** (`h2 → h4` skip) — footer group headings are now
+   `h3` (axe best-practice `heading-order`).
+3. **Label-in-name mismatches (WCAG 2.5.3)** — listing CTAs had
+   `aria-label="Inquire about …"` on links whose visible text is "Request
+   details" (screen-reader users saying "click Request details" would fail);
+   now `aria-label="Request details: …"`. Redundant `aria-label` removed from
+   the brand links.
+4. **ARIA roles replaced with native elements** — hero stats are a real
+   `<ul>/<li>`, the marquee and the scrollable NDA agreement box are
+   `<section>` elements.
+5. **A corrupted `style` attribute** on `legal/consumer-protection.html`
+   (nested quotes) found by html-validate's parser — replaced with a class.
+6. **All inline styles migrated to utility classes** (26 across the site) and
+   all self-closed void elements normalized (77) — passes the strict
+   `no-inline-style` / `void-style` rules.
+7. **Phone number wrapping** — non-breaking space/hyphen in the tel link.
+8. **Font loading** — preload hints for the three above-the-fold font files
+   (FCP 2.7 s → 1.5 s on throttled mobile; Lighthouse perf 92 → 96).
+
+### Functional suite (Round 2, all passing)
+
+Hero entrance completes; marquee animates, pauses via button
+(`aria-pressed`), and is static with the duplicate list hidden under reduced
+motion; skyline windows light; scroll progress + back-to-top ring track
+scroll; scrollspy highlights the active section; FAQ opens/closes smoothly by
+mouse **and** Enter key; first Tab focuses the skip link; listings filter to
+2 cards for "Independent Motel"; mobile nav opens with correct
+`aria-expanded`; zero horizontal overflow at 390 px; reduced-motion leaves
+every element visible and every animation off (cursor glow removed entirely).
+
+### Remaining Lighthouse notes (server-side, not fixable in static files)
+
+Text compression, cache lifetimes, and document latency are host
+configuration (the audit ran against a bare `python3 -m http.server`);
+enable gzip/brotli + far-future caching for `assets/` on the production host.
+CSS/JS are intentionally left unminified so the owner can edit listings and
+copy directly, per `DEPLOY.md`.
+
+### Desktop Lighthouse (subpages)
+
+`listings.html`: **100 / 100 / 100 / 100**. `documents.html`: 100 / 100 / 100
+with SEO flagged only for `is-crawlable` — the Document Center is
+**deliberately `noindex, follow`** because it gates confidential deal
+materials; that flag is policy, not a defect.
+
+---
+
+## Round 3 — Simplification & efficiency pass (July 2026)
+
+Code-level grading loop: measure → simplify → re-grade, until the graders
+came back clean.
+
+### What was simplified
+
+1. **One script instead of two on the homepage.** The behavior script and the
+   later "enhancements" script were merged into a single IIFE with **one**
+   scroll listener driving header state, reading progress, back-to-top +
+   ring, and skyline parallax through a single requestAnimationFrame pipeline
+   (previously three separate scroll listeners), and one shared
+   `reduceMotion` check.
+2. **Skyline windows: 112 inline `style="--d:…"` attributes replaced by 8
+   delay-bucket classes** (`d0`–`d7`, second delay value phases the
+   twinkle). SVG shrank ~1.7 KB, and the html-validate config exception for
+   custom properties was deleted — the site now passes the stock
+   `html-validate:recommended` preset with **zero configuration overrides**.
+3. **Dead CSS removed** (verified against the rendered DOM of every page that
+   loads each sheet, including JS-injected states): `.cols-2`, `.cols-4`,
+   `.spacer` from the homepage; `.visually-hidden`, `.btn-ghost` from
+   `site.css`.
+4. **Last inline styles moved out of JS templates** — the listing-media
+   gradient and the empty-state color now live in the stylesheets.
+
+### Efficiency grader results (final)
+
+| Check | Result |
+|---|---|
+| Unused CSS classes (homepage inline sheet, 135 defined) | **0** |
+| Unused CSS classes (`site.css`, 72 defined) | **0** |
+| Scroll listeners on homepage | **1** (rAF-throttled) |
+| html-validate, stock recommended preset, no overrides | **0 errors** |
+| axe (WCAG 2.0/2.1/2.2 A+AA + best-practice), 9 pages | **0 violations** |
+| Functional suite | **18/18** |
+| Lighthouse mobile | **Perf 97 · A11y 100 · BP 100 · SEO 100** (TBT 40 ms, CLS 0) |
+| index.html size | 101.1 KB → **97.9 KB** raw (24.0 KB gzipped) |
+
+### Redundancy that is deliberate (do not "fix")
+
+- The homepage keeps its own inline CSS/JS and a 6-item listings fallback so
+  it can be pasted as a **single-file Wix embed** and still work offline —
+  `assets/listings.js` remains the one place to manage listings normally.
+- CSS/JS stay unminified so the owner can edit copy and listings directly
+  (see `DEPLOY.md`); enable gzip on the host, which already brings the
+  homepage to ~24 KB on the wire.
+
+---
+
+## Round 4 — Deal Room feature (July 2026)
+
+Per-listing gated file access. A listing with a `dealRoom` array in
+`assets/listings.js` shows a **View Deal Room** button on its card (homepage
+and Listings page). Visitors enter first name, last name, and email; the
+access is logged (localStorage + the same `logEndpoint` used for signatures)
+and the file links are revealed. The owner can attach **any** files by
+dropping them in `documents/` and listing `{ label, file }` pairs — see
+README.
+
+Quality gates: accessible dialog (focus trap, Esc, `inert`, focus restore,
+`aria-live` status), axe clean **with the modal open** on both pages,
+html-validate clean, 22/22 deal-room end-to-end checks (×3 runs), 18/18 site
+functional checks, 0 axe violations across all 9 pages. Also fixed a latent
+focus race in all modals (visibility was transitioned, so early `focus()`
+could silently fail — visibility now flips instantly on open, delayed on
+close).
+
+### Round 4b — Deal Room confirmation emails
+
+The deal-room POST now carries `kind`, `firstName`/`lastName`, `listing`,
+and `filesJson` (labels + absolute URLs). `apps-script/email-endpoint.gs`
+(free Google Apps Script, setup steps inside) logs every access to a Google
+Sheet, emails the owner, and emails the client a confirmation with their
+file links; `sendsConfirmationEmail: true` in config surfaces "a
+confirmation email has been sent to …" in the modal. Mandatory-gate
+verified: with `requireRemoteLog: true` and an unreachable endpoint, files
+stay locked with a visible, retryable error (6/6 endpoint integration
+checks; mock HTTP server).
+
+---
+
+## Round 5 — "Nationwide Reach" interactive property map (July 2026)
+
+Restores (and elevates) the original site's interactive property-location map
+without any map provider, API key, or third-party tiles:
+
+- **Custom Albers-projection US map** (12 KB simplified SVG generated from
+  US Census 10m data) in the site's navy/gold language, framed like an
+  instrument panel with a live readout line.
+- **Pins are data**: any listing in `assets/listings.js` with `lat`/`lng`
+  gets a glowing pin with a staggered radar ping — add coordinates to add a
+  point, delete them to remove it. The runtime projection is an exact port
+  of the generator's (max deviation 0.006 px against d3.geoAlbers).
+- **Interactive**: hover/focus shows a dossier card (status chip, title,
+  price, location) and swaps the readout to live coordinates; click clears
+  the filters, jumps to Featured Listings, and isolates that property.
+  Overlapping pins in dense markets relax apart automatically. HQ star
+  marks Sugar Land.
+- **Accessible**: pins are real buttons with full labels, tooltip is
+  decorative (no double-speak), keyboard operable, reduced motion disables
+  pings/entrance, section hides itself if no listing has coordinates.
+
+Grades after the round: 12/12 map checks, 22/22 deal-room, 18/18 functional,
+axe 0 violations (incl. tooltip open), html-validate clean, 0 unused CSS
+(167 + 77 classes), Lighthouse mobile 92/100/100/100 (LCP cost of the new
+section on an uncompressed local server; enable gzip per DEPLOY.md §5).

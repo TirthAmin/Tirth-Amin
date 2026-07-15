@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#0a1a2f" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a1a2f">
 <title>Listings | Amin Realty, Inc.</title>
-<meta name="description" content="Browse active hotel, motel, land, and commercial real estate listings from Amin Realty, Inc. Filter by property type, status, location, and price." />
-<link rel="canonical" href="https://aminrealtyinc.com/listings.html" />
-<meta property="og:title" content="Listings | Amin Realty, Inc." />
-<meta property="og:description" content="Active hotel, motel, land, and commercial listings nationwide." />
-<meta property="og:type" content="website" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23d4af6a' text-anchor='middle' font-weight='700'%3EA%3C/text%3E%3C/svg%3E" />
-<link rel="stylesheet" href="assets/site.css" />
+<meta name="description" content="Browse active hotel, motel, land, and commercial real estate listings from Amin Realty, Inc. Filter by property type, status, location, and price.">
+<link rel="canonical" href="https://aminrealtyinc.com/listings.html">
+<meta property="og:title" content="Listings | Amin Realty, Inc.">
+<meta property="og:description" content="Active hotel, motel, land, and commercial listings nationwide.">
+<meta property="og:type" content="website">
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2f'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23d4af6a' text-anchor='middle' font-weight='700'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <header class="site-header">
   <div class="container nav">
-    <a class="brand" href="index.html" aria-label="Amin Realty, Inc. home">
+    <a class="brand" href="index.html">
       <span class="brand-mark" aria-hidden="true">A</span>
       <span class="brand-text"><b>Amin Realty, Inc.</b><span>Hotel &amp; Commercial Brokerage</span></span>
     </a>
@@ -66,13 +69,13 @@
         </div>
         <div class="field grow">
           <label for="filterSearch">Search Location / Keyword</label>
-          <input type="search" id="filterSearch" placeholder="e.g. Houston, TX" autocomplete="off" />
+          <input type="search" id="filterSearch" placeholder="e.g. Houston, TX" autocomplete="off">
         </div>
         <div class="count" id="listingsCount" aria-live="polite"></div>
       </div>
 
       <div class="listing-grid" id="listingGrid" aria-live="polite"></div>
-      <p style="margin-top:1.5rem;font-size:.85rem;color:var(--light-soft);text-align:center">Sample inventory shown for demonstration. All figures are illustrative &mdash; edit <code>assets/listings.js</code> to manage your real listings. Listings subject to change and prior sale.</p>
+      <p class="listings-note">Sample inventory shown for demonstration. All figures are illustrative &mdash; edit <code>assets/listings.js</code> to manage your real listings. Listings subject to change and prior sale.</p>
     </div>
   </section>
 </main>
@@ -92,8 +95,51 @@
   </div>
 </footer>
 
+
+<!-- ============ DEAL ROOM MODAL (gated file access) ============ -->
+<div class="modal-backdrop" id="dealBackdrop" inert>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dealTitle" aria-describedby="dealIntro" id="dealModal">
+    <div class="modal-head">
+      <div>
+        <h2 id="dealTitle">Deal Room</h2>
+        <p>Confidential materials for: <strong id="dealListing"></strong></p>
+      </div>
+      <button type="button" class="modal-close" data-deal-close aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p id="dealIntro" class="nda-intro">Enter your details to access the deal room. Your access is recorded and the materials are confidential.</p>
+      <form id="dealForm" novalidate>
+        <div class="form-row">
+          <div class="field-block">
+            <label for="dealFirst">First Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="dealFirst" name="firstName" autocomplete="given-name" required>
+          </div>
+          <div class="field-block">
+            <label for="dealLast">Last Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="dealLast" name="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="field-block">
+          <label for="dealEmail">Email <span class="req" aria-hidden="true">*</span></label>
+          <input type="email" id="dealEmail" name="email" autocomplete="email" required>
+        </div>
+        <p class="modal-status" id="dealStatus" role="status" aria-live="polite"></p>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-outline" data-deal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary" id="dealSubmit">Access Deal Room</button>
+        </div>
+        <p class="fineprint">By continuing you agree the materials are confidential and provided only to evaluate a possible transaction. See our <a href="legal/terms.html">Terms</a> and <a href="legal/privacy.html">Privacy Policy</a>.</p>
+      </form>
+      <div id="dealDownload" hidden></div>
+    </div>
+  </div>
+</div>
+
 <script src="assets/config.js"></script>
 <script src="assets/listings.js"></script>
 <script src="assets/site.js"></script>
+<script src="assets/dealroom.js"></script>
 </body>
 </html>

@@ -66,6 +66,7 @@
   var grid = $("#listingGrid");
   if (grid) {
     var data = (window.AMIN_LISTINGS || []).slice();
+    data.forEach(function (l, i) { l._i = i; });
     var fType = $("#filterType"), fStatus = $("#filterStatus"), fPrice = $("#filterPrice"),
         fSearch = $("#filterSearch"), fSort = $("#sortBy"), countEl = $("#listingsCount");
 
@@ -78,7 +79,7 @@
         return '<span class="listing-spec"><b>' + esc(s[1]) + '</b>' + esc(s[0]) + '</span>';
       }).join("");
       return '<article class="listing">' +
-        '<div class="listing-media" style="background:linear-gradient(150deg,#16395f,#0a1a2f)">' +
+        '<div class="listing-media">' +
           media +
           '<span class="listing-status ' + statusClass(l.status) + '">' + esc(l.status) + '</span>' +
           '<span class="listing-type">' + esc(l.type) + '</span>' +
@@ -88,7 +89,11 @@
           '<h2 class="listing-title">' + esc(l.title) + '</h2>' +
           '<span class="listing-loc">' + PIN + " " + esc(l.location) + '</span>' +
           '<div class="listing-specs">' + specs + '</div>' +
-          '<div class="listing-cta"><a href="index.html#contact" aria-label="Inquire about ' + esc(plain) + '">Request details ' + ARROW + '</a></div>' +
+          '<div class="listing-cta"><a href="index.html#contact" aria-label="Request details: ' + esc(plain) + '">Request details ' + ARROW + '</a>' +
+            (l.dealRoom && l.dealRoom.length
+              ? '<button type="button" class="deal-btn" data-deal="' + l._i + '" aria-haspopup="dialog">' + LOCK + ' View Deal Room</button>'
+              : '') +
+          '</div>' +
         '</div></article>';
     }
 
@@ -115,6 +120,11 @@
     [fType, fStatus, fPrice, fSort].forEach(function (el) { if (el) el.addEventListener("change", render); });
     if (fSearch) fSearch.addEventListener("input", render);
     render();
+
+    grid.addEventListener("click", function (e) {
+      var btn = e.target.closest("button[data-deal]");
+      if (btn && window.AMIN_DEAL_ROOM) window.AMIN_DEAL_ROOM.open(data[parseInt(btn.getAttribute("data-deal"), 10)], btn);
+    });
   }
 
   /* ============================================================
@@ -133,7 +143,7 @@
           '<div class="locked">' + LOCK + ' Confidential — signature required</div><br>' +
           '<button type="button" class="btn btn-outline" data-doc="' + i + '">Request access ' + ARROW + '</button>' +
         '</div></article>';
-    }).join("") : '<p class="empty" style="color:var(--ink-soft)">No documents are available right now. Please <a href="index.html#contact">contact us</a>.</p>';
+    }).join("") : '<p class="empty empty-on-light">No documents are available right now. Please <a href="index.html#contact">contact us</a>.</p>';
 
     docGrid.addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-doc]");
@@ -199,6 +209,7 @@
 
       var record = {
         id: "SIG-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7),
+        kind: "signature",
         document: currentDoc ? currentDoc.title : "",
         file: currentDoc ? currentDoc.file : "",
         name: name, email: email, company: company, signature: signature,

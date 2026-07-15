@@ -19,6 +19,16 @@ window.AMIN_CONFIG = {
   /* If you use Web3Forms, put your access key here (otherwise ignore). */
   web3formsKey: "",
 
+  /* CONFIRMATION EMAILS  ------------------------------------
+     Set to true ONLY if your logEndpoint actually emails the visitor a
+     confirmation (the included Google Apps Script in
+     apps-script/email-endpoint.gs does: it logs every deal-room access
+     to a Google Sheet, emails YOU, and emails THE CLIENT their file
+     links). When true, the deal room tells the visitor "a confirmation
+     email has been sent". Leave false for Formspree/Web3Forms, which
+     only notify you. */
+  sendsConfirmationEmail: false,
+
   /* SECURITY POSTURE  ---------------------------------------
      true  = a file will NOT unlock unless the signature is successfully
              logged to logEndpoint above (recommended for production).
