@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a1a2f">
+<script>/* theme boot: apply saved or OS-preferred theme before first paint */
+(function(){try{var t=localStorage.getItem("aminTheme");if(!t)t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <title>Amin Realty, Inc. | Hotel &amp; Commercial Real Estate Brokerage</title>
 <meta name="description" content="Amin Realty, Inc. is a national commercial real estate brokerage specializing in hotel and motel acquisitions and dispositions since 2012. Serving independent motels, franchise hotels, distressed assets, 1031 Exchange, EB-5, REIT and international investors.">
 <meta name="author" content="Amin Realty, Inc.">
@@ -159,6 +161,23 @@ ul{list-style:none}
 .section-dark :focus-visible,.site-header :focus-visible,.hero :focus-visible,
 .site-footer :focus-visible,.marquee :focus-visible{outline-color:var(--gold)}
 
+/* ---------- 3b. Dark theme (light is default; set by the head boot
+   script from localStorage/OS preference, toggled in the header) ---------- */
+:root[data-theme="dark"]{
+  --cream:#0c2036;--paper:#0e2440;
+  --ink:#eef3f9;--ink-soft:#a9bdd4;
+  --line:rgba(212,175,106,.24);
+  --gold-link:#d4af6a;
+  --shadow:0 10px 40px -12px rgba(0,0,0,.5);--shadow-lg:0 24px 60px -20px rgba(0,0,0,.7);
+}
+:root[data-theme="dark"] .section-cream{background-image:radial-gradient(rgba(212,175,106,.05) 1px,transparent 1px)}
+:root[data-theme="dark"] .field-block input[type=text],
+:root[data-theme="dark"] .field-block input[type=email]{background:var(--navy-850);border-color:rgba(212,175,106,.3);color:var(--light)}
+:root[data-theme="dark"] .modal-status[data-state=err]{color:#ff9a8a}
+:root[data-theme="dark"] .modal-status[data-state=ok]{color:#5fcf95}
+:root[data-theme="dark"] .deal-emailed{color:#5fcf95}
+:root[data-theme="dark"] .deal-warn{color:#e0a93d}
+
 /* ---------- 4. Layout ---------- */
 .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.1rem,4vw,2rem)}
 section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
@@ -215,7 +234,13 @@ section{padding-block:clamp(3.8rem,8vw,6.5rem);scroll-margin-top:84px}
   transform:scaleX(var(--progress));transform-origin:left;pointer-events:none;
 }
 .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.95rem}
-.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--light)}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--light);margin-right:auto}
+.theme-toggle{background:none;border:2px solid var(--line-dark);border-radius:8px;width:46px;height:46px;flex:none;cursor:pointer;color:var(--light);display:grid;place-items:center;transition:color .2s,border-color .2s}
+.theme-toggle:hover{color:var(--gold);border-color:var(--gold)}
+.theme-toggle svg{width:20px;height:20px}
+.theme-toggle .icon-sun{display:none}
+:root[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+:root[data-theme="dark"] .theme-toggle .icon-moon{display:none}
 .brand-mark{
   width:42px;height:42px;border-radius:10px;flex:none;
   background:linear-gradient(135deg,var(--gold),var(--gold-dark));
@@ -508,31 +533,39 @@ html:not(.js) .skyline-strip .win{opacity:.75}
 }
 .listings-note{margin-top:1.5rem;font-size:.85rem;color:var(--light-soft);text-align:center}
 
-/* ---------- 12. Process steps (a real sequence: the line draws in) ---------- */
-.steps{position:relative;counter-reset:step;display:grid;gap:1.5rem}
-.steps::before{
-  content:"";position:absolute;left:24px;top:28px;bottom:28px;width:2px;
-  background:linear-gradient(180deg,var(--gold),rgba(184,146,63,.15));
+/* ---------- 12. The Journey (GSAP scrollytelling; static fallback) ----------
+   With motion + JS + GSAP: the stage pins and scroll scrubs a cinematic
+   4-scene story (text crossfades, SVG scenes draw themselves in).
+   Without any of those: the same content reads as a normal stacked
+   section — nothing is hidden, nothing depends on the library. */
+.journey{background:linear-gradient(180deg,var(--navy-950) 0%,var(--navy-900) 55%,var(--navy-950) 100%);color:var(--light);position:relative}
+.journey .section-head h2{color:#fff}
+.journey .section-head p{color:var(--light-soft)}
+.journey-stage{position:relative}
+.journey-frame{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-block:1.5rem 3rem}
+.journey-on .journey-frame{min-height:92vh;padding-block:0}
+.journey-visual svg{width:100%;height:auto;max-height:72vh;display:block}
+.jscene{opacity:0}
+.jscene[data-scene="1"]{opacity:1}
+.journey-steps{list-style:none;display:grid;gap:2.4rem;margin:0}
+.jstep{max-width:46ch}
+.jnum{font-family:var(--display);font-size:.9rem;letter-spacing:.4em;color:var(--gold);display:block;margin-bottom:.6rem}
+.jstep h3{font-family:var(--display);font-size:clamp(1.45rem,3vw,2.05rem);color:#fff;margin-bottom:.6rem;font-weight:560;line-height:1.15}
+.jstep p{color:var(--light-soft);line-height:1.7}
+.jwho{margin-top:.9rem;font-size:.92rem;border-left:3px solid var(--gold-dark);padding-left:.9rem}
+.jwho b{color:var(--gold);font-weight:700}
+.journey-on .journey-steps{display:block;position:relative;min-height:340px}
+.journey-on .jstep{position:absolute;top:50%;left:0;right:0;margin-top:-160px}
+.journey-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08)}
+.journey-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--gold-dark),var(--gold-bright));transform:scaleX(0);transform-origin:left}
+.journey-cta-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;padding-block:0 3.5rem}
+@media (max-width:880px){
+  .journey-frame{grid-template-columns:1fr;gap:1.6rem}
+  .journey-visual svg{max-height:34vh;margin-inline:auto}
+  .journey-on .journey-frame{min-height:100vh}
+  .journey-on .journey-steps{min-height:300px}
+  .journey-on .jstep{margin-top:-140px}
 }
-.js .steps::before{transform:scaleY(0);transform-origin:top;transition:transform 1.6s var(--ease) .3s}
-.js .steps.in::before{transform:scaleY(1)}
-.step{position:relative;display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start}
-.js .steps .step{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.js .steps.in .step{opacity:1;transform:none}
-.js .steps.in .step:nth-child(1){transition-delay:.15s}
-.js .steps.in .step:nth-child(2){transition-delay:.4s}
-.js .steps.in .step:nth-child(3){transition-delay:.65s}
-.js .steps.in .step:nth-child(4){transition-delay:.9s}
-.step-num{
-  counter-increment:step;width:48px;height:48px;border-radius:50%;flex:none;display:grid;place-items:center;
-  background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy-900);
-  font-family:var(--display);font-weight:640;font-size:1.2rem;position:relative;z-index:1;
-  box-shadow:0 0 0 6px var(--paper);
-}
-.step-num::before{content:counter(step,decimal-leading-zero)}
-.step h3{font-size:1.22rem;margin-bottom:.3rem;font-weight:580}
-.step p{color:var(--ink-soft)}
-.section-dark .step p{color:var(--light-soft)}
 
 /* ---------- 13. Team ---------- */
 .team-card{text-align:center}
@@ -835,8 +868,8 @@ html:not(.js) .skyline-strip .win{opacity:.75}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
     transition-duration:.001ms!important;scroll-behavior:auto!important}
-  .js .reveal,.js .steps .step{opacity:1;transform:none}
-  .js .steps::before{transform:none}
+  .js .reveal{opacity:1;transform:none}
+  .journey-progress{display:none}
   .js .hero .tag,.js .hero p.lead,.js .hero-cta,.js .hero-stats{opacity:1;animation:none}
   .js .hero h1 .hl-inner{transform:none;animation:none}
   .hero-bg::before,.hero-stars{animation:none}
@@ -875,6 +908,10 @@ html:not(.js) .skyline-strip .win{opacity:.75}
       <a href="#process">Process</a>
       <a class="btn btn-primary" href="#contact">Contact Us</a>
     </nav>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Switch to dark theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </header>
 
@@ -1079,23 +1116,119 @@ html:not(.js) .skyline-strip .win{opacity:.75}
     </div>
   </section>
 
-  <!-- ============ PROCESS ============ -->
-  <section id="process" aria-labelledby="process-title">
-    <div class="container split">
-      <div class="reveal">
+  <!-- ============ THE JOURNEY (scrollytelling process) ============ -->
+  <section id="process" class="journey" aria-labelledby="process-title">
+    <div class="container">
+      <div class="section-head reveal">
         <span class="eyebrow">How We Work</span>
-        <h2 id="process-title">A confidential, four-step path to closing.</h2>
-        <p class="sub">Every engagement is tailored, but our disciplined process keeps transactions moving while protecting your privacy and your value.</p>
-        <div class="hero-cta mt-lg">
-          <a class="btn btn-dark" href="#contact">Start a Conversation</a>
+        <h2 id="process-title">One confidential journey, from first call to closing.</h2>
+        <p>Whether you're <strong>selling quietly</strong> or <strong>hunting for the right asset</strong>, every transaction follows the same disciplined story. Scroll through it.</p>
+      </div>
+    </div>
+
+    <div class="journey-stage" id="journeyStage">
+      <div class="container journey-frame">
+        <div class="journey-visual" aria-hidden="true">
+          <svg viewBox="0 0 560 480" fill="none" focusable="false">
+            <!-- Scene 1 · Discovery & Valuation -->
+            <g class="jscene" data-scene="1">
+              <path class="draw" d="M120 400 V210 h130 v190" stroke="#d4af6a" stroke-width="3" stroke-linejoin="round"/>
+              <path class="draw" d="M100 400 h330" stroke="#d4af6a" stroke-width="3" stroke-linecap="round"/>
+              <g class="pop" fill="rgba(230,198,137,.85)">
+                <rect x="140" y="235" width="16" height="20" rx="2"/><rect x="177" y="235" width="16" height="20" rx="2"/><rect x="214" y="235" width="16" height="20" rx="2"/>
+                <rect x="140" y="285" width="16" height="20" rx="2"/><rect x="214" y="285" width="16" height="20" rx="2"/>
+                <rect x="140" y="335" width="16" height="20" rx="2"/><rect x="177" y="335" width="16" height="20" rx="2"/>
+              </g>
+              <path class="draw" d="M300 330 a85 85 0 0 1 160 -28" stroke="#d4af6a" stroke-width="6" stroke-linecap="round" opacity=".9"/>
+              <line class="pop" x1="380" y1="330" x2="428" y2="272" stroke="#e6c689" stroke-width="5" stroke-linecap="round"/>
+              <circle class="pop" cx="380" cy="330" r="9" fill="#e6c689"/>
+              <g class="pop">
+                <circle cx="452" cy="220" r="26" stroke="#d4af6a" stroke-width="3"/>
+                <text x="452" y="229" text-anchor="middle" font-family="Georgia,serif" font-size="26" fill="#e6c689">$</text>
+              </g>
+            </g>
+            <!-- Scene 2 · Confidential Marketing -->
+            <g class="jscene" data-scene="2">
+              <path class="draw" d="M280 160 l70 26 v58 c0 52 -34 88 -70 104 c-36 -16 -70 -52 -70 -104 v-58 Z" stroke="#d4af6a" stroke-width="3.5" stroke-linejoin="round"/>
+              <path class="draw" d="M250 250 l22 22 40 -46" stroke="#e6c689" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle class="pop" cx="280" cy="252" r="128" stroke="rgba(212,175,106,.35)" stroke-width="1.5"/>
+              <circle class="pop" cx="280" cy="252" r="170" stroke="rgba(212,175,106,.18)" stroke-width="1.5"/>
+              <g stroke="rgba(212,175,106,.55)" stroke-width="2">
+                <line class="draw" x1="280" y1="252" x2="106" y2="140"/><line class="draw" x1="280" y1="252" x2="462" y2="128"/>
+                <line class="draw" x1="280" y1="252" x2="84" y2="330"/><line class="draw" x1="280" y1="252" x2="480" y2="318"/>
+                <line class="draw" x1="280" y1="252" x2="300" y2="440"/>
+              </g>
+              <g class="pop" fill="#0c2036" stroke="#e6c689" stroke-width="2.5">
+                <circle cx="106" cy="140" r="11"/><circle cx="462" cy="128" r="11"/><circle cx="84" cy="330" r="11"/><circle cx="480" cy="318" r="11"/><circle cx="300" cy="440" r="11"/>
+              </g>
+            </g>
+            <!-- Scene 3 · Negotiation & Diligence -->
+            <g class="jscene" data-scene="3">
+              <path class="draw" d="M172 96 h180 l56 56 v240 h-236 Z" stroke="#d4af6a" stroke-width="3.5" stroke-linejoin="round"/>
+              <path class="draw" d="M352 96 v56 h56" stroke="#d4af6a" stroke-width="3.5" stroke-linejoin="round"/>
+              <g stroke="rgba(230,198,137,.75)" stroke-width="3" stroke-linecap="round">
+                <line class="draw" x1="204" y1="192" x2="376" y2="192"/><line class="draw" x1="204" y1="228" x2="376" y2="228"/>
+                <line class="draw" x1="204" y1="264" x2="340" y2="264"/>
+              </g>
+              <path class="draw" d="M204 336 c18 -20 30 8 46 -8 c14 -14 22 10 38 -2 c12 -9 22 6 34 -4" stroke="#e6c689" stroke-width="3.5" stroke-linecap="round"/>
+              <g class="pop">
+                <circle cx="398" cy="352" r="30" stroke="#d4af6a" stroke-width="3"/>
+                <path d="M384 352 l10 10 20 -22" stroke="#e6c689" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </g>
+            </g>
+            <!-- Scene 4 · Closing & Beyond -->
+            <g class="jscene" data-scene="4">
+              <g class="pop" fill="#0f2742" stroke="#d4af6a" stroke-width="2">
+                <rect x="96" y="300" width="70" height="120"/><rect x="180" y="252" width="86" height="168"/><rect x="280" y="292" width="64" height="128"/><rect x="358" y="222" width="96" height="198"/>
+              </g>
+              <g class="pop" fill="#e6c689">
+                <rect x="196" y="272" width="12" height="14" rx="2"/><rect x="228" y="272" width="12" height="14" rx="2"/><rect x="196" y="308" width="12" height="14" rx="2"/><rect x="228" y="344" width="12" height="14" rx="2"/>
+                <rect x="376" y="244" width="12" height="14" rx="2"/><rect x="406" y="244" width="12" height="14" rx="2"/><rect x="376" y="286" width="12" height="14" rx="2"/><rect x="406" y="322" width="12" height="14" rx="2"/><rect x="436" y="286" width="12" height="14" rx="2"/>
+              </g>
+              <path class="draw" d="M80 420 h400" stroke="#d4af6a" stroke-width="3" stroke-linecap="round"/>
+              <g class="pop">
+                <circle cx="150" cy="140" r="34" stroke="#e6c689" stroke-width="5"/>
+                <path d="M178 160 l70 66 m-26 -25 l-14 15 m28 -2 l-12 13" stroke="#e6c689" stroke-width="5" stroke-linecap="round" fill="none"/>
+              </g>
+              <path class="pop" d="m420 96 8 19 20 2 -15 13 5 20 -18 -11 -18 11 5 -20 -15 -13 20 -2 Z" fill="#d4af6a"/>
+            </g>
+          </svg>
+        </div>
+        <div class="journey-copy">
+          <ol class="journey-steps">
+            <li class="jstep">
+              <span class="jnum" aria-hidden="true">01 / 04</span>
+              <h3>Discovery &amp; Valuation</h3>
+              <p>We learn your goals and assess the asset with current market data to establish a realistic, defensible value.</p>
+              <p class="jwho"><b>Sellers:</b> a confidential, no-obligation valuation. <b>Buyers:</b> a precise acquisition brief.</p>
+            </li>
+            <li class="jstep">
+              <span class="jnum" aria-hidden="true">02 / 04</span>
+              <h3>Confidential Marketing</h3>
+              <p>Qualified buyers are approached discreetly through our nationwide network &mdash; no signage, no public disruption.</p>
+              <p class="jwho"><b>Sellers:</b> your staff and guests never know. <b>Buyers:</b> first look at off-market deals.</p>
+            </li>
+            <li class="jstep">
+              <span class="jnum" aria-hidden="true">03 / 04</span>
+              <h3>Negotiation &amp; Diligence</h3>
+              <p>We manage offers, financing, and due diligence, coordinating with lenders, attorneys, and exchange intermediaries.</p>
+              <p class="jwho"><b>Sellers:</b> offers pressure-tested, terms defended. <b>Buyers:</b> clean numbers before you commit.</p>
+            </li>
+            <li class="jstep">
+              <span class="jnum" aria-hidden="true">04 / 04</span>
+              <h3>Closing &amp; Beyond</h3>
+              <p>We drive the transaction to a clean close and remain a resource for your next acquisition or disposition.</p>
+              <p class="jwho"><b>Sellers &amp; Buyers:</b> a relationship that outlasts the deal &mdash; most of our clients come back.</p>
+            </li>
+          </ol>
         </div>
       </div>
-      <div class="steps reveal" data-delay="1">
-        <div class="step"><span class="step-num" aria-hidden="true"></span><div><h3>Discovery &amp; Valuation</h3><p>We learn your goals and assess the asset with current market data to establish a realistic, defensible value.</p></div></div>
-        <div class="step"><span class="step-num" aria-hidden="true"></span><div><h3>Confidential Marketing</h3><p>Qualified buyers are approached discreetly through our nationwide network &mdash; no signage, no public disruption.</p></div></div>
-        <div class="step"><span class="step-num" aria-hidden="true"></span><div><h3>Negotiation &amp; Diligence</h3><p>We manage offers, financing, and due diligence, coordinating with lenders, attorneys, and exchange intermediaries.</p></div></div>
-        <div class="step"><span class="step-num" aria-hidden="true"></span><div><h3>Closing &amp; Beyond</h3><p>We drive the transaction to a clean close and remain a resource for your next acquisition or disposition.</p></div></div>
-      </div>
+      <div class="journey-progress" aria-hidden="true"><span id="journeyBar"></span></div>
+    </div>
+
+    <div class="container journey-cta-row">
+      <a class="btn btn-primary" href="#contact">Start a Conversation</a>
+      <a class="btn btn-ghost" href="#listings">See Current Opportunities</a>
     </div>
   </section>
 
@@ -1369,6 +1502,9 @@ html:not(.js) .skyline-strip .win{opacity:.75}
 <script src="assets/listings.js"></script>
 <script src="assets/dealroom.js"></script>
 <script src="assets/map.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/journey.js"></script>
 <script>
 /* ============================================================
    AMIN REALTY, INC. — Behavior
@@ -1382,6 +1518,24 @@ html:not(.js) .skyline-strip .win{opacity:.75}
   /* ---- Current year ---- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ---- Dark / light theme toggle ---- */
+  var themeBtn = document.getElementById("themeToggle");
+  function applyTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    if (themeBtn){
+      themeBtn.setAttribute("aria-pressed", String(t === "dark"));
+      themeBtn.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    }
+    var mc = document.querySelector('meta[name="theme-color"]');
+    if (mc) mc.setAttribute("content", t === "dark" ? "#071120" : "#0a1a2f");
+  }
+  applyTheme(document.documentElement.getAttribute("data-theme") || "light");
+  if (themeBtn) themeBtn.addEventListener("click", function(){
+    var t = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    try { localStorage.setItem("aminTheme", t); } catch(e){ /* private mode */ }
+    applyTheme(t);
+  });
 
   /* ---- Mobile nav toggle ---- */
   var toggle = document.getElementById("navToggle");

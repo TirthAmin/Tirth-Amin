@@ -7,7 +7,9 @@
   Media Library and put those URLs in the listings/documents config
   near the bottom of this file (search for dealRoom / AMIN_DOCUMENTS).
 ================================================================= -->
-<script>document.documentElement.classList.add("js");</script>
+<script>document.documentElement.classList.add("js");
+/* theme boot: apply saved or OS-preferred theme before first paint */
+(function(){try{var t=localStorage.getItem("aminTheme");if(!t)t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <style>
 /* ============================================================
    AMIN REALTY, INC. — Shared styles for listings.html,
@@ -43,6 +45,27 @@
   --radius:14px;--radius-sm:10px;--maxw:1180px;--ease:cubic-bezier(.22,.61,.36,1);
   --serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
+/* ---------- THEME — light is the default; [data-theme=dark] remaps the
+   light-surface tokens so every cream/paper surface goes deep navy.
+   Set by a tiny head script (localStorage "aminTheme", falls back to the
+   OS preference); toggled by the sun/moon button in the header. ---------- */
+:root[data-theme="dark"]{
+  --cream:#0c2036;--paper:#0e2440;
+  --ink:#eef3f9;--ink-soft:#a9bdd4;
+  --line:rgba(212,175,106,.24);
+  --gold-link:#d4af6a;
+  --shadow:0 10px 40px -12px rgba(0,0,0,.5);--shadow-lg:0 24px 60px -20px rgba(0,0,0,.7);
+}
+:root[data-theme="dark"] .field-block input[type=text],
+:root[data-theme="dark"] .field-block input[type=email]{background:var(--navy-850);border-color:rgba(212,175,106,.3);color:var(--light)}
+:root[data-theme="dark"] .sig-input{color:var(--gold-bright)!important}
+:root[data-theme="dark"] .audit th{background:var(--navy-800);color:var(--light)}
+:root[data-theme="dark"] .doc .ficon{color:var(--gold)}
+:root[data-theme="dark"] .modal-status[data-state=err]{color:#ff9a8a}
+:root[data-theme="dark"] .modal-status[data-state=ok]{color:#5fcf95}
+:root[data-theme="dark"] .deal-emailed{color:#5fcf95}
+:root[data-theme="dark"] .deal-warn,:root[data-theme="dark"] .nda-warn{color:#e0a93d}
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -94,6 +117,13 @@ a{color:var(--gold-link)}
 .nav-links a.btn.btn-primary,.nav-links a.btn.btn-primary:hover{color:var(--navy-900)}
 .nav-toggle{display:none;background:none;border:2px solid var(--line-dark);border-radius:8px;width:46px;height:46px;cursor:pointer;color:var(--light)}
 .nav-toggle svg{width:22px;height:22px;margin:auto}
+.brand{margin-right:auto}
+.theme-toggle{background:none;border:2px solid var(--line-dark);border-radius:8px;width:46px;height:46px;flex:none;cursor:pointer;color:var(--light);display:grid;place-items:center;transition:color .2s,border-color .2s,background .2s}
+.theme-toggle:hover{color:var(--gold);border-color:var(--gold)}
+.theme-toggle svg{width:20px;height:20px}
+.theme-toggle .icon-sun{display:none}
+:root[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+:root[data-theme="dark"] .theme-toggle .icon-moon{display:none}
 @media (max-width:920px){
   .nav-toggle{display:grid;place-items:center}
   .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--navy-900);border-bottom:1px solid var(--line-dark);padding:1rem clamp(1.1rem,4vw,2rem) 1.6rem;gap:.25rem;max-height:0;overflow:hidden;visibility:hidden;transition:max-height .35s var(--ease),visibility .35s}
@@ -366,6 +396,10 @@ a{color:var(--gold-link)}
       <a href="/#process">Process</a>
       <a class="btn btn-primary" href="/#contact">Contact Us</a>
     </nav>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Switch to dark theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </header>
 
@@ -628,6 +662,24 @@ window.AMIN_DOCUMENTS = [
     });
   }
   var yEl = $("#year"); if (yEl) yEl.textContent = new Date().getFullYear();
+
+  /* ---------- dark / light theme toggle ---------- */
+  var themeBtn = $("#themeToggle");
+  function applyTheme(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    if (themeBtn) {
+      themeBtn.setAttribute("aria-pressed", String(t === "dark"));
+      themeBtn.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    }
+    var mc = document.querySelector('meta[name="theme-color"]');
+    if (mc) mc.setAttribute("content", t === "dark" ? "#071120" : "#0a1a2f");
+  }
+  applyTheme(document.documentElement.getAttribute("data-theme") || "light");
+  if (themeBtn) themeBtn.addEventListener("click", function () {
+    var t = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    try { localStorage.setItem("aminTheme", t); } catch (e) { /* private mode */ }
+    applyTheme(t);
+  });
 
   // Stagger helper: gives each rendered card its animation-delay index.
   function stagger(container) {
@@ -990,8 +1042,8 @@ window.AMIN_DOCUMENTS = [
       if (downloadWrap) {
         downloadWrap.hidden = false;
         downloadWrap.innerHTML =
-          '<p style="margin-bottom:1rem;color:var(--ink-soft)">Your agreement has been logged on ' + esc(record.timestampLocal) + '. This file is confidential and may not be shared.</p>' +
-          (warn ? '<p class="fineprint" style="color:#9a6a00;margin-bottom:1rem">⚠ ' + esc(warn) + '</p>' : '') +
+          '<p class="deal-note">Your agreement has been logged on ' + esc(record.timestampLocal) + '. This file is confidential and may not be shared.</p>' +
+          (warn ? '<p class="fineprint deal-warn">⚠ ' + esc(warn) + '</p>' : '') +
           '<a class="btn btn-primary" id="ndaDownloadLink" href="' + encodeURI(record.file) + '" download>Download “' + esc(record.document) + '” ' + ARROW + '</a>' +
           '<button type="button" class="btn btn-outline" data-nda-close style="margin-left:.6rem">Close</button>';
         var dl = $("#ndaDownloadLink", downloadWrap);

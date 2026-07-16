@@ -18,6 +18,8 @@
 | `legal/*` (5 pages) | Privacy, Terms, Accessibility, TREC IABS + Consumer Protection |
 
 Signature features:
+- **Dark & light mode** — sun/moon toggle in every header; remembers the visitor's choice, defaults to their OS preference. Both themes audited to 0 WCAG violations.
+- **Scrollytelling "Journey"** — the homepage How-We-Work section pins and plays a 4-scene scroll-driven story (GSAP ScrollTrigger, self-hosted in `assets/vendor/`). Degrades to a plain readable section with motion off / JS off.
 - **Deal Rooms** — listings can gate files behind a mandatory first/last/email form; every access is logged and (when configured) confirmation emails go to you **and** the client.
 - **Nationwide Reach map** — custom SVG US map; pins plot automatically from listing coordinates; hover = property card, click = jump to listing.
 - **Motion system** — hero entrance, window-by-window skyline lighting, marquee (with accessible pause button), scroll progress, count-ups, smooth FAQ. All disabled for reduced-motion users.

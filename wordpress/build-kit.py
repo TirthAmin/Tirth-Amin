@@ -78,7 +78,7 @@ def style_of(html):
 def inline_script_srcs(markup):
     def repl(m):
         return "<script>\n" + read(m.group(1)).strip() + "\n</script>"
-    return re.sub(r'<script src="(assets/[\w.-]+\.js)"></script>', repl, markup)
+    return re.sub(r'<script src="(assets/[\w./-]+\.js)"></script>', repl, markup)
 
 HEADER = """<!-- ================================================================
   AMIN REALTY — paste-ready WordPress fragment (%s)
@@ -86,7 +86,9 @@ HEADER = """<!-- ===============================================================
   "Custom HTML" block, and paste this ENTIRE file into it.
   Use a full-width / blank page template if your theme has one.
 %s================================================================= -->
-<script>document.documentElement.classList.add("js");</script>
+<script>document.documentElement.classList.add("js");
+/* theme boot: apply saved or OS-preferred theme before first paint */
+(function(){try{var t=localStorage.getItem("aminTheme");if(!t)t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 """
 
 FILES_NOTE = """  Deal-room and document files: upload your PDFs to the WordPress

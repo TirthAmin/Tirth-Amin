@@ -50,6 +50,24 @@
   }
   var yEl = $("#year"); if (yEl) yEl.textContent = new Date().getFullYear();
 
+  /* ---------- dark / light theme toggle ---------- */
+  var themeBtn = $("#themeToggle");
+  function applyTheme(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    if (themeBtn) {
+      themeBtn.setAttribute("aria-pressed", String(t === "dark"));
+      themeBtn.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    }
+    var mc = document.querySelector('meta[name="theme-color"]');
+    if (mc) mc.setAttribute("content", t === "dark" ? "#071120" : "#0a1a2f");
+  }
+  applyTheme(document.documentElement.getAttribute("data-theme") || "light");
+  if (themeBtn) themeBtn.addEventListener("click", function () {
+    var t = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    try { localStorage.setItem("aminTheme", t); } catch (e) { /* private mode */ }
+    applyTheme(t);
+  });
+
   // Stagger helper: gives each rendered card its animation-delay index.
   function stagger(container) {
     if (!container) return;
@@ -411,8 +429,8 @@
       if (downloadWrap) {
         downloadWrap.hidden = false;
         downloadWrap.innerHTML =
-          '<p style="margin-bottom:1rem;color:var(--ink-soft)">Your agreement has been logged on ' + esc(record.timestampLocal) + '. This file is confidential and may not be shared.</p>' +
-          (warn ? '<p class="fineprint" style="color:#9a6a00;margin-bottom:1rem">⚠ ' + esc(warn) + '</p>' : '') +
+          '<p class="deal-note">Your agreement has been logged on ' + esc(record.timestampLocal) + '. This file is confidential and may not be shared.</p>' +
+          (warn ? '<p class="fineprint deal-warn">⚠ ' + esc(warn) + '</p>' : '') +
           '<a class="btn btn-primary" id="ndaDownloadLink" href="' + encodeURI(record.file) + '" download>Download “' + esc(record.document) + '” ' + ARROW + '</a>' +
           '<button type="button" class="btn btn-outline" data-nda-close style="margin-left:.6rem">Close</button>';
         var dl = $("#ndaDownloadLink", downloadWrap);

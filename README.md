@@ -40,6 +40,8 @@ assets/
   config.js         ← SET your signature-log endpoint & options here
   site.css          shared styles for listings/documents pages
   site.js           shared behavior (rendering, filters, NDA modal, logging)
+  journey.js        homepage scrollytelling ("How We Work" pinned story)
+  vendor/           self-hosted GSAP + ScrollTrigger (used only by journey.js)
 documents/          put your actual downloadable files here
 legal/              Privacy, Terms, Accessibility, and TREC notices
 DEPLOY.md           How to publish on GoDaddy or Wix (+ the [VERIFY] checklist)
@@ -138,6 +140,24 @@ Find the `FALLBACK_LISTINGS` array near the bottom of `index.html`. Each entry l
   with your own approved client quotes and names.
 - **FAQ** — an accessible accordion built on native `<details>`; edit the
   questions/answers directly in the markup.
+
+## Dark & light mode
+
+Every page has a sun/moon toggle in the header. The choice is remembered in
+the visitor's browser (`localStorage`), and first-time visitors get whatever
+their device prefers (`prefers-color-scheme`). Both themes are audited to
+0 WCAG violations — see `GRADE.md`.
+
+## The scrollytelling "Journey" (homepage How-We-Work)
+
+The homepage process section is a pinned, scroll-driven story: as visitors
+scroll, four scenes draw themselves in (valuation, confidential marketing,
+diligence, closing) with copy addressed to both sellers and buyers. It runs
+on GSAP ScrollTrigger, self-hosted in `assets/vendor/` — no CDN, no account,
+nothing to configure. It automatically falls back to a normal, fully readable
+stacked section for reduced-motion users, if JavaScript is off, or if the
+library ever fails to load. Edit the step copy directly in `index.html`
+(search for `journey-steps`).
 
 ## Disclaimer
 

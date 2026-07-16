@@ -5,7 +5,27 @@ This site was graded with an automated, headless-browser audit (Chromium +
 accessibility checkers) and a set of functional/interaction tests, then fixed
 and re-graded until no further issues remained.
 
-## Latest audit pass (detail pages + motion overhaul)
+## Latest audit pass (scrollytelling + dark/light themes)
+
+Re-graded after adding the GSAP-powered scrollytelling "Journey" section
+(homepage) and the site-wide dark/light theme system.
+
+| Surface | axe (A/AA + 2.2 + best-practice) | html-validate | JS errors |
+|---|---|---|---|
+| All 11 pages × **both themes** (28 audits incl. modals + audit panel) | **0** | **0** | 0 |
+
+- Functional: 19/19 smoke, 12/12 features, 4/4 scrollytelling scene checks
+  (pin, scrub, per-scene exclusivity, progress bar), theme toggle + persistence
+  across pages (including legal), WordPress-kit simulation 12/12.
+- Scrollytelling degrades three ways: reduced-motion → static; GSAP missing →
+  static; JS off → the same content reads top-to-bottom. Verified all 4 steps
+  remain readable with motion off.
+- Choreography fix this pass: scene build-in used per-element staggers that
+  could overrun a scene's exit for element-heavy scenes; switched to
+  amount-based staggers so every scene completes before its outro.
+- GSAP 3.15 + ScrollTrigger are self-hosted in `assets/vendor/` (no CDN).
+
+## Previous audit pass (detail pages + motion overhaul)
 
 Re-graded after adding the per-listing detail pages (`listing.html?id=…`) and
 the site-wide motion system. Rule sets: `wcag2a`, `wcag2aa`, `wcag21a`,
