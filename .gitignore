@@ -8,3 +8,4 @@ Thumbs.db
 # Dependencies (none required to run this site)
 node_modules/
 .claude/memory.json
+__pycache__/
