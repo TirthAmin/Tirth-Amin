@@ -44,6 +44,7 @@
   --serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.65;font-size:clamp(16px,1.02vw,17px);overflow-x:hidden}
 img{max-width:100%;display:block}
@@ -74,6 +75,8 @@ a{color:var(--gold-link)}
 .btn.btn-primary:hover{background:var(--gold-dark);transform:translateY(-2px)}
 .btn.btn-outline{background:transparent;color:var(--gold-link);border-color:var(--gold-link)}
 .btn.btn-outline:hover{background:rgba(212,175,106,.12);transform:translateY(-2px)}
+.btn.btn-ghost{background:transparent;color:var(--light);border-color:rgba(212,175,106,.55)}
+.btn.btn-ghost:hover{background:rgba(212,175,106,.12);border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
 .btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
 
 /* Header */
@@ -135,6 +138,8 @@ a{color:var(--gold-link)}
 .listing-body{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
 .listing-price{font-family:var(--serif);font-size:1.45rem;color:var(--gold);font-weight:700}
 .listing-title{font-family:var(--serif);font-size:1.12rem;color:var(--light);line-height:1.3}
+.listing-title a{color:inherit;text-decoration:none;transition:color .2s var(--ease)}
+.listing-title a:hover,.listing-title a:focus-visible{color:var(--gold)}
 .listing-loc{display:flex;align-items:center;gap:.4rem;color:var(--light-soft);font-size:.9rem}
 .listing-loc svg{width:16px;height:16px;flex:none;color:var(--gold)}
 .listing-specs{display:flex;flex-wrap:wrap;gap:.5rem .9rem;margin-top:.2rem;border-top:1px solid rgba(255,255,255,.08);padding-top:.9rem}
@@ -145,6 +150,33 @@ a{color:var(--gold-link)}
 .listing-cta a:hover{color:#fff}
 .empty{grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--light-soft);border:1px dashed var(--line-dark);border-radius:var(--radius)}
 .empty.empty-on-light{color:var(--ink-soft);border-color:var(--line)}
+
+/* Listing detail page (listing.html) */
+.detail-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(1.6rem,4vw,3rem);align-items:start}
+@media (max-width:880px){.detail-layout{grid-template-columns:1fr}}
+.detail-media{position:relative;aspect-ratio:16/10;border-radius:var(--radius);overflow:hidden;display:grid;place-items:center;color:rgba(255,255,255,.85);background:linear-gradient(150deg,#16395f,#0a1a2f);border:1px solid var(--line-dark)}
+.detail-media svg{width:110px;height:110px;opacity:.85}
+.detail-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.detail-badges{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.1rem}
+.badge-pill{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.4rem .85rem;border-radius:999px;color:#fff}
+.badge-pill.badge-type{background:rgba(255,255,255,.1);color:var(--light)}
+.detail-price{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.5rem);color:var(--gold);font-weight:700;line-height:1.15}
+.detail-loc{display:flex;align-items:center;gap:.5rem;color:var(--light-soft);margin:.5rem 0 1.2rem;font-size:1.02rem}
+.detail-loc svg{width:18px;height:18px;flex:none;color:var(--gold)}
+.detail-specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:1rem;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);padding:1.1rem 0;margin-bottom:1.2rem}
+.detail-specs:empty{display:none}
+.detail-spec b{display:block;font-family:var(--serif);font-size:1.3rem;color:var(--light)}
+.detail-spec span{font-size:.82rem;color:var(--light-soft)}
+.detail-desc p{color:var(--light-soft);margin-bottom:.9rem;max-width:62ch}
+.detail-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem;margin-top:1.5rem}
+.deal-btn-lg{font-size:.95rem;padding:.8rem 1.35rem}
+.detail-info .fineprint{max-width:62ch;color:var(--light-soft)}
+.detail-notfound{text-align:center;padding:3rem 1rem;border:1px dashed var(--line-dark);border-radius:var(--radius)}
+.detail-notfound h2{font-size:clamp(1.5rem,3vw,2rem);color:var(--light);margin-bottom:.8rem}
+.detail-notfound p{color:var(--light-soft);max-width:52ch;margin-inline:auto}
+.detail-notfound .detail-cta{justify-content:center}
+.detail-related{margin-top:clamp(2.5rem,6vw,4rem)}
+.detail-related h2{font-size:clamp(1.4rem,3vw,1.9rem);color:var(--light);margin-bottom:1.4rem}
 
 /* Document cards */
 .doc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem}
@@ -231,15 +263,89 @@ a{color:var(--gold-link)}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 .reveal[data-delay="1"]{transition-delay:.08s}.reveal[data-delay="2"]{transition-delay:.16s}
+
+/* ============================================================
+   MOTION SYSTEM (subpages) — luxury-calibrated, transform/opacity
+   only, fully disabled for prefers-reduced-motion users.
+   ============================================================ */
+@media (prefers-reduced-motion:no-preference){
+  /* Seamless cross-document page transitions (progressive enhancement;
+     browsers without View Transitions simply navigate normally). */
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation:vt-out .26s var(--ease) both}
+  ::view-transition-new(root){animation:vt-in .38s var(--ease) both}
+
+  /* Page hero: content rises in; ambient light drifts slowly. */
+  .page-hero .crumbs{animation:rise-in .55s var(--ease) both}
+  .page-hero h1{animation:rise-in .65s var(--ease) .08s both}
+  .page-hero p{animation:rise-in .65s var(--ease) .16s both}
+  .page-hero::before{animation:ambient-drift 16s ease-in-out infinite alternate}
+
+  /* Toolbar + grids: staggered card choreography (30-50ms/item).
+     --i is set by site.js on each rendered card. */
+  .toolbar{animation:rise-in .55s var(--ease) .1s both}
+  .listing-grid .listing,.doc-grid .doc{animation:card-in .55s var(--ease) both;animation-delay:calc(min(var(--i,0),9)*45ms)}
+
+  /* Card media: gold sheen sweep + gentle zoom on hover. */
+  .listing-media::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 40%,rgba(230,198,137,.16) 50%,transparent 60%);transform:translateX(-130%) skewX(-8deg);transition:transform .8s var(--ease)}
+  .listing:hover .listing-media::before{transform:translateX(130%) skewX(-8deg)}
+  .listing-media svg{transition:transform .5s var(--ease)}
+  .listing:hover .listing-media svg{transform:scale(1.12)}
+  .listing-media img{transition:transform .6s var(--ease)}
+  .listing:hover .listing-media img{transform:scale(1.06)}
+  .listing-cta a svg{transition:transform .25s var(--ease)}
+  .listing-cta a:hover svg{transform:translateX(4px)}
+
+  /* Buttons: sheen on primary, tactile press on all. */
+  .btn{position:relative;overflow:hidden}
+  .btn:active{transform:translateY(0) scale(.97)}
+  .btn.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.32) 50%,transparent 70%);transform:translateX(-130%);transition:transform .65s var(--ease)}
+  .btn.btn-primary:hover::after{transform:translateX(130%)}
+  .deal-btn:active,.to-top:active{transform:scale(.94)}
+
+  /* Modal: soft spring entrance; unlocked file links cascade in. */
+  .modal{transform:translateY(20px) scale(.97);transition:transform .38s cubic-bezier(.3,1.35,.45,1)}
+  .deal-files li{animation:rise-in .45s var(--ease) both}
+  .deal-files li:nth-child(2){animation-delay:.07s}
+  .deal-files li:nth-child(3){animation-delay:.14s}
+  .deal-files li:nth-child(4){animation-delay:.21s}
+  .deal-files li:nth-child(n+5){animation-delay:.28s}
+  .deal-files a{transition:border-color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease)}
+
+  /* Listing detail: choreographed entrance, left to right. */
+  .detail-layout .detail-media{animation:media-in .7s var(--ease) both}
+  .detail-info>*{animation:rise-in .6s var(--ease) both}
+  .detail-info>*:nth-child(1){animation-delay:.1s}
+  .detail-info>*:nth-child(2){animation-delay:.16s}
+  .detail-info>*:nth-child(3){animation-delay:.22s}
+  .detail-info>*:nth-child(4){animation-delay:.28s}
+  .detail-info>*:nth-child(5){animation-delay:.34s}
+  .detail-info>*:nth-child(6){animation-delay:.4s}
+  .detail-info>*:nth-child(n+7){animation-delay:.46s}
+}
+@keyframes vt-out{to{opacity:0;transform:translateY(-10px)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(12px)}}
+@keyframes rise-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes card-in{from{opacity:0;transform:translateY(20px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes media-in{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+@keyframes ambient-drift{from{transform:translate3d(-1.5%,-1%,0)}to{transform:translate3d(1.5%,2%,0)}}
+
+/* Reading progress bar (thin gold line under the sticky header). */
+.site-header{--progress:0}
+.site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-bright));transform-origin:0 50%;transform:scaleX(var(--progress));pointer-events:none}
+
+/* Back-to-top */
+.to-top{position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:150;width:52px;height:52px;border-radius:50%;border:1px solid var(--line-dark);background:rgba(10,26,47,.92);color:var(--gold);cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s,background .3s var(--ease);box-shadow:var(--shadow)}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{background:var(--navy-700)}
+.to-top svg{width:22px;height:22px}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
+  .site-header::after{display:none}
 }
-
-
-.amin-site{font-family:var(--sans);color:var(--ink);line-height:1.65;font-size:clamp(16px,1.02vw,17px)}
 </style>
-<div class="amin-site">
 
 <a class="skip-link" href="#main">Skip to main content</a>
 
@@ -254,10 +360,10 @@ a{color:var(--gold-link)}
     </button>
     <nav id="navLinks" class="nav-links" aria-label="Primary">
       <a href="/#about">About</a>
-      <a href="index.html#services">Services</a>
+      <a href="/#services">Services</a>
       <a href="/listings/" aria-current="page">Listings</a>
       <a href="/documents/">Documents</a>
-      <a href="index.html#process">Process</a>
+      <a href="/#process">Process</a>
       <a class="btn btn-primary" href="/#contact">Contact Us</a>
     </nav>
   </div>
@@ -285,7 +391,7 @@ a{color:var(--gold-link)}
         </div>
         <div class="field">
           <label for="filterPrice">Max Price</label>
-          <select id="filterPrice"><option value="">Any Price</option><option value="2500000">Up to $2.5M</option><option value="5000000">Up to $5M</option><option value="10000000">Up to $10M</option><option value="100000000">$10M+</option></select>
+          <select id="filterPrice"><option value="">Any Price</option><option value="0-2500000">Up to $2.5M</option><option value="0-5000000">Up to $5M</option><option value="0-10000000">Up to $10M</option><option value="10000000-">$10M+</option></select>
         </div>
         <div class="field">
           <label for="sortBy">Sort By</label>
@@ -361,6 +467,10 @@ a{color:var(--gold-link)}
   </div>
 </div>
 
+<button type="button" class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 15 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
 <script>
 /* ============================================================
    AMIN REALTY, INC. — SITE CONFIGURATION
@@ -409,7 +519,6 @@ window.AMIN_CONFIG = {
   companyName: "Amin Realty, Inc.",
   contactEmail: "info@aminrealtyinc.com"  /* [VERIFY] */
 };
-
 </script>
 <script>
 /* ============================================================
@@ -423,6 +532,11 @@ window.AMIN_CONFIG = {
    To REMOVE a listing: delete its { ... } block (and the trailing comma).
    To FEATURE on home:  set  featured: true
 
+   Every listing automatically gets its own detail page at
+   /listing/?id=<slug>. The homepage cards and the full catalog both
+   link to it. The slug comes from the optional `id` field below, or (if
+   you omit it) from the title. Nothing else to wire up.
+
    FIELD REFERENCE
      title       text shown as the listing name
      type        MUST be one of: "Franchise Hotel" | "Independent Motel"
@@ -435,6 +549,14 @@ window.AMIN_CONFIG = {
      image       OPTIONAL "https://.../photo.jpg" — shows a real photo
                  (alt text is generated automatically). Omit to use the icon.
      featured    OPTIONAL true to also show it on the homepage
+     id          OPTIONAL short url-friendly name for this listing's page,
+                 e.g. id:"houston-85-key". If omitted, it is generated from
+                 the title. Keep it unique and it won't change if you later
+                 edit the title (better for links people have bookmarked).
+     description OPTIONAL text for the detail page. One string, or an array
+                 of strings for multiple paragraphs, e.g.
+                   description:[ "First paragraph.", "Second paragraph." ]
+                 Omit it and the page shows a sensible default line.
      specs       up to ~4 pairs of [ "Label", "Value" ]
      lat, lng    OPTIONAL coordinates. Adding them drops a glowing pin for
                  this listing on the homepage map ("Nationwide Reach");
@@ -453,74 +575,103 @@ window.AMIN_CONFIG = {
    ============================================================ */
 window.AMIN_LISTINGS = [
   {
+    id:"houston-85-key-franchise-hotel",
     title:"85-Key Franchise Hotel", type:"Franchise Hotel", location:"Houston, TX", lat:29.7604, lng:-95.3698,
     status:"Available", price:7900000, priceLabel:"$7,900,000", icon:"hotel", featured:true,
     specs:[["Keys","85"],["Brand","Flagged"],["Year Built","2016"]],
+    description:[
+      "A well-maintained, nationally flagged select-service hotel in one of Houston's strongest interstate corridors. Built in 2016, the property benefits from a modern prototype, strong brand standards, and steady corporate and leisure demand.",
+      "The asset is offered with in-place financing potential and value-add upside through revenue management. A full offering memorandum and trailing financials are available in the deal room."
+    ],
     dealRoom:[
       { label:"Offering Memorandum (sample)", file:"documents/SAMPLE-offering-memorandum.txt" },
       { label:"Property Financials (sample)", file:"documents/SAMPLE-property-financials.txt" }
     ]
   },
   {
+    id:"san-antonio-42-room-motel",
     title:"42-Room Independent Motel", type:"Independent Motel", location:"San Antonio, TX", lat:29.4241, lng:-98.4936,
     status:"Available", price:2450000, priceLabel:"$2,450,000", icon:"motel", featured:true,
     specs:[["Rooms","42"],["Lot","1.8 ac"],["Cap Rate","9.1%"]],
+    description:[
+      "A cash-flowing independent motel on a 1.8-acre parcel with excellent visibility and ample parking. In-place operations produce a 9.1% cap rate with room to grow through light renovation and improved online distribution.",
+      "Ideal for an owner-operator or a 1031 exchange buyer seeking durable, unbranded roadside hospitality income."
+    ],
     dealRoom:[
       { label:"Property Financials (sample)", file:"documents/SAMPLE-property-financials.txt" }
     ]
   },
   {
+    id:"katy-highway-frontage-land",
     title:"Highway-Frontage Development Land", type:"Land / Development", location:"Katy, TX", lat:29.7858, lng:-95.8245,
     status:"Available", price:1850000, priceLabel:"$1,850,000", icon:"land", featured:true,
-    specs:[["Acres","4.6"],["Zoning","Commercial"],["Frontage","320 ft"]]
+    specs:[["Acres","4.6"],["Zoning","Commercial"],["Frontage","320 ft"]],
+    description:"A 4.6-acre commercially zoned development site with 320 feet of highway frontage in fast-growing Katy. Suited to new hospitality, retail, or mixed-use construction, with utilities available to the site and strong daily traffic counts."
   },
   {
+    id:"dallas-120-key-select-service",
     title:"120-Key Upscale Select-Service", type:"Franchise Hotel", location:"Dallas, TX", lat:32.7767, lng:-96.797,
     status:"Under Contract", price:14250000, priceLabel:"$14,250,000", icon:"hotel", featured:true,
-    specs:[["Keys","120"],["Brand","Upper-Midscale"],["Year Built","2019"]]
+    specs:[["Keys","120"],["Brand","Upper-Midscale"],["Year Built","2019"]],
+    description:"A newer upper-midscale, select-service hotel in the Dallas metro, currently under contract. Contact us to be notified if it returns to market or to discuss comparable assets in our pipeline."
   },
   {
+    id:"sugar-land-mixed-use-retail-office",
     title:"Mixed-Use Retail & Office", type:"Commercial", location:"Sugar Land, TX", lat:29.6197, lng:-95.6349,
     status:"Available", price:4600000, priceLabel:"$4,600,000", icon:"commercial", featured:true,
-    specs:[["SF","28,000"],["Occupancy","92%"],["Parking","110"]]
+    specs:[["SF","28,000"],["Occupancy","92%"],["Parking","110"]],
+    description:"A 28,000-square-foot mixed-use retail and office property in Sugar Land at 92% occupancy. A stable tenant roster and 110 parking spaces make this a dependable commercial income play with modest lease-up upside."
   },
   {
+    id:"el-paso-58-room-motel",
     title:"58-Room Roadside Motel", type:"Independent Motel", location:"El Paso, TX", lat:31.7619, lng:-106.485,
     status:"Sold", price:3100000, priceLabel:"$3,100,000", icon:"motel", featured:true,
-    specs:[["Rooms","58"],["Lot","2.3 ac"],["Closed","2025"]]
+    specs:[["Rooms","58"],["Lot","2.3 ac"],["Closed","2025"]],
+    description:"Sold in 2025. This 58-room roadside motel is shown as a representative closed transaction. Ask us about current opportunities in the El Paso and West Texas markets."
   },
   {
+    id:"austin-extended-stay-conversion",
     title:"Extended-Stay Conversion Opportunity", type:"Franchise Hotel", location:"Austin, TX", lat:30.2672, lng:-97.7431,
     status:"Available", price:9750000, priceLabel:"$9,750,000", icon:"hotel",
-    specs:[["Keys","98"],["Type","Extended-Stay"],["Cap Rate","8.4%"]]
+    specs:[["Keys","98"],["Type","Extended-Stay"],["Cap Rate","8.4%"]],
+    description:"A 98-key hotel in Austin positioned for conversion to an extended-stay flag, with an 8.4% in-place cap rate and strong long-stay demand drivers nearby. A compelling value-add repositioning for an experienced operator."
   },
   {
+    id:"amarillo-truck-stop-motel-pad",
     title:"Interstate Truck-Stop Motel & Pad", type:"Independent Motel", location:"Amarillo, TX", lat:35.222, lng:-101.8313,
     status:"Available", price:2200000, priceLabel:"$2,200,000", icon:"motel",
-    specs:[["Rooms","36"],["Lot","3.1 ac"],["Add'l Pad","Yes"]]
+    specs:[["Rooms","36"],["Lot","3.1 ac"],["Add'l Pad","Yes"]],
+    description:"A 36-room interstate motel on 3.1 acres with an additional buildable pad site, offering both stabilized roadside income and land for future expansion or a complementary use."
   },
   {
+    id:"new-orleans-downtown-boutique-hotel",
     title:"Downtown Boutique Hotel", type:"Franchise Hotel", location:"New Orleans, LA", lat:29.9511, lng:-90.0715,
     status:"Under Contract", price:18900000, priceLabel:"$18,900,000", icon:"hotel",
-    specs:[["Keys","76"],["Class","Boutique"],["ADR","$210"]]
+    specs:[["Keys","76"],["Class","Boutique"],["ADR","$210"]],
+    description:"A 76-key downtown boutique hotel commanding a $210 ADR, currently under contract. Contact us about similar boutique and lifestyle assets across the Gulf South."
   },
   {
+    id:"sugar-land-commercial-strip-center",
     title:"Commercial Strip Center", type:"Commercial", location:"Sugar Land, TX", lat:29.6197, lng:-95.6349,
     status:"Available", price:5400000, priceLabel:"$5,400,000", icon:"commercial",
-    specs:[["SF","31,500"],["Occupancy","88%"],["Tenants","11"]]
+    specs:[["SF","31,500"],["Occupancy","88%"],["Tenants","11"]],
+    description:"A 31,500-square-foot multi-tenant strip center with 11 tenants at 88% occupancy. Diversified rent roll with lease-up and mark-to-market upside in an affluent, high-traffic Sugar Land trade area."
   },
   {
+    id:"frisco-hospitality-development-parcel",
     title:"Hospitality Development Parcel", type:"Land / Development", location:"Frisco, TX", lat:33.1507, lng:-96.8236,
     status:"Available", price:3650000, priceLabel:"$3,650,000", icon:"land",
-    specs:[["Acres","6.2"],["Zoning","Mixed-Use"],["Utilities","To Site"]]
+    specs:[["Acres","6.2"],["Zoning","Mixed-Use"],["Utilities","To Site"]],
+    description:"A 6.2-acre mixed-use parcel in booming Frisco, entitled for hospitality and complementary uses, with utilities to the site. A rare development-ready position in one of the nation's fastest-growing suburbs."
   },
   {
+    id:"texas-limited-service-portfolio",
     title:"Limited-Service Portfolio (3 Assets)", type:"Franchise Hotel", location:"Multiple, TX",
     status:"Available", price:0, priceLabel:"Call for Price", icon:"hotel",
-    specs:[["Keys","254 total"],["Assets","3"],["Markets","Secondary"]]
+    specs:[["Keys","254 total"],["Assets","3"],["Markets","Secondary"]],
+    description:"A three-asset, 254-key limited-service portfolio across Texas secondary markets, available individually or as a package. Priced on request; qualified principals may request a confidential summary."
   }
 ];
-
 </script>
 <script>
 /* ============================================================
@@ -575,6 +726,34 @@ window.AMIN_LISTINGS = [
   }
   var yEl = $("#year"); if (yEl) yEl.textContent = new Date().getFullYear();
 
+  // Stagger helper: gives each rendered card its animation-delay index.
+  function stagger(container) {
+    if (!container) return;
+    Array.prototype.forEach.call(container.children, function (el, i) {
+      el.style.setProperty("--i", i);
+    });
+  }
+
+  /* ---------- reading progress + back-to-top (one rAF pipeline) ---------- */
+  var headerEl = $(".site-header"), toTopBtn = $("#toTop"), scrollTick = false;
+  function paintScroll() {
+    scrollTick = false;
+    var y = window.scrollY || window.pageYOffset;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    if (headerEl && !reduce) headerEl.style.setProperty("--progress", (max > 0 ? Math.min(y / max, 1) : 0).toFixed(4));
+    if (toTopBtn) toTopBtn.classList.toggle("show", y > 600);
+  }
+  if (headerEl || toTopBtn) {
+    window.addEventListener("scroll", function () {
+      if (!scrollTick) { scrollTick = true; requestAnimationFrame(paintScroll); }
+    }, { passive: true });
+    paintScroll();
+  }
+  if (toTopBtn) toTopBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  });
+
   var reveals = $all(".reveal");
   if (reduce || !("IntersectionObserver" in window)) {
     reveals.forEach(function (el) { el.classList.add("in"); });
@@ -586,41 +765,77 @@ window.AMIN_LISTINGS = [
   }
 
   /* ============================================================
-     LISTINGS PAGE
+     LISTINGS — shared data + card rendering, used by the catalog
+     page (listings.html) and the detail pages (/listing/?id=…)
+     ============================================================ */
+  var data = (window.AMIN_LISTINGS || []).slice();
+  (function () {
+    // Every listing gets a stable URL slug for its detail page,
+    // generated from `id` (if set in listings.js) or the title.
+    var seen = {};
+    data.forEach(function (l, i) {
+      l._i = i;
+      var base = String(l.id || l.title || "").toLowerCase()
+        .replace(/&amp;/g, " and ").replace(/&/g, " and ")
+        .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "listing-" + (i + 1);
+      var slug = base, n = 2;
+      while (seen[slug]) { slug = base + "-" + (n++); }
+      seen[slug] = true;
+      l._slug = slug;
+    });
+  })();
+  function detailHref(l) { return "/listing/?id=" + encodeURIComponent(l._slug); }
+  function priceInRange(price, range) {
+    // range values look like "0-2500000" (up to) or "10000000-" (and up)
+    if (!range) return true;
+    var parts = range.split("-");
+    var min = parseFloat(parts[0]) || 0;
+    var max = parts[1] ? parseFloat(parts[1]) : Infinity;
+    return price >= min && price <= max;
+  }
+
+  function cardHTML(l, hLevel) {
+    var h = hLevel || 2;
+    var plain = String(l.title).replace(/&amp;/g, "and");
+    var media = l.image
+      ? '<img src="' + encodeURI(l.image) + '" alt="' + esc(plain) + ' in ' + esc(l.location) + '" loading="lazy" decoding="async">'
+      : (ICONS[l.icon] || ICONS.commercial);
+    var specs = (l.specs || []).map(function (s) {
+      return '<span class="listing-spec"><b>' + esc(s[1]) + '</b>' + esc(s[0]) + '</span>';
+    }).join("");
+    return '<article class="listing">' +
+      '<div class="listing-media">' +
+        media +
+        '<span class="listing-status ' + statusClass(l.status) + '">' + esc(l.status) + '</span>' +
+        '<span class="listing-type">' + esc(l.type) + '</span>' +
+      '</div>' +
+      '<div class="listing-body">' +
+        '<span class="listing-price">' + esc(l.priceLabel) + '</span>' +
+        '<h' + h + ' class="listing-title"><a href="' + detailHref(l) + '">' + esc(l.title) + '</a></h' + h + '>' +
+        '<span class="listing-loc">' + PIN + " " + esc(l.location) + '</span>' +
+        '<div class="listing-specs">' + specs + '</div>' +
+        '<div class="listing-cta"><a href="' + detailHref(l) + '" aria-label="View details: ' + esc(plain) + '">View details ' + ARROW + '</a>' +
+          (l.dealRoom && l.dealRoom.length
+            ? '<button type="button" class="deal-btn" data-deal="' + l._i + '" aria-haspopup="dialog">' + LOCK + ' View Deal Room</button>'
+            : '') +
+        '</div>' +
+      '</div></article>';
+  }
+
+  // One delegated handler covers deal-room buttons in every grid
+  // (catalog, detail page, related listings).
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest("button[data-deal]");
+    if (btn && window.AMIN_DEAL_ROOM) window.AMIN_DEAL_ROOM.open(data[parseInt(btn.getAttribute("data-deal"), 10)], btn);
+  });
+
+  /* ============================================================
+     LISTINGS CATALOG PAGE (listings.html)
      ============================================================ */
   var grid = $("#listingGrid");
   if (grid) {
-    var data = (window.AMIN_LISTINGS || []).slice();
-    data.forEach(function (l, i) { l._i = i; });
     var fType = $("#filterType"), fStatus = $("#filterStatus"), fPrice = $("#filterPrice"),
         fSearch = $("#filterSearch"), fSort = $("#sortBy"), countEl = $("#listingsCount");
-
-    function cardHTML(l) {
-      var plain = String(l.title).replace(/&amp;/g, "and");
-      var media = l.image
-        ? '<img src="' + encodeURI(l.image) + '" alt="' + esc(plain) + ' in ' + esc(l.location) + '" loading="lazy" decoding="async">'
-        : (ICONS[l.icon] || ICONS.commercial);
-      var specs = (l.specs || []).map(function (s) {
-        return '<span class="listing-spec"><b>' + esc(s[1]) + '</b>' + esc(s[0]) + '</span>';
-      }).join("");
-      return '<article class="listing">' +
-        '<div class="listing-media">' +
-          media +
-          '<span class="listing-status ' + statusClass(l.status) + '">' + esc(l.status) + '</span>' +
-          '<span class="listing-type">' + esc(l.type) + '</span>' +
-        '</div>' +
-        '<div class="listing-body">' +
-          '<span class="listing-price">' + esc(l.priceLabel) + '</span>' +
-          '<h2 class="listing-title">' + esc(l.title) + '</h2>' +
-          '<span class="listing-loc">' + PIN + " " + esc(l.location) + '</span>' +
-          '<div class="listing-specs">' + specs + '</div>' +
-          '<div class="listing-cta"><a href="/#contact" aria-label="Request details: ' + esc(plain) + '">Request details ' + ARROW + '</a>' +
-            (l.dealRoom && l.dealRoom.length
-              ? '<button type="button" class="deal-btn" data-deal="' + l._i + '" aria-haspopup="dialog">' + LOCK + ' View Deal Room</button>'
-              : '') +
-          '</div>' +
-        '</div></article>';
-    }
 
     function render() {
       var t = fType ? fType.value : "", s = fStatus ? fStatus.value : "",
@@ -629,7 +844,7 @@ window.AMIN_LISTINGS = [
       var out = data.filter(function (l) {
         if (t && l.type !== t) return false;
         if (s && l.status !== s) return false;
-        if (p && l.price > parseFloat(p)) return false;
+        if (!priceInRange(l.price, p)) return false;
         if (q && (l.title + " " + l.location + " " + l.type).toLowerCase().indexOf(q) === -1) return false;
         return true;
       });
@@ -638,18 +853,107 @@ window.AMIN_LISTINGS = [
       else if (sort === "title") out.sort(function (a, b) { return a.title.localeCompare(b.title); });
 
       grid.innerHTML = out.length
-        ? out.map(cardHTML).join("")
+        ? out.map(function (l) { return cardHTML(l); }).join("")
         : '<p class="empty">No listings match your filters. <a href="/#contact">Contact us</a> about off-market opportunities.</p>';
+      stagger(grid);
       if (countEl) countEl.textContent = out.length + (out.length === 1 ? " listing" : " listings");
     }
     [fType, fStatus, fPrice, fSort].forEach(function (el) { if (el) el.addEventListener("change", render); });
     if (fSearch) fSearch.addEventListener("input", render);
     render();
+  }
 
-    grid.addEventListener("click", function (e) {
-      var btn = e.target.closest("button[data-deal]");
-      if (btn && window.AMIN_DEAL_ROOM) window.AMIN_DEAL_ROOM.open(data[parseInt(btn.getAttribute("data-deal"), 10)], btn);
-    });
+  /* ============================================================
+     LISTING DETAIL PAGE (/listing/?id=<slug>)
+     Renders one listing from assets/listings.js as its own page.
+     ============================================================ */
+  var detailRoot = $("#listingDetail");
+  if (detailRoot) {
+    var slugMatch = location.search.match(/[?&]id=([^&]+)/);
+    var wantedSlug = "";
+    try { wantedSlug = slugMatch ? decodeURIComponent(slugMatch[1].replace(/\+/g, " ")) : ""; } catch (err) { wantedSlug = ""; }
+    var current = null;
+    data.forEach(function (l) { if (!current && l._slug === wantedSlug) current = l; });
+
+    if (!current) {
+      detailRoot.hidden = true;
+      var nf = $("#listingNotFound");
+      if (nf) nf.hidden = false;
+      document.title = "Listing Not Found | Amin Realty, Inc.";
+    } else {
+      renderDetail(current);
+    }
+  }
+
+  function renderDetail(l) {
+    var display = String(l.title).replace(/&amp;/g, "&");
+    document.title = display + " — " + l.location + " | Amin Realty, Inc.";
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", display + " — " + l.type + " in " + l.location + ", " + l.priceLabel + ", " + l.status + ". Amin Realty, Inc.");
+
+    var crumb = $("#crumbTitle"); if (crumb) crumb.textContent = display;
+    var titleEl = $("#detailTitle"); if (titleEl) titleEl.textContent = display;
+
+    var mediaEl = $("#detailMedia");
+    if (mediaEl) {
+      if (l.image) {
+        mediaEl.innerHTML = '<img src="' + encodeURI(l.image) + '" alt="' + esc(display) + ' in ' + esc(l.location) + '" decoding="async">';
+        mediaEl.removeAttribute("aria-hidden");
+      } else {
+        mediaEl.innerHTML = ICONS[l.icon] || ICONS.commercial;
+        mediaEl.setAttribute("aria-hidden", "true");
+      }
+    }
+
+    var badges = $("#detailBadges");
+    if (badges) badges.innerHTML =
+      '<span class="badge-pill ' + statusClass(l.status) + '">' + esc(l.status) + '</span>' +
+      '<span class="badge-pill badge-type">' + esc(l.type) + '</span>';
+
+    var priceEl = $("#detailPrice"); if (priceEl) priceEl.textContent = l.priceLabel;
+    var locEl = $("#detailLoc"); if (locEl) locEl.innerHTML = PIN + '<span>' + esc(l.location) + '</span>';
+
+    var specsEl = $("#detailSpecs");
+    if (specsEl) specsEl.innerHTML = (l.specs || []).map(function (s) {
+      return '<div class="detail-spec"><b>' + esc(s[1]) + '</b><span>' + esc(s[0]) + '</span></div>';
+    }).join("");
+
+    var descEl = $("#detailDesc");
+    if (descEl) {
+      var desc = l.description;
+      var paras = desc ? (Object.prototype.toString.call(desc) === "[object Array]" ? desc : [desc])
+        : ["Full details for this " + l.type.toLowerCase() + " are available on request. Contact us for financials, brochures, and a confidential conversation about this opportunity."];
+      descEl.innerHTML = paras.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
+    }
+
+    // Deal room button appears only when the listing has gated files.
+    if (l.dealRoom && l.dealRoom.length) {
+      var cta = $("#detailCta");
+      if (cta) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "deal-btn deal-btn-lg";
+        btn.setAttribute("data-deal", String(l._i));
+        btn.setAttribute("aria-haspopup", "dialog");
+        btn.innerHTML = LOCK + " View Deal Room (" + l.dealRoom.length + (l.dealRoom.length === 1 ? " file)" : " files)");
+        cta.appendChild(btn);
+      }
+    }
+
+    // Related listings: same type first, then anything else.
+    var related = data.filter(function (r) { return r !== l && r.type === l.type; });
+    if (related.length < 3) {
+      data.forEach(function (r) {
+        if (related.length < 3 && r !== l && related.indexOf(r) === -1) related.push(r);
+      });
+    }
+    related = related.slice(0, 3);
+    var relWrap = $("#relatedWrap"), relGrid = $("#relatedGrid");
+    if (related.length && relWrap && relGrid) {
+      relWrap.hidden = false;
+      relGrid.innerHTML = related.map(function (r) { return cardHTML(r, 3); }).join("");
+      stagger(relGrid);
+    }
   }
 
   /* ============================================================
@@ -669,6 +973,7 @@ window.AMIN_LISTINGS = [
           '<button type="button" class="btn btn-outline" data-doc="' + i + '">Request access ' + ARROW + '</button>' +
         '</div></article>';
     }).join("") : '<p class="empty empty-on-light">No documents are available right now. Please <a href="/#contact">contact us</a>.</p>';
+    stagger(docGrid);
 
     docGrid.addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-doc]");
@@ -840,7 +1145,6 @@ window.AMIN_LISTINGS = [
   if (location.hash === "#audit") renderAudit();
   window.addEventListener("hashchange", function () { if (location.hash === "#audit") renderAudit(); });
 })();
-
 </script>
 <script>
 /* ============================================================
@@ -1019,7 +1323,4 @@ window.AMIN_LISTINGS = [
 
   window.AMIN_DEAL_ROOM = { open: open, close: close };
 })();
-
 </script>
-
-</div>

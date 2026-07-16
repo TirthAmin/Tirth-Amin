@@ -5,7 +5,37 @@ This site was graded with an automated, headless-browser audit (Chromium +
 accessibility checkers) and a set of functional/interaction tests, then fixed
 and re-graded until no further issues remained.
 
-## Final result
+## Latest audit pass (detail pages + motion overhaul)
+
+Re-graded after adding the per-listing detail pages (`listing.html?id=…`) and
+the site-wide motion system. Rule sets: `wcag2a`, `wcag2aa`, `wcag21a`,
+`wcag21aa`, `wcag22aa`, **plus `best-practice`**.
+
+| Surface | axe violations | html-validate | JS errors |
+|---|---|---|---|
+| All 11 pages (home, catalog, detail, detail not-found, documents, 404, 5 legal) | **0** | **0** | 0 |
+| `listing.html` with deal-room modal open | **0** | — | 0 |
+| `documents.html` with NDA modal open | **0** | — | 0 |
+| `documents.html` `#audit` admin panel | **0** | — | 0 |
+
+Functional suites (Chromium): **19/19** site+detail smoke checks and **12/12**
+feature checks — deal-room sign→unlock→log, NDA sign→download→log, admin audit
+panel + CSV export, map pins/tooltip/click-through, and reduced-motion
+compliance (animations neutralized, progress bar hidden, all content intact).
+
+Issues this pass caught and fixed:
+- `listing.html` fineprint used `--ink-soft` (a light-background tone) on the
+  dark navy section — 2.25:1. Now `--light-soft` (≥4.5:1). A specificity
+  conflict with the shared `.fineprint` rule was also resolved.
+- The "$10M+" price filter matched *everything up to $100M*; filters now use
+  real min–max ranges on both the homepage and the catalog.
+- Unescaped `title`/`priceLabel` interpolation in the homepage card renderer.
+- `hidden` attribute was overridden by `display:grid` on the detail layout —
+  added a `[hidden]{display:none!important}` baseline.
+- Audit-methodology note: entrance-staggered cards are scanned **after**
+  animations settle; mid-fade frames are not treated as contrast failures.
+
+## Final result (previous full pass)
 
 | Page | WCAG 2.1 A/AA violations | JS errors |
 |---|---|---|

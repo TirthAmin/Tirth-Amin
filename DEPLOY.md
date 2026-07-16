@@ -38,6 +38,7 @@ information. These are intentionally left blank so nothing false is published.
 .htaccess                      ← Apache config (https redirect, gzip, caching, 404)
 index.html                     ← the homepage (hero, featured listings, contact)
 listings.html                  ← full property catalog (filter + sort)
+listing.html                   ← per-property detail page (auto: listing.html?id=…)
 documents.html                 ← Secure Document Center (signature-gated)
 404.html                       ← "page not found" page
 robots.txt, sitemap.xml        ← search-engine helpers
@@ -63,8 +64,8 @@ legal/
 ```
 
 > **Keep the folder structure intact** when uploading. `index.html`, `listings.html`,
-> and `documents.html` reference the `assets/` and `documents/` folders by relative
-> path, so upload the whole tree (not just loose files).
+> `listing.html`, and `documents.html` reference the `assets/` and `documents/`
+> folders by relative path, so upload the whole tree (not just loose files).
 
 To **edit your listings**, open `assets/listings.js` — one clearly commented
 file controls the catalog, the homepage featured cards, the map pins

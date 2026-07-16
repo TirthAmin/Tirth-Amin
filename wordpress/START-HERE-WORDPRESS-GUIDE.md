@@ -19,9 +19,9 @@ paste into WordPress → save.** Eight times.
 
 ---
 
-## Part 1 — Make the 8 pages (about 20 minutes)
+## Part 1 — Make the 9 pages (about 25 minutes)
 
-You will repeat the same little dance 8 times. Here is the dance once:
+You will repeat the same little dance 9 times. Here is the dance once:
 
 1. In WordPress, on the left menu, click **Pages → Add New Page**.
 2. Type the **title** (from the table below).
@@ -48,9 +48,25 @@ Now do that dance for each row:
 | 6 | `6-ACCESSIBILITY-paste-this.html` | Accessibility    | `accessibility`       |
 | 7 | `7-IABS-paste-this.html`     | IABS                  | `iabs`                |
 | 8 | `8-CONSUMER-PROTECTION-paste-this.html` | Consumer Protection | `consumer-protection` |
+| 9 | `9-LISTING-DETAIL-paste-this.html` | Listing | `listing` |
 
 > The slugs matter! The pages link to each other using these exact names.
 > If a slug is different, a link will land on "page not found."
+
+### What is page 9 ("Listing")?
+
+It's the magic one: that single page powers **every property's own page**,
+exactly like the big brokerage sites. When a visitor clicks a property card
+on your homepage or Listings page, they land on
+`yoursite.com/listing/?id=that-property` — with the photo, price, specs,
+description, deal-room button, and similar properties. You never create
+pages per property; the one `listing` page does them all.
+
+> **Editing listings in WordPress:** the property list (`AMIN_LISTINGS`)
+> lives inside pages 1, 2, **and** 9 (search the pasted code for
+> `AMIN_LISTINGS`). When you add or remove a property, update it in all
+> three pages — easiest is to edit once, select that whole block, and
+> paste the same block into the other two.
 
 ---
 

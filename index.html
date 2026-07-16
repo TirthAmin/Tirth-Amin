@@ -797,6 +797,40 @@ html:not(.js) .skyline-strip .win{opacity:.75}
 .map-hq i{font-style:normal;font-size:.6rem;letter-spacing:.14em;font-weight:700;color:var(--light-soft)}
 @media (max-width:640px){.map-tip{min-width:170px;max-width:200px;padding:.6rem .8rem}}
 
+/* ---------- 16b. Luxury motion layer (transform/opacity only) ---------- */
+@media (prefers-reduced-motion:no-preference){
+  /* Seamless cross-document page transitions (progressive enhancement). */
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation:vt-out .26s var(--ease) both}
+  ::view-transition-new(root){animation:vt-in .38s var(--ease) both}
+
+  /* Listing cards: staggered entrance on every render/filter change. */
+  .listing-grid .listing{animation:card-in .55s var(--ease) both;animation-delay:calc(min(var(--i,0),9)*45ms)}
+
+  /* Gold sheen sweeps across card media on hover. */
+  .listing-media::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 40%,rgba(230,198,137,.16) 50%,transparent 60%);transform:translateX(-130%) skewX(-8deg);transition:transform .8s var(--ease)}
+  .listing:hover .listing-media::before{transform:translateX(130%) skewX(-8deg)}
+
+  /* Buttons: sheen on primary, tactile press on all. */
+  .btn{position:relative;overflow:hidden}
+  .btn:active{transform:translateY(0) scale(.97)}
+  .btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.32) 50%,transparent 70%);transform:translateX(-130%);transition:transform .65s var(--ease)}
+  .btn-primary:hover::after{transform:translateX(130%)}
+  .deal-btn:active{transform:scale(.94)}
+
+  /* Deal-room modal: soft spring in; unlocked files cascade. */
+  .modal{transform:translateY(20px) scale(.97);transition:transform .38s cubic-bezier(.3,1.35,.45,1)}
+  .deal-files li{animation:file-in .45s var(--ease) both}
+  .deal-files li:nth-child(2){animation-delay:.07s}
+  .deal-files li:nth-child(3){animation-delay:.14s}
+  .deal-files li:nth-child(4){animation-delay:.21s}
+  .deal-files li:nth-child(n+5){animation-delay:.28s}
+}
+@keyframes vt-out{to{opacity:0;transform:translateY(-10px)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(12px)}}
+@keyframes card-in{from{opacity:0;transform:translateY(20px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes file-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
 /* ---------- 17. Reduced-motion: honor user/OS preference ---------- */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
@@ -1652,6 +1686,10 @@ html:not(.js) .skyline-strip .win{opacity:.75}
         grid.appendChild(article);
       });
     }
+    // stagger the entrance animation per card
+    Array.prototype.forEach.call(grid.children, function(el, i){
+      el.style.setProperty("--i", i);
+    });
     if (countEl){
       countEl.textContent = filtered.length + (filtered.length === 1 ? " listing" : " listings");
     }

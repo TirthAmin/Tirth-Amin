@@ -1,11 +1,14 @@
 <!-- ================================================================
-  AMIN REALTY — paste-ready WordPress fragment (documents.html)
+  AMIN REALTY — paste-ready WordPress fragment (listing detail page)
   HOW TO USE: in WordPress, create/edit the page, add ONE
   "Custom HTML" block, and paste this ENTIRE file into it.
   Use a full-width / blank page template if your theme has one.
-  Deal-room and document files: upload your PDFs to the WordPress
-  Media Library and put those URLs in the listings/documents config
-  near the bottom of this file (search for dealRoom / AMIN_DOCUMENTS).
+  This ONE page powers every listing's own page. Create it with the
+  slug  listing  and each property is automatically available at
+  /listing/?id=... — the homepage and catalog cards link there for you.
+  Add/remove listings in the AMIN_LISTINGS config on your Listings page
+  AND in the copy near the bottom of this file (keep the two in sync,
+  or paste the same block into both).
 ================================================================= -->
 <script>document.documentElement.classList.add("js");</script>
 <style>
@@ -362,7 +365,7 @@ a{color:var(--gold-link)}
       <a href="/#about">About</a>
       <a href="/#services">Services</a>
       <a href="/listings/">Listings</a>
-      <a href="/documents/" aria-current="page">Documents</a>
+      <a href="/documents/">Documents</a>
       <a href="/#process">Process</a>
       <a class="btn btn-primary" href="/#contact">Contact Us</a>
     </nav>
@@ -372,91 +375,47 @@ a{color:var(--gold-link)}
 <main id="main">
   <section class="page-hero">
     <div class="container">
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span>Document Center</nav>
-      <h1>Secure Document Center</h1>
-      <p>Confidential deal materials &mdash; offering memoranda, financials, and related files. To protect our clients, each document is released only after you agree to keep its contents confidential. Your agreement is recorded.</p>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/listings/">Listings</a><span aria-hidden="true">/</span><span id="crumbTitle">Listing</span></nav>
+      <h1 id="detailTitle">Property Listing</h1>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-dark">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Available Documents</span>
-        <h2>Request access to confidential files</h2>
-        <p>Select a document, review and sign the short confidentiality agreement, and your download will unlock immediately.</p>
+      <div id="listingDetail" class="detail-layout">
+        <div class="detail-media" id="detailMedia"></div>
+        <div class="detail-info">
+          <div class="detail-badges" id="detailBadges"></div>
+          <p class="detail-price" id="detailPrice"></p>
+          <p class="detail-loc" id="detailLoc"></p>
+          <div class="detail-specs" id="detailSpecs"></div>
+          <div class="detail-desc" id="detailDesc"></div>
+          <div class="detail-cta" id="detailCta">
+            <a class="btn btn-primary" href="/#contact">Request Details</a>
+            <a class="btn btn-ghost" href="/listings/">Back to All Listings</a>
+          </div>
+          <p class="fineprint">All information is deemed reliable but not guaranteed and should be independently verified. Price, terms, and availability are subject to change or withdrawal without notice.</p>
+        </div>
       </div>
-      <div class="doc-grid" id="docGrid"></div>
 
-      <!-- Owner audit panel: visit documents.html#audit to view/export signatures stored on this device -->
-      <div class="audit" id="auditPanel" hidden>
-        <h3>Signature Audit Log (this device)</h3>
-        <div class="audit-inner" id="auditInner"></div>
+      <div id="listingNotFound" class="detail-notfound" hidden>
+        <h2>We couldn't find that listing.</h2>
+        <p>It may have sold, gone under contract, or been withdrawn. Browse the full catalog below &mdash; or contact us about private, off-market inventory.</p>
+        <div class="detail-cta">
+          <a class="btn btn-primary" href="/listings/">View All Listings</a>
+          <a class="btn btn-ghost" href="/#contact">Contact Us</a>
+        </div>
       </div>
 
-      <p class="fineprint reveal mt-2 measure">
-        <strong>How this works &amp; important notes.</strong> Typing your name as a signature and checking the box forms a binding electronic acknowledgment under the U.S. ESIGN Act and UETA. Each signature is recorded with a timestamp. This click-through agreement is a practical safeguard, not a substitute for a fully negotiated non-disclosure agreement or a dedicated e-signature platform for highly sensitive transactions &mdash; consult your attorney for those. Files are provided &ldquo;as is&rdquo; and remain the confidential property of Amin Realty, Inc. and its clients.
-      </p>
+      <noscript><p class="listings-note">This page needs JavaScript to display the listing. Please enable JavaScript, or browse the <a href="/listings/">full catalog</a>.</p></noscript>
+
+      <div id="relatedWrap" class="detail-related" hidden>
+        <h2>Similar opportunities</h2>
+        <div class="listing-grid" id="relatedGrid"></div>
+      </div>
     </div>
   </section>
 </main>
-
-<!-- ===================== NDA MODAL ===================== -->
-<div class="modal-backdrop" id="ndaBackdrop" inert>
-  <div class="modal" id="ndaModal" role="dialog" aria-modal="true" aria-labelledby="ndaTitle" aria-describedby="ndaIntro">
-    <div class="modal-head">
-      <div>
-        <h2 id="ndaTitle">Confidentiality Agreement</h2>
-        <p>Regarding: <strong id="ndaDoc"></strong></p>
-      </div>
-      <button type="button" class="modal-close" data-nda-close aria-label="Close dialog">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p id="ndaIntro" class="nda-intro">Please read the following before downloading. <em>Template wording &mdash; have your attorney review and adjust.</em></p>
-      <section class="agreement" tabindex="0" aria-label="Confidentiality agreement text">
-        <h3>Mutual Confidentiality Acknowledgment</h3>
-        <p>By signing below, I (&ldquo;Recipient&rdquo;) acknowledge that the materials I am requesting from <strong data-company>Amin Realty, Inc.</strong> (&ldquo;Broker&rdquo;) and its clients contain confidential and proprietary information provided solely to evaluate a possible transaction.</p>
-        <p>I agree that I will: (a) keep the materials and all information in them strictly confidential; (b) use them only to evaluate a potential transaction and for no other purpose; (c) not copy, distribute, or disclose them to any third party without the Broker's prior written consent, except to my own advisors who are bound by confidentiality; and (d) return or destroy the materials upon request.</p>
-        <p>I understand the information is deemed reliable but not guaranteed, is subject to change or withdrawal without notice, and does not constitute an offer or investment, legal, or tax advice. I am not relying on the Broker for such advice. I acknowledge the Broker represents the seller/owner unless a separate written agreement states otherwise.</p>
-        <p>This acknowledgment is governed by the laws of the State of Texas. I am at least 18 years old and authorized to enter into this agreement.</p>
-      </section>
-
-      <form id="ndaForm" novalidate>
-        <div class="form-row">
-          <div class="field-block">
-            <label for="ndaName">Full Legal Name <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="ndaName" name="name" autocomplete="name" required>
-          </div>
-          <div class="field-block">
-            <label for="ndaEmail">Email <span class="req" aria-hidden="true">*</span></label>
-            <input type="email" id="ndaEmail" name="email" autocomplete="email" required>
-          </div>
-        </div>
-        <div class="field-block">
-          <label for="ndaCompany">Company / Organization</label>
-          <input type="text" id="ndaCompany" name="company" autocomplete="organization">
-        </div>
-        <div class="field-block">
-          <label for="ndaSignature">Signature &mdash; type your full legal name <span class="req" aria-hidden="true">*</span></label>
-          <input type="text" id="ndaSignature" name="signature" class="sig-input" autocomplete="off" required aria-describedby="sigHelp">
-          <span id="sigHelp" class="fineprint">Typing your name here serves as your electronic signature.</span>
-        </div>
-        <div class="check-row">
-          <input type="checkbox" id="ndaAgree" name="agree" required>
-          <label for="ndaAgree" class="check-label">I have read and agree to keep this information confidential, and I consent to electronic signing and to my agreement being recorded. <span class="req" aria-hidden="true">*</span></label>
-        </div>
-        <p class="modal-status" id="ndaStatus" role="status" aria-live="polite"></p>
-        <div class="modal-foot">
-          <button type="button" class="btn btn-outline" data-nda-close>Cancel</button>
-          <button type="submit" class="btn btn-primary" id="ndaSubmit">Agree &amp; Download</button>
-        </div>
-      </form>
-
-      <div id="ndaDownload" hidden></div>
-    </div>
-  </div>
-</div>
 
 <footer class="site-footer">
   <div class="container">
@@ -467,10 +426,53 @@ a{color:var(--gold-link)}
       <a href="/privacy/">Privacy</a>
       <a href="/terms/">Terms</a>
       <a href="/accessibility/">Accessibility</a>
+      <a href="/iabs/">TREC IABS</a>
     </div>
-    <p class="foot-copy">&copy; <span id="year">2026</span> Amin Realty, Inc. All rights reserved. Materials in this center are confidential. Licensed Texas Real Estate Brokerage. TREC Broker License No. <strong>[VERIFY-LICENSE]</strong>.</p>
+    <p class="foot-copy">&copy; <span id="year">2026</span> Amin Realty, Inc. All rights reserved. Licensed Texas Real Estate Brokerage &mdash; 3 Sugarcreek Center, Sugar Land, TX 77478. TREC Broker License No. <strong>[VERIFY-LICENSE]</strong>. All information deemed reliable but not guaranteed; verify independently. Equal Housing Opportunity.</p>
   </div>
 </footer>
+
+
+<!-- ============ DEAL ROOM MODAL (gated file access) ============ -->
+<div class="modal-backdrop" id="dealBackdrop" inert>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dealTitle" aria-describedby="dealIntro" id="dealModal">
+    <div class="modal-head">
+      <div>
+        <h2 id="dealTitle">Deal Room</h2>
+        <p>Confidential materials for: <strong id="dealListing"></strong></p>
+      </div>
+      <button type="button" class="modal-close" data-deal-close aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p id="dealIntro" class="nda-intro">Enter your details to access the deal room. Your access is recorded and the materials are confidential.</p>
+      <form id="dealForm" novalidate>
+        <div class="form-row">
+          <div class="field-block">
+            <label for="dealFirst">First Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="dealFirst" name="firstName" autocomplete="given-name" required>
+          </div>
+          <div class="field-block">
+            <label for="dealLast">Last Name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="dealLast" name="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="field-block">
+          <label for="dealEmail">Email <span class="req" aria-hidden="true">*</span></label>
+          <input type="email" id="dealEmail" name="email" autocomplete="email" required>
+        </div>
+        <p class="modal-status" id="dealStatus" role="status" aria-live="polite"></p>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-outline" data-deal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary" id="dealSubmit">Access Deal Room</button>
+        </div>
+        <p class="fineprint">By continuing you agree the materials are confidential and provided only to evaluate a possible transaction. See our <a href="/terms/">Terms</a> and <a href="/privacy/">Privacy Policy</a>.</p>
+      </form>
+      <div id="dealDownload" hidden></div>
+    </div>
+  </div>
+</div>
 
 <button type="button" class="to-top" id="toTop" aria-label="Back to top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 15 6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -527,52 +529,154 @@ window.AMIN_CONFIG = {
 </script>
 <script>
 /* ============================================================
-   AMIN REALTY, INC. — SECURE DOCUMENTS
+   AMIN REALTY, INC. — MASTER LISTINGS
    ------------------------------------------------------------
-   THIS IS THE FILE YOU EDIT TO ADD OR REMOVE DOWNLOADABLE FILES.
-   Each file is gated: a visitor must sign the confidentiality
-   agreement before the download is unlocked, and every signature
-   is logged (see assets/config.js to connect your log).
+   THIS IS THE ONE FILE YOU EDIT TO ADD OR REMOVE LISTINGS.
+   It powers both the full Listings page (listings.html) and the
+   "Featured Listings" on the homepage (the ones with featured:true).
 
-   To ADD a document:
-     1) Put the actual file in the  documents/  folder
-        (e.g. documents/offering-memorandum.pdf)
-     2) Copy a { ... } block below and set:
-          title, description, category, file, size
-   To REMOVE a document: delete its { ... } block.
+   To ADD a listing:    copy a { ... } block, edit the values, done.
+   To REMOVE a listing: delete its { ... } block (and the trailing comma).
+   To FEATURE on home:  set  featured: true
+
+   Every listing automatically gets its own detail page at
+   /listing/?id=<slug>. The homepage cards and the full catalog both
+   link to it. The slug comes from the optional `id` field below, or (if
+   you omit it) from the title. Nothing else to wire up.
 
    FIELD REFERENCE
-     title        name shown on the card
-     description  one or two sentences
-     category     short label/tag, e.g. "Offering Memorandum"
-     file         path to the file, e.g. "documents/om-houston.pdf"
-     size         text shown to the visitor, e.g. "PDF · 4.2 MB"
-     icon         OPTIONAL "pdf" | "doc" | "sheet" | "zip" (default pdf)
+     title       text shown as the listing name
+     type        MUST be one of: "Franchise Hotel" | "Independent Motel"
+                 | "Land / Development" | "Commercial"
+     location    e.g. "Houston, TX"
+     status      "Available" | "Under Contract" | "Sold"
+     price       number only, no $ or commas (used for filtering/sorting)
+     priceLabel  the text shown, e.g. "$7,900,000"  (use "Call for Price")
+     icon        "hotel" | "motel" | "land" | "commercial"
+     image       OPTIONAL "https://.../photo.jpg" — shows a real photo
+                 (alt text is generated automatically). Omit to use the icon.
+     featured    OPTIONAL true to also show it on the homepage
+     id          OPTIONAL short url-friendly name for this listing's page,
+                 e.g. id:"houston-85-key". If omitted, it is generated from
+                 the title. Keep it unique and it won't change if you later
+                 edit the title (better for links people have bookmarked).
+     description OPTIONAL text for the detail page. One string, or an array
+                 of strings for multiple paragraphs, e.g.
+                   description:[ "First paragraph.", "Second paragraph." ]
+                 Omit it and the page shows a sensible default line.
+     specs       up to ~4 pairs of [ "Label", "Value" ]
+     lat, lng    OPTIONAL coordinates. Adding them drops a glowing pin for
+                 this listing on the homepage map ("Nationwide Reach");
+                 removing them (or the listing) removes the pin. Get numbers
+                 from Google Maps: right-click the property -> first menu row.
+     dealRoom    OPTIONAL list of gated files for this listing. When present,
+                 the card shows a "View Deal Room" button; visitors enter
+                 first name, last name, and email (logged like signatures)
+                 and then see these links. Upload ANY file types you want
+                 (PDF, Excel, photos, zip, ...) to the documents/ folder —
+                 or use a full https:// URL — and list them here:
+                   dealRoom: [
+                     { label:"Offering Memorandum (PDF)", file:"documents/my-om.pdf" },
+                     { label:"T-12 Financials (Excel)",   file:"documents/my-t12.xlsx" }
+                   ]
    ============================================================ */
-window.AMIN_DOCUMENTS = [
+window.AMIN_LISTINGS = [
   {
-    title:"Sample Offering Memorandum",
-    description:"Confidential investment summary for a flagged select-service hotel, including financial highlights and market overview.",
-    category:"Offering Memorandum",
-    file:"documents/SAMPLE-offering-memorandum.txt",
-    size:"Sample file",
-    icon:"pdf"
+    id:"houston-85-key-franchise-hotel",
+    title:"85-Key Franchise Hotel", type:"Franchise Hotel", location:"Houston, TX", lat:29.7604, lng:-95.3698,
+    status:"Available", price:7900000, priceLabel:"$7,900,000", icon:"hotel", featured:true,
+    specs:[["Keys","85"],["Brand","Flagged"],["Year Built","2016"]],
+    description:[
+      "A well-maintained, nationally flagged select-service hotel in one of Houston's strongest interstate corridors. Built in 2016, the property benefits from a modern prototype, strong brand standards, and steady corporate and leisure demand.",
+      "The asset is offered with in-place financing potential and value-add upside through revenue management. A full offering memorandum and trailing financials are available in the deal room."
+    ],
+    dealRoom:[
+      { label:"Offering Memorandum (sample)", file:"documents/SAMPLE-offering-memorandum.txt" },
+      { label:"Property Financials (sample)", file:"documents/SAMPLE-property-financials.txt" }
+    ]
   },
   {
-    title:"Sample Confidentiality Agreement (NDA)",
-    description:"The buyer-side non-disclosure agreement template used before sharing deal materials. Provided here as a reference copy.",
-    category:"Legal",
-    file:"documents/SAMPLE-confidentiality-agreement.txt",
-    size:"Sample file",
-    icon:"doc"
+    id:"san-antonio-42-room-motel",
+    title:"42-Room Independent Motel", type:"Independent Motel", location:"San Antonio, TX", lat:29.4241, lng:-98.4936,
+    status:"Available", price:2450000, priceLabel:"$2,450,000", icon:"motel", featured:true,
+    specs:[["Rooms","42"],["Lot","1.8 ac"],["Cap Rate","9.1%"]],
+    description:[
+      "A cash-flowing independent motel on a 1.8-acre parcel with excellent visibility and ample parking. In-place operations produce a 9.1% cap rate with room to grow through light renovation and improved online distribution.",
+      "Ideal for an owner-operator or a 1031 exchange buyer seeking durable, unbranded roadside hospitality income."
+    ],
+    dealRoom:[
+      { label:"Property Financials (sample)", file:"documents/SAMPLE-property-financials.txt" }
+    ]
   },
   {
-    title:"Sample Property Financials",
-    description:"Trailing-12-month operating statement and key performance indicators for a representative hospitality asset.",
-    category:"Financials",
-    file:"documents/SAMPLE-property-financials.txt",
-    size:"Sample file",
-    icon:"sheet"
+    id:"katy-highway-frontage-land",
+    title:"Highway-Frontage Development Land", type:"Land / Development", location:"Katy, TX", lat:29.7858, lng:-95.8245,
+    status:"Available", price:1850000, priceLabel:"$1,850,000", icon:"land", featured:true,
+    specs:[["Acres","4.6"],["Zoning","Commercial"],["Frontage","320 ft"]],
+    description:"A 4.6-acre commercially zoned development site with 320 feet of highway frontage in fast-growing Katy. Suited to new hospitality, retail, or mixed-use construction, with utilities available to the site and strong daily traffic counts."
+  },
+  {
+    id:"dallas-120-key-select-service",
+    title:"120-Key Upscale Select-Service", type:"Franchise Hotel", location:"Dallas, TX", lat:32.7767, lng:-96.797,
+    status:"Under Contract", price:14250000, priceLabel:"$14,250,000", icon:"hotel", featured:true,
+    specs:[["Keys","120"],["Brand","Upper-Midscale"],["Year Built","2019"]],
+    description:"A newer upper-midscale, select-service hotel in the Dallas metro, currently under contract. Contact us to be notified if it returns to market or to discuss comparable assets in our pipeline."
+  },
+  {
+    id:"sugar-land-mixed-use-retail-office",
+    title:"Mixed-Use Retail & Office", type:"Commercial", location:"Sugar Land, TX", lat:29.6197, lng:-95.6349,
+    status:"Available", price:4600000, priceLabel:"$4,600,000", icon:"commercial", featured:true,
+    specs:[["SF","28,000"],["Occupancy","92%"],["Parking","110"]],
+    description:"A 28,000-square-foot mixed-use retail and office property in Sugar Land at 92% occupancy. A stable tenant roster and 110 parking spaces make this a dependable commercial income play with modest lease-up upside."
+  },
+  {
+    id:"el-paso-58-room-motel",
+    title:"58-Room Roadside Motel", type:"Independent Motel", location:"El Paso, TX", lat:31.7619, lng:-106.485,
+    status:"Sold", price:3100000, priceLabel:"$3,100,000", icon:"motel", featured:true,
+    specs:[["Rooms","58"],["Lot","2.3 ac"],["Closed","2025"]],
+    description:"Sold in 2025. This 58-room roadside motel is shown as a representative closed transaction. Ask us about current opportunities in the El Paso and West Texas markets."
+  },
+  {
+    id:"austin-extended-stay-conversion",
+    title:"Extended-Stay Conversion Opportunity", type:"Franchise Hotel", location:"Austin, TX", lat:30.2672, lng:-97.7431,
+    status:"Available", price:9750000, priceLabel:"$9,750,000", icon:"hotel",
+    specs:[["Keys","98"],["Type","Extended-Stay"],["Cap Rate","8.4%"]],
+    description:"A 98-key hotel in Austin positioned for conversion to an extended-stay flag, with an 8.4% in-place cap rate and strong long-stay demand drivers nearby. A compelling value-add repositioning for an experienced operator."
+  },
+  {
+    id:"amarillo-truck-stop-motel-pad",
+    title:"Interstate Truck-Stop Motel & Pad", type:"Independent Motel", location:"Amarillo, TX", lat:35.222, lng:-101.8313,
+    status:"Available", price:2200000, priceLabel:"$2,200,000", icon:"motel",
+    specs:[["Rooms","36"],["Lot","3.1 ac"],["Add'l Pad","Yes"]],
+    description:"A 36-room interstate motel on 3.1 acres with an additional buildable pad site, offering both stabilized roadside income and land for future expansion or a complementary use."
+  },
+  {
+    id:"new-orleans-downtown-boutique-hotel",
+    title:"Downtown Boutique Hotel", type:"Franchise Hotel", location:"New Orleans, LA", lat:29.9511, lng:-90.0715,
+    status:"Under Contract", price:18900000, priceLabel:"$18,900,000", icon:"hotel",
+    specs:[["Keys","76"],["Class","Boutique"],["ADR","$210"]],
+    description:"A 76-key downtown boutique hotel commanding a $210 ADR, currently under contract. Contact us about similar boutique and lifestyle assets across the Gulf South."
+  },
+  {
+    id:"sugar-land-commercial-strip-center",
+    title:"Commercial Strip Center", type:"Commercial", location:"Sugar Land, TX", lat:29.6197, lng:-95.6349,
+    status:"Available", price:5400000, priceLabel:"$5,400,000", icon:"commercial",
+    specs:[["SF","31,500"],["Occupancy","88%"],["Tenants","11"]],
+    description:"A 31,500-square-foot multi-tenant strip center with 11 tenants at 88% occupancy. Diversified rent roll with lease-up and mark-to-market upside in an affluent, high-traffic Sugar Land trade area."
+  },
+  {
+    id:"frisco-hospitality-development-parcel",
+    title:"Hospitality Development Parcel", type:"Land / Development", location:"Frisco, TX", lat:33.1507, lng:-96.8236,
+    status:"Available", price:3650000, priceLabel:"$3,650,000", icon:"land",
+    specs:[["Acres","6.2"],["Zoning","Mixed-Use"],["Utilities","To Site"]],
+    description:"A 6.2-acre mixed-use parcel in booming Frisco, entitled for hospitality and complementary uses, with utilities to the site. A rare development-ready position in one of the nation's fastest-growing suburbs."
+  },
+  {
+    id:"texas-limited-service-portfolio",
+    title:"Limited-Service Portfolio (3 Assets)", type:"Franchise Hotel", location:"Multiple, TX",
+    status:"Available", price:0, priceLabel:"Call for Price", icon:"hotel",
+    specs:[["Keys","254 total"],["Assets","3"],["Markets","Secondary"]],
+    description:"A three-asset, 254-key limited-service portfolio across Texas secondary markets, available individually or as a package. Priced on request; qualified principals may request a confidential summary."
   }
 ];
 </script>
@@ -1047,5 +1151,183 @@ window.AMIN_DOCUMENTS = [
   }
   if (location.hash === "#audit") renderAudit();
   window.addEventListener("hashchange", function () { if (location.hash === "#audit") renderAudit(); });
+})();
+</script>
+<script>
+/* ============================================================
+   AMIN REALTY, INC. — Deal Room (gated listing files)
+   ------------------------------------------------------------
+   Shared by the homepage and the Listings page. A listing with a
+   dealRoom array (see assets/listings.js) gets a "View Deal Room"
+   button; the visitor enters first name, last name, and email,
+   the access is logged (locally + to AMIN_CONFIG.logEndpoint when
+   configured), and the file links are revealed.
+
+   NOTE: this is lead capture and an access record, not security.
+   Anything truly sensitive should live behind a real login or be
+   sent manually after you review the log.
+   ============================================================ */
+(function () {
+  "use strict";
+  var CFG = window.AMIN_CONFIG || {};
+  var LOG_KEY = "aminSignatureLog"; // same log the document-center signatures use
+
+  var backdrop = document.getElementById("dealBackdrop");
+  if (!backdrop) return;
+
+  var modal = document.getElementById("dealModal"),
+      form = document.getElementById("dealForm"),
+      statusEl = document.getElementById("dealStatus"),
+      listingEl = document.getElementById("dealListing"),
+      downloadWrap = document.getElementById("dealDownload"),
+      firstEl = document.getElementById("dealFirst"),
+      lastEl = document.getElementById("dealLast"),
+      emailEl = document.getElementById("dealEmail"),
+      submitBtn = document.getElementById("dealSubmit"),
+      current = null, lastTrigger = null;
+
+  var FILE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>';
+  var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function esc(str) {
+    return String(str == null ? "" : str).replace(/[&<>"]/g, function (c) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c];
+    });
+  }
+  function focusable() {
+    return Array.prototype.slice.call(
+      modal.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])')
+    ).filter(function (el) { return el.offsetParent !== null || el === document.activeElement; });
+  }
+  function onKey(e) {
+    if (e.key === "Escape") { e.preventDefault(); close(); return; }
+    if (e.key === "Tab") {
+      var f = focusable(); if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  function open(listing, trigger) {
+    if (!listing || !listing.dealRoom || !listing.dealRoom.length) return;
+    current = listing; lastTrigger = trigger || null;
+    listingEl.textContent = listing.title.replace(/&amp;/g, "&");
+    var intro = document.getElementById("dealIntro");
+    if (intro) intro.hidden = false;
+    form.reset(); form.style.display = "";
+    // convenience: prefill from the visitor's last recorded access
+    try {
+      var log = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+      var mine = log.length ? log[log.length - 1] : null;
+      if (mine && mine.email) {
+        emailEl.value = mine.email;
+        if (mine.firstName) { firstEl.value = mine.firstName; lastEl.value = mine.lastName || ""; }
+      }
+    } catch (e) { /* ignore */ }
+    downloadWrap.hidden = true; downloadWrap.innerHTML = "";
+    statusEl.textContent = ""; statusEl.removeAttribute("data-state");
+    submitBtn.disabled = false;
+    backdrop.classList.add("open"); backdrop.removeAttribute("inert");
+    document.body.style.overflow = "hidden";
+    setTimeout(function () { firstEl.focus(); }, 60);
+    document.addEventListener("keydown", onKey, true);
+  }
+  function close() {
+    backdrop.classList.remove("open"); backdrop.setAttribute("inert", "");
+    document.body.style.overflow = "";
+    document.removeEventListener("keydown", onKey, true);
+    if (lastTrigger) lastTrigger.focus();
+  }
+  Array.prototype.slice.call(document.querySelectorAll("[data-deal-close]")).forEach(function (b) {
+    b.addEventListener("click", close);
+  });
+  backdrop.addEventListener("mousedown", function (e) { if (e.target === backdrop) close(); });
+
+  function setStatus(msg, state) {
+    statusEl.textContent = msg;
+    if (state) statusEl.setAttribute("data-state", state); else statusEl.removeAttribute("data-state");
+  }
+  function fail(msg) { setStatus(msg, "err"); submitBtn.disabled = false; }
+  function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function saveLocal(rec) {
+    try {
+      var arr = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+      arr.push(rec); localStorage.setItem(LOG_KEY, JSON.stringify(arr));
+    } catch (e) { /* storage unavailable; remote log still applies */ }
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var first = firstEl.value.trim(), last = lastEl.value.trim(), email = emailEl.value.trim();
+    if (!first) return fail("Please enter your first name.");
+    if (!last) return fail("Please enter your last name.");
+    if (!validEmail(email)) return fail("Please enter a valid email address.");
+
+    var fileLinks = current.dealRoom.map(function (f) {
+      return { label: f.label, url: new URL(f.file, location.href).href };
+    });
+    var record = {
+      id: "DR-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7),
+      kind: "deal-room",
+      document: "Deal room: " + current.title.replace(/&amp;/g, "&"),
+      listing: current.title.replace(/&amp;/g, "&"),
+      file: fileLinks.map(function (f) { return f.url; }).join(" | "),
+      filesJson: JSON.stringify(fileLinks),
+      name: first + " " + last, firstName: first, lastName: last,
+      email: email, company: "", signature: "",
+      agreementVersion: CFG.agreementVersion || "1.0",
+      timestamp: new Date().toISOString(),
+      timestampLocal: new Date().toLocaleString(),
+      page: location.href, userAgent: navigator.userAgent
+    };
+    saveLocal(record);
+    setStatus("Checking you in…");
+    submitBtn.disabled = true;
+
+    var endpoint = CFG.logEndpoint || "";
+    if (endpoint) {
+      var fd = new FormData();
+      Object.keys(record).forEach(function (k) { fd.append(k, record[k]); });
+      if (CFG.web3formsKey) fd.append("access_key", CFG.web3formsKey);
+      fd.append("_subject", "Deal room access: " + record.document + " — " + record.name);
+      fetch(endpoint, { method: "POST", body: fd, headers: { Accept: "application/json" } })
+        .then(function (r) { if (!r.ok) throw new Error("bad"); })
+        .then(function () { unlock(record, null, CFG.sendsConfirmationEmail === true); })
+        .catch(function () {
+          if (CFG.requireRemoteLog) fail("We couldn't record your access just now. Please try again, or email " + (CFG.contactEmail || "us") + ".");
+          else unlock(record, "Saved locally — the central log could not be reached.");
+        });
+    } else if (CFG.requireRemoteLog) {
+      fail("The deal room is temporarily unavailable (access logging is being configured). Please contact " + (CFG.contactEmail || "us") + ".");
+    } else {
+      unlock(record, "Recorded in this browser only — set a log endpoint in assets/config.js for a central record.");
+    }
+  });
+
+  function unlock(record, warn, emailed) {
+    setStatus("Welcome, " + record.firstName + " — the deal room is open.", "ok");
+    var intro = document.getElementById("dealIntro");
+    if (intro) intro.hidden = true;
+    form.style.display = "none";
+    downloadWrap.hidden = false;
+    downloadWrap.innerHTML =
+      '<p class="deal-note">Your access was logged on ' + esc(record.timestampLocal) + '. These materials are confidential and may not be shared.</p>' +
+      (emailed ? '<p class="deal-note deal-emailed">A confirmation email with these links has been sent to <strong>' + esc(record.email) + '</strong>.</p>' : '') +
+      (warn ? '<p class="fineprint deal-warn">⚠ ' + esc(warn) + '</p>' : '') +
+      '<ul class="deal-files">' +
+      current.dealRoom.map(function (f) {
+        return '<li><a href="' + encodeURI(f.file) + '" download target="_blank" rel="noopener">' + FILE + '<span>' + esc(f.label) + '</span>' + ARROW + '</a></li>';
+      }).join("") +
+      '</ul>' +
+      '<div class="modal-foot"><button type="button" class="btn btn-outline" data-deal-close>Close</button></div>';
+    Array.prototype.slice.call(downloadWrap.querySelectorAll("[data-deal-close]")).forEach(function (b) {
+      b.addEventListener("click", close);
+    });
+    var firstLink = downloadWrap.querySelector(".deal-files a");
+    if (firstLink) firstLink.focus();
+  }
+
+  window.AMIN_DEAL_ROOM = { open: open, close: close };
 })();
 </script>

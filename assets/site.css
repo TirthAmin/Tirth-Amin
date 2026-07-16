@@ -159,7 +159,7 @@ a{color:var(--gold-link)}
 .detail-desc p{color:var(--light-soft);margin-bottom:.9rem;max-width:62ch}
 .detail-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem;margin-top:1.5rem}
 .deal-btn-lg{font-size:.95rem;padding:.8rem 1.35rem}
-.detail-fineprint{max-width:62ch}
+.detail-info .fineprint{max-width:62ch;color:var(--light-soft)}
 .detail-notfound{text-align:center;padding:3rem 1rem;border:1px dashed var(--line-dark);border-radius:var(--radius)}
 .detail-notfound h2{font-size:clamp(1.5rem,3vw,2rem);color:var(--light);margin-bottom:.8rem}
 .detail-notfound p{color:var(--light-soft);max-width:52ch;margin-inline:auto}
@@ -252,7 +252,85 @@ a{color:var(--gold-link)}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 .reveal[data-delay="1"]{transition-delay:.08s}.reveal[data-delay="2"]{transition-delay:.16s}
+
+/* ============================================================
+   MOTION SYSTEM (subpages) — luxury-calibrated, transform/opacity
+   only, fully disabled for prefers-reduced-motion users.
+   ============================================================ */
+@media (prefers-reduced-motion:no-preference){
+  /* Seamless cross-document page transitions (progressive enhancement;
+     browsers without View Transitions simply navigate normally). */
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation:vt-out .26s var(--ease) both}
+  ::view-transition-new(root){animation:vt-in .38s var(--ease) both}
+
+  /* Page hero: content rises in; ambient light drifts slowly. */
+  .page-hero .crumbs{animation:rise-in .55s var(--ease) both}
+  .page-hero h1{animation:rise-in .65s var(--ease) .08s both}
+  .page-hero p{animation:rise-in .65s var(--ease) .16s both}
+  .page-hero::before{animation:ambient-drift 16s ease-in-out infinite alternate}
+
+  /* Toolbar + grids: staggered card choreography (30-50ms/item).
+     --i is set by site.js on each rendered card. */
+  .toolbar{animation:rise-in .55s var(--ease) .1s both}
+  .listing-grid .listing,.doc-grid .doc{animation:card-in .55s var(--ease) both;animation-delay:calc(min(var(--i,0),9)*45ms)}
+
+  /* Card media: gold sheen sweep + gentle zoom on hover. */
+  .listing-media::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 40%,rgba(230,198,137,.16) 50%,transparent 60%);transform:translateX(-130%) skewX(-8deg);transition:transform .8s var(--ease)}
+  .listing:hover .listing-media::before{transform:translateX(130%) skewX(-8deg)}
+  .listing-media svg{transition:transform .5s var(--ease)}
+  .listing:hover .listing-media svg{transform:scale(1.12)}
+  .listing-media img{transition:transform .6s var(--ease)}
+  .listing:hover .listing-media img{transform:scale(1.06)}
+  .listing-cta a svg{transition:transform .25s var(--ease)}
+  .listing-cta a:hover svg{transform:translateX(4px)}
+
+  /* Buttons: sheen on primary, tactile press on all. */
+  .btn{position:relative;overflow:hidden}
+  .btn:active{transform:translateY(0) scale(.97)}
+  .btn.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.32) 50%,transparent 70%);transform:translateX(-130%);transition:transform .65s var(--ease)}
+  .btn.btn-primary:hover::after{transform:translateX(130%)}
+  .deal-btn:active,.to-top:active{transform:scale(.94)}
+
+  /* Modal: soft spring entrance; unlocked file links cascade in. */
+  .modal{transform:translateY(20px) scale(.97);transition:transform .38s cubic-bezier(.3,1.35,.45,1)}
+  .deal-files li{animation:rise-in .45s var(--ease) both}
+  .deal-files li:nth-child(2){animation-delay:.07s}
+  .deal-files li:nth-child(3){animation-delay:.14s}
+  .deal-files li:nth-child(4){animation-delay:.21s}
+  .deal-files li:nth-child(n+5){animation-delay:.28s}
+  .deal-files a{transition:border-color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease)}
+
+  /* Listing detail: choreographed entrance, left to right. */
+  .detail-layout .detail-media{animation:media-in .7s var(--ease) both}
+  .detail-info>*{animation:rise-in .6s var(--ease) both}
+  .detail-info>*:nth-child(1){animation-delay:.1s}
+  .detail-info>*:nth-child(2){animation-delay:.16s}
+  .detail-info>*:nth-child(3){animation-delay:.22s}
+  .detail-info>*:nth-child(4){animation-delay:.28s}
+  .detail-info>*:nth-child(5){animation-delay:.34s}
+  .detail-info>*:nth-child(6){animation-delay:.4s}
+  .detail-info>*:nth-child(n+7){animation-delay:.46s}
+}
+@keyframes vt-out{to{opacity:0;transform:translateY(-10px)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(12px)}}
+@keyframes rise-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes card-in{from{opacity:0;transform:translateY(20px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes media-in{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+@keyframes ambient-drift{from{transform:translate3d(-1.5%,-1%,0)}to{transform:translate3d(1.5%,2%,0)}}
+
+/* Reading progress bar (thin gold line under the sticky header). */
+.site-header{--progress:0}
+.site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--gold-dark),var(--gold-bright));transform-origin:0 50%;transform:scaleX(var(--progress));pointer-events:none}
+
+/* Back-to-top */
+.to-top{position:fixed;right:clamp(1rem,3vw,2rem);bottom:clamp(1rem,3vw,2rem);z-index:150;width:52px;height:52px;border-radius:50%;border:1px solid var(--line-dark);background:rgba(10,26,47,.92);color:var(--gold);cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s,background .3s var(--ease);box-shadow:var(--shadow)}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{background:var(--navy-700)}
+.to-top svg{width:22px;height:22px}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
+  .site-header::after{display:none}
 }

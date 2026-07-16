@@ -50,6 +50,34 @@
   }
   var yEl = $("#year"); if (yEl) yEl.textContent = new Date().getFullYear();
 
+  // Stagger helper: gives each rendered card its animation-delay index.
+  function stagger(container) {
+    if (!container) return;
+    Array.prototype.forEach.call(container.children, function (el, i) {
+      el.style.setProperty("--i", i);
+    });
+  }
+
+  /* ---------- reading progress + back-to-top (one rAF pipeline) ---------- */
+  var headerEl = $(".site-header"), toTopBtn = $("#toTop"), scrollTick = false;
+  function paintScroll() {
+    scrollTick = false;
+    var y = window.scrollY || window.pageYOffset;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    if (headerEl && !reduce) headerEl.style.setProperty("--progress", (max > 0 ? Math.min(y / max, 1) : 0).toFixed(4));
+    if (toTopBtn) toTopBtn.classList.toggle("show", y > 600);
+  }
+  if (headerEl || toTopBtn) {
+    window.addEventListener("scroll", function () {
+      if (!scrollTick) { scrollTick = true; requestAnimationFrame(paintScroll); }
+    }, { passive: true });
+    paintScroll();
+  }
+  if (toTopBtn) toTopBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  });
+
   var reveals = $all(".reveal");
   if (reduce || !("IntersectionObserver" in window)) {
     reveals.forEach(function (el) { el.classList.add("in"); });
@@ -151,6 +179,7 @@
       grid.innerHTML = out.length
         ? out.map(function (l) { return cardHTML(l); }).join("")
         : '<p class="empty">No listings match your filters. <a href="index.html#contact">Contact us</a> about off-market opportunities.</p>';
+      stagger(grid);
       if (countEl) countEl.textContent = out.length + (out.length === 1 ? " listing" : " listings");
     }
     [fType, fStatus, fPrice, fSort].forEach(function (el) { if (el) el.addEventListener("change", render); });
@@ -247,6 +276,7 @@
     if (related.length && relWrap && relGrid) {
       relWrap.hidden = false;
       relGrid.innerHTML = related.map(function (r) { return cardHTML(r, 3); }).join("");
+      stagger(relGrid);
     }
   }
 
@@ -267,6 +297,7 @@
           '<button type="button" class="btn btn-outline" data-doc="' + i + '">Request access ' + ARROW + '</button>' +
         '</div></article>';
     }).join("") : '<p class="empty empty-on-light">No documents are available right now. Please <a href="index.html#contact">contact us</a>.</p>';
+    stagger(docGrid);
 
     docGrid.addEventListener("click", function (e) {
       var btn = e.target.closest("button[data-doc]");
