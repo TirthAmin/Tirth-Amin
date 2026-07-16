@@ -4,11 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a1a2f">
-<title>Listings | Amin Realty, Inc.</title>
-<meta name="description" content="Browse active hotel, motel, land, and commercial real estate listings from Amin Realty, Inc. Filter by property type, status, location, and price.">
-<link rel="canonical" href="https://aminrealtyinc.com/listings.html">
-<meta property="og:title" content="Listings | Amin Realty, Inc.">
-<meta property="og:description" content="Active hotel, motel, land, and commercial listings nationwide.">
+<title>Property Listing | Amin Realty, Inc.</title>
+<meta name="description" content="Property details for a hotel, motel, land, or commercial listing from Amin Realty, Inc. — specs, pricing, status, and confidential deal-room materials.">
+<meta property="og:title" content="Property Listing | Amin Realty, Inc.">
+<meta property="og:description" content="Hotel, motel, land, and commercial listing details from Amin Realty, Inc.">
 <meta property="og:type" content="website">
 <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/fraunces-italic.woff2" as="font" type="font/woff2" crossorigin>
@@ -31,7 +30,7 @@
     <nav id="navLinks" class="nav-links" aria-label="Primary">
       <a href="index.html#about">About</a>
       <a href="index.html#services">Services</a>
-      <a href="listings.html" aria-current="page">Listings</a>
+      <a href="listings.html">Listings</a>
       <a href="documents.html">Documents</a>
       <a href="index.html#process">Process</a>
       <a class="btn btn-primary" href="index.html#contact">Contact Us</a>
@@ -42,40 +41,44 @@
 <main id="main">
   <section class="page-hero">
     <div class="container">
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span>Listings</nav>
-      <h1>Property Listings</h1>
-      <p>Active hotel, motel, land, and commercial opportunities. Filter and sort below. Many of our best deals are off-market &mdash; <a href="index.html#contact">contact us</a> for private inventory.</p>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="listings.html">Listings</a><span aria-hidden="true">/</span><span id="crumbTitle">Listing</span></nav>
+      <h1 id="detailTitle">Property Listing</h1>
     </div>
   </section>
 
   <section class="section section-dark">
     <div class="container">
-      <div class="toolbar" role="search" aria-label="Filter and sort listings">
-        <div class="field">
-          <label for="filterType">Property Type</label>
-          <select id="filterType"><option value="">All Types</option><option>Franchise Hotel</option><option>Independent Motel</option><option>Land / Development</option><option>Commercial</option></select>
+      <div id="listingDetail" class="detail-layout">
+        <div class="detail-media" id="detailMedia"></div>
+        <div>
+          <div class="detail-badges" id="detailBadges"></div>
+          <p class="detail-price" id="detailPrice"></p>
+          <p class="detail-loc" id="detailLoc"></p>
+          <div class="detail-specs" id="detailSpecs"></div>
+          <div class="detail-desc" id="detailDesc"></div>
+          <div class="detail-cta" id="detailCta">
+            <a class="btn btn-primary" href="index.html#contact">Request Details</a>
+            <a class="btn btn-ghost" href="listings.html">Back to All Listings</a>
+          </div>
+          <p class="fineprint detail-fineprint">All information is deemed reliable but not guaranteed and should be independently verified. Price, terms, and availability are subject to change or withdrawal without notice.</p>
         </div>
-        <div class="field">
-          <label for="filterStatus">Status</label>
-          <select id="filterStatus"><option value="">All Statuses</option><option>Available</option><option>Under Contract</option><option>Sold</option></select>
-        </div>
-        <div class="field">
-          <label for="filterPrice">Max Price</label>
-          <select id="filterPrice"><option value="">Any Price</option><option value="0-2500000">Up to $2.5M</option><option value="0-5000000">Up to $5M</option><option value="0-10000000">Up to $10M</option><option value="10000000-">$10M+</option></select>
-        </div>
-        <div class="field">
-          <label for="sortBy">Sort By</label>
-          <select id="sortBy"><option value="">Featured</option><option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option><option value="title">Name (A–Z)</option></select>
-        </div>
-        <div class="field grow">
-          <label for="filterSearch">Search Location / Keyword</label>
-          <input type="search" id="filterSearch" placeholder="e.g. Houston, TX" autocomplete="off">
-        </div>
-        <div class="count" id="listingsCount" aria-live="polite"></div>
       </div>
 
-      <div class="listing-grid" id="listingGrid" aria-live="polite"></div>
-      <p class="listings-note">Sample inventory shown for demonstration. All figures are illustrative &mdash; edit <code>assets/listings.js</code> to manage your real listings. Listings subject to change and prior sale.</p>
+      <div id="listingNotFound" class="detail-notfound" hidden>
+        <h2>We couldn't find that listing.</h2>
+        <p>It may have sold, gone under contract, or been withdrawn. Browse the full catalog below &mdash; or contact us about private, off-market inventory.</p>
+        <div class="detail-cta">
+          <a class="btn btn-primary" href="listings.html">View All Listings</a>
+          <a class="btn btn-ghost" href="index.html#contact">Contact Us</a>
+        </div>
+      </div>
+
+      <noscript><p class="listings-note">This page needs JavaScript to display the listing. Please enable JavaScript, or browse the <a href="listings.html">full catalog</a>.</p></noscript>
+
+      <div id="relatedWrap" class="detail-related" hidden>
+        <h2>Similar opportunities</h2>
+        <div class="listing-grid" id="relatedGrid"></div>
+      </div>
     </div>
   </section>
 </main>

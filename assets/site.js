@@ -61,41 +61,77 @@
   }
 
   /* ============================================================
-     LISTINGS PAGE
+     LISTINGS — shared data + card rendering, used by the catalog
+     page (listings.html) and the detail pages (listing.html?id=…)
+     ============================================================ */
+  var data = (window.AMIN_LISTINGS || []).slice();
+  (function () {
+    // Every listing gets a stable URL slug for its detail page,
+    // generated from `id` (if set in listings.js) or the title.
+    var seen = {};
+    data.forEach(function (l, i) {
+      l._i = i;
+      var base = String(l.id || l.title || "").toLowerCase()
+        .replace(/&amp;/g, " and ").replace(/&/g, " and ")
+        .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "listing-" + (i + 1);
+      var slug = base, n = 2;
+      while (seen[slug]) { slug = base + "-" + (n++); }
+      seen[slug] = true;
+      l._slug = slug;
+    });
+  })();
+  function detailHref(l) { return "listing.html?id=" + encodeURIComponent(l._slug); }
+  function priceInRange(price, range) {
+    // range values look like "0-2500000" (up to) or "10000000-" (and up)
+    if (!range) return true;
+    var parts = range.split("-");
+    var min = parseFloat(parts[0]) || 0;
+    var max = parts[1] ? parseFloat(parts[1]) : Infinity;
+    return price >= min && price <= max;
+  }
+
+  function cardHTML(l, hLevel) {
+    var h = hLevel || 2;
+    var plain = String(l.title).replace(/&amp;/g, "and");
+    var media = l.image
+      ? '<img src="' + encodeURI(l.image) + '" alt="' + esc(plain) + ' in ' + esc(l.location) + '" loading="lazy" decoding="async">'
+      : (ICONS[l.icon] || ICONS.commercial);
+    var specs = (l.specs || []).map(function (s) {
+      return '<span class="listing-spec"><b>' + esc(s[1]) + '</b>' + esc(s[0]) + '</span>';
+    }).join("");
+    return '<article class="listing">' +
+      '<div class="listing-media">' +
+        media +
+        '<span class="listing-status ' + statusClass(l.status) + '">' + esc(l.status) + '</span>' +
+        '<span class="listing-type">' + esc(l.type) + '</span>' +
+      '</div>' +
+      '<div class="listing-body">' +
+        '<span class="listing-price">' + esc(l.priceLabel) + '</span>' +
+        '<h' + h + ' class="listing-title"><a href="' + detailHref(l) + '">' + esc(l.title) + '</a></h' + h + '>' +
+        '<span class="listing-loc">' + PIN + " " + esc(l.location) + '</span>' +
+        '<div class="listing-specs">' + specs + '</div>' +
+        '<div class="listing-cta"><a href="' + detailHref(l) + '" aria-label="View details: ' + esc(plain) + '">View details ' + ARROW + '</a>' +
+          (l.dealRoom && l.dealRoom.length
+            ? '<button type="button" class="deal-btn" data-deal="' + l._i + '" aria-haspopup="dialog">' + LOCK + ' View Deal Room</button>'
+            : '') +
+        '</div>' +
+      '</div></article>';
+  }
+
+  // One delegated handler covers deal-room buttons in every grid
+  // (catalog, detail page, related listings).
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest("button[data-deal]");
+    if (btn && window.AMIN_DEAL_ROOM) window.AMIN_DEAL_ROOM.open(data[parseInt(btn.getAttribute("data-deal"), 10)], btn);
+  });
+
+  /* ============================================================
+     LISTINGS CATALOG PAGE (listings.html)
      ============================================================ */
   var grid = $("#listingGrid");
   if (grid) {
-    var data = (window.AMIN_LISTINGS || []).slice();
-    data.forEach(function (l, i) { l._i = i; });
     var fType = $("#filterType"), fStatus = $("#filterStatus"), fPrice = $("#filterPrice"),
         fSearch = $("#filterSearch"), fSort = $("#sortBy"), countEl = $("#listingsCount");
-
-    function cardHTML(l) {
-      var plain = String(l.title).replace(/&amp;/g, "and");
-      var media = l.image
-        ? '<img src="' + encodeURI(l.image) + '" alt="' + esc(plain) + ' in ' + esc(l.location) + '" loading="lazy" decoding="async">'
-        : (ICONS[l.icon] || ICONS.commercial);
-      var specs = (l.specs || []).map(function (s) {
-        return '<span class="listing-spec"><b>' + esc(s[1]) + '</b>' + esc(s[0]) + '</span>';
-      }).join("");
-      return '<article class="listing">' +
-        '<div class="listing-media">' +
-          media +
-          '<span class="listing-status ' + statusClass(l.status) + '">' + esc(l.status) + '</span>' +
-          '<span class="listing-type">' + esc(l.type) + '</span>' +
-        '</div>' +
-        '<div class="listing-body">' +
-          '<span class="listing-price">' + esc(l.priceLabel) + '</span>' +
-          '<h2 class="listing-title">' + esc(l.title) + '</h2>' +
-          '<span class="listing-loc">' + PIN + " " + esc(l.location) + '</span>' +
-          '<div class="listing-specs">' + specs + '</div>' +
-          '<div class="listing-cta"><a href="index.html#contact" aria-label="Request details: ' + esc(plain) + '">Request details ' + ARROW + '</a>' +
-            (l.dealRoom && l.dealRoom.length
-              ? '<button type="button" class="deal-btn" data-deal="' + l._i + '" aria-haspopup="dialog">' + LOCK + ' View Deal Room</button>'
-              : '') +
-          '</div>' +
-        '</div></article>';
-    }
 
     function render() {
       var t = fType ? fType.value : "", s = fStatus ? fStatus.value : "",
@@ -104,7 +140,7 @@
       var out = data.filter(function (l) {
         if (t && l.type !== t) return false;
         if (s && l.status !== s) return false;
-        if (p && l.price > parseFloat(p)) return false;
+        if (!priceInRange(l.price, p)) return false;
         if (q && (l.title + " " + l.location + " " + l.type).toLowerCase().indexOf(q) === -1) return false;
         return true;
       });
@@ -113,18 +149,105 @@
       else if (sort === "title") out.sort(function (a, b) { return a.title.localeCompare(b.title); });
 
       grid.innerHTML = out.length
-        ? out.map(cardHTML).join("")
+        ? out.map(function (l) { return cardHTML(l); }).join("")
         : '<p class="empty">No listings match your filters. <a href="index.html#contact">Contact us</a> about off-market opportunities.</p>';
       if (countEl) countEl.textContent = out.length + (out.length === 1 ? " listing" : " listings");
     }
     [fType, fStatus, fPrice, fSort].forEach(function (el) { if (el) el.addEventListener("change", render); });
     if (fSearch) fSearch.addEventListener("input", render);
     render();
+  }
 
-    grid.addEventListener("click", function (e) {
-      var btn = e.target.closest("button[data-deal]");
-      if (btn && window.AMIN_DEAL_ROOM) window.AMIN_DEAL_ROOM.open(data[parseInt(btn.getAttribute("data-deal"), 10)], btn);
-    });
+  /* ============================================================
+     LISTING DETAIL PAGE (listing.html?id=<slug>)
+     Renders one listing from assets/listings.js as its own page.
+     ============================================================ */
+  var detailRoot = $("#listingDetail");
+  if (detailRoot) {
+    var slugMatch = location.search.match(/[?&]id=([^&]+)/);
+    var wantedSlug = "";
+    try { wantedSlug = slugMatch ? decodeURIComponent(slugMatch[1].replace(/\+/g, " ")) : ""; } catch (err) { wantedSlug = ""; }
+    var current = null;
+    data.forEach(function (l) { if (!current && l._slug === wantedSlug) current = l; });
+
+    if (!current) {
+      detailRoot.hidden = true;
+      var nf = $("#listingNotFound");
+      if (nf) nf.hidden = false;
+      document.title = "Listing Not Found | Amin Realty, Inc.";
+    } else {
+      renderDetail(current);
+    }
+  }
+
+  function renderDetail(l) {
+    var display = String(l.title).replace(/&amp;/g, "&");
+    document.title = display + " — " + l.location + " | Amin Realty, Inc.";
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute("content", display + " — " + l.type + " in " + l.location + ", " + l.priceLabel + ", " + l.status + ". Amin Realty, Inc.");
+
+    var crumb = $("#crumbTitle"); if (crumb) crumb.textContent = display;
+    var titleEl = $("#detailTitle"); if (titleEl) titleEl.textContent = display;
+
+    var mediaEl = $("#detailMedia");
+    if (mediaEl) {
+      if (l.image) {
+        mediaEl.innerHTML = '<img src="' + encodeURI(l.image) + '" alt="' + esc(display) + ' in ' + esc(l.location) + '" decoding="async">';
+        mediaEl.removeAttribute("aria-hidden");
+      } else {
+        mediaEl.innerHTML = ICONS[l.icon] || ICONS.commercial;
+        mediaEl.setAttribute("aria-hidden", "true");
+      }
+    }
+
+    var badges = $("#detailBadges");
+    if (badges) badges.innerHTML =
+      '<span class="badge-pill ' + statusClass(l.status) + '">' + esc(l.status) + '</span>' +
+      '<span class="badge-pill badge-type">' + esc(l.type) + '</span>';
+
+    var priceEl = $("#detailPrice"); if (priceEl) priceEl.textContent = l.priceLabel;
+    var locEl = $("#detailLoc"); if (locEl) locEl.innerHTML = PIN + '<span>' + esc(l.location) + '</span>';
+
+    var specsEl = $("#detailSpecs");
+    if (specsEl) specsEl.innerHTML = (l.specs || []).map(function (s) {
+      return '<div class="detail-spec"><b>' + esc(s[1]) + '</b><span>' + esc(s[0]) + '</span></div>';
+    }).join("");
+
+    var descEl = $("#detailDesc");
+    if (descEl) {
+      var desc = l.description;
+      var paras = desc ? (Object.prototype.toString.call(desc) === "[object Array]" ? desc : [desc])
+        : ["Full details for this " + l.type.toLowerCase() + " are available on request. Contact us for financials, brochures, and a confidential conversation about this opportunity."];
+      descEl.innerHTML = paras.map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
+    }
+
+    // Deal room button appears only when the listing has gated files.
+    if (l.dealRoom && l.dealRoom.length) {
+      var cta = $("#detailCta");
+      if (cta) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "deal-btn deal-btn-lg";
+        btn.setAttribute("data-deal", String(l._i));
+        btn.setAttribute("aria-haspopup", "dialog");
+        btn.innerHTML = LOCK + " View Deal Room (" + l.dealRoom.length + (l.dealRoom.length === 1 ? " file)" : " files)");
+        cta.appendChild(btn);
+      }
+    }
+
+    // Related listings: same type first, then anything else.
+    var related = data.filter(function (r) { return r !== l && r.type === l.type; });
+    if (related.length < 3) {
+      data.forEach(function (r) {
+        if (related.length < 3 && r !== l && related.indexOf(r) === -1) related.push(r);
+      });
+    }
+    related = related.slice(0, 3);
+    var relWrap = $("#relatedWrap"), relGrid = $("#relatedGrid");
+    if (related.length && relWrap && relGrid) {
+      relWrap.hidden = false;
+      relGrid.innerHTML = related.map(function (r) { return cardHTML(r, 3); }).join("");
+    }
   }
 
   /* ============================================================

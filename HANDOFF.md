@@ -12,6 +12,7 @@
 |---|---|
 | `index.html` | Homepage: animated skyline hero, services, **featured listings with filters**, **interactive US property map**, process, testimonials, team, FAQ, contact form |
 | `listings.html` | Full catalog with filter + sort |
+| `listing.html` | **Per-listing detail page** — one template rendered from `assets/listings.js` via `listing.html?id=<slug>`; every listing gets its own page automatically |
 | `documents.html` | Secure Document Center — signature-gated downloads with audit log |
 | `404.html` | Branded not-found page |
 | `legal/*` (5 pages) | Privacy, Terms, Accessibility, TREC IABS + Consumer Protection |
@@ -23,12 +24,16 @@ Signature features:
 
 ## 2. The ONE file you'll edit 95% of the time
 
-**`assets/listings.js`** controls everything about listings (full field reference is commented at the top of the file):
+**`assets/listings.js`** controls everything about listings (full field reference is commented at the top of the file). One edit updates the homepage, the full catalog, **and** that listing's own detail page:
 
 - Add/remove a **listing**: copy/delete a `{ ... }` block
 - Show on homepage: `featured: true`
+- Set the detail-page write-up: `description:` (a string, or an array of strings for multiple paragraphs)
+- Set a clean detail-page URL: `id:"short-name"` → `listing.html?id=short-name` (optional; auto-generated from the title if omitted)
 - Add/remove a **map pin**: add/delete `lat:` + `lng:` (right-click the property in Google Maps to get the numbers)
 - Add/remove **Deal Room files**: edit the `dealRoom: [ { label, file } ]` list (upload files to `documents/` first)
+
+Every listing's detail page is created automatically — there are **no per-listing HTML files to make**. Cards on the homepage and catalog link straight to `listing.html?id=<slug>`. A bad/removed id shows a friendly "listing not found" page, never a broken one.
 
 Other edit points: `assets/documents.js` (Document Center files), `assets/config.js` (email/logging settings), `documents/` (your PDFs).
 
@@ -70,9 +75,11 @@ Full audit history and every fix: **`GRADE.md`**.
 ```
 .htaccess                 Apache: https redirect, gzip, caching, 404
 index.html                homepage (self-contained CSS/JS inline)
-listings.html / documents.html / 404.html / legal/
+listings.html             full catalog (filter + sort)
+listing.html              per-listing detail page (rendered from listings.js via ?id=)
+documents.html / 404.html / legal/
 assets/
-  listings.js             ← EDIT THIS (listings, pins, deal rooms)
+  listings.js             ← EDIT THIS (listings, detail pages, pins, deal rooms)
   documents.js            document-center files
   config.js               email/log endpoint settings
   site.css / site.js      shared subpage styles & behavior

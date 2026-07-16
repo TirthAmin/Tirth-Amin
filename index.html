@@ -484,6 +484,8 @@ html:not(.js) .skyline-strip .win{opacity:.75}
 .listing-body{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
 .listing-price{font-family:var(--display);font-size:1.5rem;color:var(--gold);font-weight:600}
 .listing-title{font-family:var(--display);font-size:1.14rem;color:var(--light);line-height:1.3;font-weight:560}
+.listing-title a{color:inherit;text-decoration:none;transition:color .2s var(--ease)}
+.listing-title a:hover,.listing-title a:focus-visible{color:var(--gold)}
 .listing-loc{display:flex;align-items:center;gap:.4rem;color:var(--light-soft);font-size:.9rem}
 .listing-loc svg{width:16px;height:16px;flex:none;color:var(--gold)}
 .listing-specs{
@@ -999,10 +1001,10 @@ html:not(.js) .skyline-strip .win{opacity:.75}
           <label for="filterPrice">Max Price</label>
           <select id="filterPrice" name="price">
             <option value="">Any Price</option>
-            <option value="2000000">Up to $2M</option>
-            <option value="5000000">Up to $5M</option>
-            <option value="10000000">Up to $10M</option>
-            <option value="100000000">$10M+</option>
+            <option value="0-2500000">Up to $2.5M</option>
+            <option value="0-5000000">Up to $5M</option>
+            <option value="0-10000000">Up to $10M</option>
+            <option value="10000000-">$10M+</option>
           </select>
         </div>
         <div class="field field-grow">
@@ -1546,6 +1548,31 @@ html:not(.js) .skyline-strip .win{opacity:.75}
       specs:[["Rooms","58"],["Lot","2.3 ac"],["Status","Closed 2025"]] }
   ];
   var sharedListings   = (window.AMIN_LISTINGS || []);
+  // Give every shared listing a stable URL slug for its detail page
+  // (listing.html?id=<slug>) — mirrors the logic in assets/site.js so the
+  // homepage, catalog, and detail pages all agree on the same slugs.
+  (function () {
+    var seen = {};
+    sharedListings.forEach(function (l, i) {
+      var base = String(l.id || l.title || "").toLowerCase()
+        .replace(/&amp;/g, " and ").replace(/&/g, " and ")
+        .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "listing-" + (i + 1);
+      var slug = base, n = 2;
+      while (seen[slug]) { slug = base + "-" + (n++); }
+      seen[slug] = true;
+      l._slug = slug;
+    });
+  })();
+  function detailHref(l) {
+    return l._slug ? "listing.html?id=" + encodeURIComponent(l._slug) : "#contact";
+  }
+  function priceInRange(price, range) {
+    if (!range) return true;
+    var parts = range.split("-");
+    var min = parseFloat(parts[0]) || 0;
+    var max = parts[1] ? parseFloat(parts[1]) : Infinity;
+    return price >= min && price <= max;
+  }
   var featuredListings = sharedListings.filter(function (l) { return l.featured; });
   var LISTINGS = featuredListings.length ? featuredListings
                  : (sharedListings.length ? sharedListings.slice(0, 6) : FALLBACK_LISTINGS);
@@ -1582,7 +1609,7 @@ html:not(.js) .skyline-strip .win{opacity:.75}
     var filtered = LISTINGS.filter(function(l){
       if (t && l.type !== t) return false;
       if (s && l.status !== s) return false;
-      if (p && l.price > parseFloat(p)) return false;
+      if (!priceInRange(l.price, p)) return false;
       if (q){
         var hay = (l.title + " " + l.location + " " + l.type).toLowerCase();
         if (hay.indexOf(q) === -1) return false;
@@ -1612,11 +1639,11 @@ html:not(.js) .skyline-strip .win{opacity:.75}
             '<span class="listing-type">'+ escapeHtml(l.type) +'</span>'+
           '</div>'+
           '<div class="listing-body">'+
-            '<span class="listing-price">'+ l.priceLabel +'</span>'+
-            '<h3 class="listing-title">'+ l.title +'</h3>'+
+            '<span class="listing-price">'+ escapeHtml(l.priceLabel) +'</span>'+
+            '<h3 class="listing-title"><a href="'+ detailHref(l) +'">'+ escapeHtml(l.title) +'</a></h3>'+
             '<span class="listing-loc">'+ pinIcon +' '+ escapeHtml(l.location) +'</span>'+
             '<div class="listing-specs">'+ specs +'</div>'+
-            '<div class="listing-cta"><a href="#contact" aria-label="Request details: '+ escapeHtml(plainTitle) +'">Request details '+ arrowIcon +'</a>'+
+            '<div class="listing-cta"><a href="'+ detailHref(l) +'" aria-label="View details: '+ escapeHtml(plainTitle) +'">View details '+ arrowIcon +'</a>'+
             (l.dealRoom && l.dealRoom.length && window.AMIN_DEAL_ROOM
               ? '<button type="button" class="deal-btn" data-deal="'+ LISTINGS.indexOf(l) +'" aria-haspopup="dialog">'+ lockIcon +' View Deal Room</button>'
               : '')+

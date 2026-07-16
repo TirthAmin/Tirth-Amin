@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://aminrealtyinc.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://aminrealtyinc.com/listings.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <!-- Per-listing detail pages. When you add or remove a listing in
+       assets/listings.js, update this list to match (use the listing's
+       id as the ?id= value). Optional, but good for search visibility. -->
+  <url><loc>https://aminrealtyinc.com/listing.html?id=houston-85-key-franchise-hotel</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=san-antonio-42-room-motel</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=katy-highway-frontage-land</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=dallas-120-key-select-service</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=sugar-land-mixed-use-retail-office</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=el-paso-58-room-motel</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=austin-extended-stay-conversion</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=amarillo-truck-stop-motel-pad</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=new-orleans-downtown-boutique-hotel</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=sugar-land-commercial-strip-center</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=frisco-hospitality-development-parcel</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://aminrealtyinc.com/listing.html?id=texas-limited-service-portfolio</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://aminrealtyinc.com/legal/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://aminrealtyinc.com/legal/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://aminrealtyinc.com/legal/accessibility.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>

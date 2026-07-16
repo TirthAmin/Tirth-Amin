@@ -28,6 +28,7 @@ hotel and motel transactions since 2012.
 index.html          Homepage (hero, about, services, featured listings,
                     process, testimonials, team, FAQ, contact)
 listings.html       Full property catalog (filter + sort)
+listing.html        Per-listing detail page (one template, driven by ?id=)
 documents.html      Secure Document Center (signature-gated downloads)
 404.html            Not-found page
 robots.txt          Search crawler rules
@@ -49,16 +50,43 @@ GRADE.md            The accessibility & functional audit and its results
 
 1. Open `index.html` in any browser to preview locally (double-click works).
 2. Replace every `[VERIFY]` placeholder with real info — see `DEPLOY.md` §0.
-3. Edit the `LISTINGS` array in `index.html` to add your real properties.
+3. Edit **`assets/listings.js`** to add your real properties (this one file
+   drives the homepage, the catalog, and every listing detail page).
 4. Connect the contact form (`DEPLOY.md` §4).
 5. Publish (`DEPLOY.md` §2 for GoDaddy, §3 for Wix).
 
 ## Managing listings (add / remove)
 
-Edit **`assets/listings.js`** — one file powers both the full Listings page and
-the homepage "Featured Listings" (the entries marked `featured: true`). To add a
-listing, copy a block and edit it; to remove one, delete its block. Full field
-docs are at the top of that file.
+Edit **`assets/listings.js`** — one file powers the full Listings page, the
+homepage "Featured Listings" (the entries marked `featured: true`), **and each
+listing's own detail page**. To add a listing, copy a block and edit it; to
+remove one, delete its block. Full field docs are at the top of that file.
+
+## Per-listing detail pages
+
+Every listing automatically gets its own page at
+**`listing.html?id=<slug>`** — no extra files to create. The homepage cards
+and the full catalog both link to it, and each detail page shows the property's
+photo/icon, price, status, specs, a description, an optional deal room, and a
+few "similar opportunities."
+
+Two optional fields on each listing control the page:
+
+- **`id`** — a short, URL-friendly name used in the page's web address, e.g.
+  `id:"houston-85-key"` → `listing.html?id=houston-85-key`. If you leave it
+  out, the slug is generated from the title. Setting an explicit `id` keeps the
+  link stable even if you later reword the title (good for bookmarks/SEO).
+- **`description`** — the write-up on the detail page. Use one string, or an
+  array of strings for multiple paragraphs. Omit it and the page shows a
+  sensible default line.
+
+If a visitor opens a `listing.html?id=…` that doesn't exist (e.g. a sold
+listing you removed), the page shows a friendly "we couldn't find that listing"
+message with links back to the catalog and contact form — it never looks broken.
+
+> Optional: the detail-page URLs are also listed in `sitemap.xml` for search
+> engines. If you add or remove listings and want the sitemap to stay exact,
+> update that list to match. It won't break anything if you don't.
 
 > The homepage also keeps a built-in fallback copy of a few listings so it still
 > works if `assets/listings.js` isn't loaded (e.g. inside a single-file Wix
